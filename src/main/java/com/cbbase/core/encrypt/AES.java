@@ -26,7 +26,7 @@ public class AES {
 	public static String encrypt(String data, String key, String cipherAlgorithm, int keySize) {
 		try {
 			SecretKeySpec skeySpec = getKey(key, keySize);
-			Cipher cipher = Cipher.getInstance(CIPHER_ALGORITHM);
+			Cipher cipher = Cipher.getInstance(cipherAlgorithm);
 			cipher.init(Cipher.ENCRYPT_MODE, skeySpec);
 			byte[] encrypted = cipher.doFinal(data.getBytes(CHARACTER_SET));
 			return StringUtil.encodeBase64(encrypted);
@@ -43,7 +43,7 @@ public class AES {
 	public static String decrypt(String data, String key, String cipherAlgorithm, int keySize) {
 		try {
 			SecretKeySpec skeySpec = getKey(key, keySize);
-			Cipher cipher = Cipher.getInstance(CIPHER_ALGORITHM);
+			Cipher cipher = Cipher.getInstance(cipherAlgorithm);
 			cipher.init(Cipher.DECRYPT_MODE, skeySpec);
 			byte[] original = cipher.doFinal(StringUtil.decodeBase64(data));
 			return new String(original, CHARACTER_SET);
