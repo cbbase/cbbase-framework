@@ -6,6 +6,7 @@
 	<groupId>com.cbbase</groupId>
 	<artifactId>cbbase-core</artifactId>
 	<version>2.0.0</version>
+    <packaging>jar</packaging>
 	<name>cbbase-core</name>
 	<url>http://maven.apache.org</url>
 	
@@ -299,23 +300,26 @@
 
 	</dependencies>
 	<build>
+	
 		<finalName>cbbase-core-2.0.0</finalName>
 		<plugins>
-			<plugin>
-				<groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-compiler-plugin</artifactId>
-                <configuration>
-                    <source>${jdk.version}</source>
-                    <target>${jdk.version}</target>
-					<classesDirectory>target/classes/</classesDirectory>
-					<archive>
-						<addMavenDescriptor>false</addMavenDescriptor>
-					</archive>
-					<excludes>
-						<exclude>/*.*</exclude>
-					</excludes>
-				</configuration>
-			</plugin>
+	        <plugin>
+	            <groupId>org.apache.maven.plugins</groupId>
+	            <artifactId>maven-jar-plugin</artifactId>
+	            <configuration>
+                    <excludes>
+                        <exclude>*.properties</exclude>
+                        <exclude>*.xml</exclude>
+                    </excludes>
+	                <archive>
+	                    <manifest>
+	                        <addClasspath>true</addClasspath>
+	                        <classpathPrefix>lib/</classpathPrefix>
+	                        <mainClass>com.xxg.Main</mainClass>
+	                    </manifest>
+	                </archive>
+	            </configuration>
+	        </plugin>
 		</plugins>
 
 	</build>
