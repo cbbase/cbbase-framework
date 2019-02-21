@@ -11,7 +11,7 @@ import org.springframework.stereotype.Component;
  *
  */
 @Component
-public class ServiceFactory implements ApplicationContextAware {
+public class BeanFactory implements ApplicationContextAware {
 	
 	private static ApplicationContext applicationContext = null;
 	
@@ -20,7 +20,7 @@ public class ServiceFactory implements ApplicationContextAware {
 	}
 	
 	public void setApplicationContext(ApplicationContext applicationContext) throws BeansException {
-		ServiceFactory.applicationContext = applicationContext;
+		BeanFactory.applicationContext = applicationContext;
 	}
 	
 	public static <T> T getBean(Class<T> serviceClass){
