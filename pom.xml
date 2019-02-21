@@ -309,15 +309,8 @@
 	            <configuration>
                     <excludes>
                         <exclude>*.properties</exclude>
-                        <exclude>*.xml</exclude>
+                        <exclude>**.xml</exclude>
                     </excludes>
-	                <archive>
-	                    <manifest>
-	                        <addClasspath>true</addClasspath>
-	                        <classpathPrefix>lib/</classpathPrefix>
-	                        <mainClass>com.xxg.Main</mainClass>
-	                    </manifest>
-	                </archive>
 	            </configuration>
 	        </plugin>
 		</plugins>
