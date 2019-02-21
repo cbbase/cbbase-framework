@@ -1,7 +1,7 @@
 package com.cbbase.core.common;
 
 import org.springframework.core.env.Environment;
-import com.cbbase.core.common.ServiceFactory;
+import com.cbbase.core.common.BeanFactory;
 import com.cbbase.core.tools.StringUtil;
 
 /**
@@ -12,7 +12,7 @@ import com.cbbase.core.tools.StringUtil;
 public class ApplicationConfig {
 	
 	private static Environment getConfig() {
-		return ServiceFactory.getBean(Environment.class);
+		return BeanFactory.getBean(Environment.class);
 	}
 
 	public static String getParam(String code, String defaultValue){

@@ -7,7 +7,7 @@ import javax.servlet.http.HttpSession;
 import org.springframework.web.context.request.RequestContextHolder;
 import org.springframework.web.context.request.ServletRequestAttributes;
 
-import com.cbbase.core.common.ServiceFactory;
+import com.cbbase.core.common.BeanFactory;
 import com.cbbase.core.handler.AuthHandler;
 import com.cbbase.core.handler.DataSourceHandler;
 
@@ -19,11 +19,11 @@ import com.cbbase.core.handler.DataSourceHandler;
 public class GlobalManager {
 	
 	public static DataSourceHandler getDataSourceHandler() {
-		return ServiceFactory.getBean(DataSourceHandler.class);
+		return BeanFactory.getBean(DataSourceHandler.class);
 	}
 	
 	public static AuthHandler getAuthHandler() {
-		return ServiceFactory.getBean(AuthHandler.class);
+		return BeanFactory.getBean(AuthHandler.class);
 	}
 	
 	public static HttpServletRequest getRequest() {
