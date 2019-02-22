@@ -221,4 +221,14 @@ public class ServletUtil {
 		sb.append(";domain=" + domain);
 		response.addHeader("Set-Cookie",sb.toString());
     }
+    
+    public static boolean isAjax(HttpServletRequest request) {
+    	String accept = request.getHeader("accept");
+    	String with = request.getHeader("X-Requested-With");
+    	if (accept != null && accept.indexOf("application/json") > -1 
+    			|| with != null && with.indexOf("XMLHttpRequest") > -1) {
+    		return true;
+    	}
+    	return false;
+    }
 }
