@@ -12,7 +12,6 @@ import com.cbbase.core.common.BusinessException;
 import com.cbbase.core.container.RestResponse;
 import com.cbbase.core.tools.JsonUtil;
 import com.cbbase.core.tools.ServletUtil;
-import com.cbbase.core.tools.StringUtil;
 
 /**
  * 全局异常处理
