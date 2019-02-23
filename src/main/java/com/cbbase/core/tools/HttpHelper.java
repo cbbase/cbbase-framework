@@ -45,7 +45,6 @@ import org.apache.http.util.EntityUtils;
  */
 public class HttpHelper {
 
-
 	public static final int DUFAULT_TIMEOUT = 10000;
 	public static final String DUFAULT_CHARACTERSET = "UTF-8";
 
@@ -64,8 +63,6 @@ public class HttpHelper {
 	private Map<String, String> params = new HashMap<String, String>();
 	private String body;
 	//
-	private int statusCode;
-	private String respString;
 	private boolean showLog;
 	
 	public HttpHelper(String url, int action){
@@ -244,16 +241,18 @@ public class HttpHelper {
 	        }
 			httpResponse = httpClient.execute(http);//执行请求
 			
-			statusCode = httpResponse.getStatusLine().getStatusCode();
-			if(statusCode == 200){
-				if(StringUtil.isEmpty(downloadFile)){
-					respString = EntityUtils.toString(httpResponse.getEntity());
-					return respString;
-				}else{
+			int code = httpResponse.getStatusLine().getStatusCode();
+			String msg = EntityUtils.toString(httpResponse.getEntity());
+			if(code == 200){
+				if(StringUtil.hasValue(downloadFile)){
 					InputStream in = httpResponse.getEntity().getContent();
 					FileUtil.writeInputStream2File(in, new File(downloadFile));
+					return msg;
 				}
+			}else {
+				throw new RuntimeException("{\"code\": "+code+", \"data\":\""+msg+"\"}");
 			}
+			return msg;
 		} catch (Exception e) {
 			e.printStackTrace();
 		} finally {
@@ -441,14 +440,6 @@ public class HttpHelper {
 		if(showLog) {
 			System.out.println(log);
 		}
-	}
-
-	public int getStatusCode() {
-		return statusCode;
-	}
-
-	public String getRespString() {
-		return respString;
 	}
 	
 }
