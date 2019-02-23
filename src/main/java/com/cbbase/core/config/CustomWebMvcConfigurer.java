@@ -7,7 +7,7 @@ import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
 import org.springframework.web.servlet.config.annotation.ViewControllerRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
-import com.cbbase.core.handler.ExceptionHandler;
+import com.cbbase.core.handler.GlobalExceptionHandler;
 import com.cbbase.core.interceptor.AuthInterceptor;
 
 /**
@@ -29,8 +29,8 @@ public class CustomWebMvcConfigurer implements WebMvcConfigurer {
      * @return
      */
     @Bean
-    public ExceptionHandler globalExceptionResolver(){
-        return new ExceptionHandler();
+    public GlobalExceptionHandler globalExceptionResolver(){
+        return new GlobalExceptionHandler();
     }
     
     /**
