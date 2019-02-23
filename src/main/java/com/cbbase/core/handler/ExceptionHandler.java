@@ -24,15 +24,16 @@ public class ExceptionHandler implements HandlerExceptionResolver {
 	
 	@Override
 	public ModelAndView resolveException(HttpServletRequest request, HttpServletResponse response, Object handler,
-			Exception exception) {
-		logger.error("", exception);
-		String msg = "请求失败";
-		int code = -1;
-		if(exception instanceof BusinessException) {
-			msg = exception.getMessage();
-			code = 1;
-		}
-		RestResponse resp = new RestResponse(code, msg);
+			Exception ex) {
+		logger.error("", ex);
+		RestResponse resp = new RestResponse();
+        if(ex instanceof BusinessException) {
+        	resp.setCode(1);
+        	resp.setMsg(ex.getMessage());
+        }else {
+        	resp.setCode(-1);
+        	resp.setMsg("请求失败");
+        }
 		ServletUtil.returnString(response, JsonUtil.toJson(resp));
         return null;
 	}
