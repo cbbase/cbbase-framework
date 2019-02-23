@@ -23,15 +23,6 @@ public class CustomWebMvcConfigurer implements WebMvcConfigurer {
         registry.addViewController("/").setViewName("forward:/index.jsp");
         registry.setOrder(Ordered.HIGHEST_PRECEDENCE);
     }
-
-    /**
-     * 	全局异常处理
-     * @return
-     */
-    @Bean
-    public GlobalExceptionHandler globalExceptionResolver(){
-        return new GlobalExceptionHandler();
-    }
     
     /**
      *	 权限拦截器
