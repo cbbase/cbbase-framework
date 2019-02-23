@@ -250,7 +250,8 @@ public class HttpHelper {
 					return msg;
 				}
 			}else {
-				throw new RuntimeException("{\"code\": "+code+", \"data\":\""+msg+"\"}");
+				printLog("code:"+code);
+				return null;
 			}
 			return msg;
 		} catch (Exception e) {
