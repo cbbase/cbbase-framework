@@ -14,23 +14,23 @@ public class IdWorker{
 
     private long twepoch = 1483200000000L;
     
-    private long datacenterIdBits = 5L;
+    private long dataCenterIdBits = 5L;
     private long workerIdBits = 5L;
     private long sequenceBits = 12L;
     
     private long maxWorkerId = -1L ^ (-1L << workerIdBits);
-    private long maxDatacenterId = -1L ^ (-1L << datacenterIdBits);
+    private long maxdataCenterId = -1L ^ (-1L << dataCenterIdBits);
 
     private long workerIdShift = sequenceBits;
-    private long datacenterIdShift = sequenceBits + workerIdBits;
-    private long timestampLeftShift = sequenceBits + workerIdBits + datacenterIdBits;
+    private long dataCenterIdShift = sequenceBits + workerIdBits;
+    private long timestampLeftShift = sequenceBits + workerIdBits + dataCenterIdBits;
     //
     private long sequenceMask = -1L ^ (-1L << sequenceBits);
     private long workerIdMask = -1L ^ (-1L << workerIdBits);
     
     //
     private long workerId;
-    private long datacenterId;
+    private long dataCenterId;
     private long sequence;
     
     private static IdWorker idWorker = null;
@@ -40,20 +40,20 @@ public class IdWorker{
     }
     
     private IdWorker(){
-        this.datacenterId = 1;
+        this.dataCenterId = 1;
         this.workerId = getMachineNum() & workerIdMask;
         this.sequence = 1;
     }
     
-    public IdWorker(long workerId, long datacenterId){
+    public IdWorker(long workerId, long dataCenterId){
         if (workerId > maxWorkerId || workerId < 0) {
             throw new IllegalArgumentException("workerId error");
         }
-        if (datacenterId > maxDatacenterId || datacenterId < 0) {
-            throw new IllegalArgumentException("datacenterId error");
+        if (dataCenterId > maxdataCenterId || dataCenterId < 0) {
+            throw new IllegalArgumentException("dataCenterId error");
         }
         
-        this.datacenterId = datacenterId;
+        this.dataCenterId = dataCenterId;
         this.workerId = workerId;
         this.sequence = 1;
     }
@@ -83,8 +83,8 @@ public class IdWorker{
         return workerId;
     }
 
-    public long getDatacenterId(){
-        return datacenterId;
+    public long getdataCenterId(){
+        return dataCenterId;
     }
 
     public long getTimestamp(){
@@ -108,7 +108,7 @@ public class IdWorker{
 
         lastTimestamp = timestamp;
         return ((timestamp - twepoch) << timestampLeftShift) |
-                (datacenterId << datacenterIdShift) |
+                (dataCenterId << dataCenterIdShift) |
                 (workerId << workerIdShift) |
                 sequence;
     }
