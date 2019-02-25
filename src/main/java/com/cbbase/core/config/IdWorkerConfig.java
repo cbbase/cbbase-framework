@@ -4,15 +4,16 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
+import com.cbbase.core.common.ApplicationConfig;
 import com.cbbase.core.tools.IdWorker;
 
 @Configuration
 public class IdWorkerConfig {
 	
-    @Value("${sequence.workerId}")
+    @Value("${id.workerId}")
     private long workerId;
     
-    @Value("${sequence.dataCenterId}")
+    @Value("${id.dataCenterId}")
     private long dataCenterId;
     
     @Bean
