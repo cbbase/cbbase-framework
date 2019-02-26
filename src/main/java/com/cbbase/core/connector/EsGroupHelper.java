@@ -15,6 +15,7 @@ import org.elasticsearch.search.aggregations.AggregationBuilders;
 import org.elasticsearch.search.aggregations.BucketOrder;
 import org.elasticsearch.search.aggregations.bucket.terms.Terms;
 import org.elasticsearch.search.aggregations.bucket.terms.TermsAggregationBuilder;
+import com.alibaba.fastjson.JSON;
 import com.cbbase.core.tools.ObjectUtil;
 
 /**
@@ -136,7 +137,13 @@ public class EsGroupHelper {
 		return this;
 	}
 	
-	public List<Map<String, Object>> execute() {
+	public <T> List<T> query(Class<T> clazz) {
+		List<Map<String, Object>> list = query();
+		String json = JSON.toJSONString(list);
+		return JSON.parseArray(json, clazz);
+	}
+	
+	public List<Map<String, Object>> query() {
 		if(termsList.size() == 0) {
 			return null;
 		}
@@ -152,7 +159,7 @@ public class EsGroupHelper {
 		for(AggregationBuilder agg : aggList) {
 			last.subAggregation(agg);
 		}
-		termsList.get(0).size(size);
+        searchRequestBuilder.setFrom(0).setSize(size);
 		searchRequestBuilder.addAggregation(termsList.get(0));
 		searchRequestBuilder.setQuery(boolQueryBuilder);
 		response = searchRequestBuilder.execute().actionGet();
