@@ -183,11 +183,12 @@ public class HttpHelper {
 		return true;
 	}
 	
-	public String execute(){
+	public ResponseData execute(){
+		ResponseData responseData = new ResponseData();
 		url = StringUtil.getValue(url).trim();
 		if(!checkUrl()){
-			printLog("url format error");
-			return null;
+			responseData.setException(new RuntimeException("url format error"));
+			return responseData;
 		}
 		CloseableHttpClient httpClient = null;
 		HttpRequestBase http = null;
@@ -242,20 +243,18 @@ public class HttpHelper {
 			httpResponse = httpClient.execute(http);//执行请求
 			
 			int code = httpResponse.getStatusLine().getStatusCode();
-			String msg = EntityUtils.toString(httpResponse.getEntity());
+			String data = EntityUtils.toString(httpResponse.getEntity());
+			responseData.setStatus(code);
+			responseData.setData(data);
 			if(code == 200){
 				if(StringUtil.hasValue(downloadFile)){
 					InputStream in = httpResponse.getEntity().getContent();
 					FileUtil.writeInputStream2File(in, new File(downloadFile));
-					return msg;
 				}
-			}else {
-				printLog("code:"+code);
-				return null;
 			}
-			return msg;
+			return responseData;
 		} catch (Exception e) {
-			e.printStackTrace();
+			responseData.setException(e);
 		} finally {
 			if(http != null){
 				http.abort();
@@ -264,7 +263,7 @@ public class HttpHelper {
 			close(httpClient);
 			close(httpResponse);
 		}
-		return null;
+		return responseData;
 	}
 	
 	private HttpRequestBase getHttpForGet() throws Exception{
@@ -443,4 +442,30 @@ public class HttpHelper {
 		}
 	}
 	
+	public class ResponseData{
+		
+		private int status;
+		private String data;
+		private Exception exception;
+		
+		public int getStatus() {
+			return status;
+		}
+		public void setStatus(int status) {
+			this.status = status;
+		}
+		public String getData() {
+			return data;
+		}
+		public void setData(String data) {
+			this.data = data;
+		}
+		public Exception getException() {
+			return exception;
+		}
+		public void setException(Exception exception) {
+			this.exception = exception;
+		}
+		
+	}
 }

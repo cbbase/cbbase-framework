@@ -14,7 +14,7 @@ public class ConstantUtil {
             for (Field field : fields) {
                 if (field.isAnnotationPresent(Text.class)) {
                     Text annotation = field.getAnnotation(Text.class);
-                    list.add(new SelectVO(String.valueOf(field.get(null)), annotation.value()));
+                    list.add(new ConstantUtil().new SelectVO(String.valueOf(field.get(null)), annotation.value()));
                 }
             }
         } catch (Exception e) {
@@ -22,35 +22,36 @@ public class ConstantUtil {
         }
         return list;
     }
-}
 
-class SelectVO {
+
+	public class SelectVO {
+		
+		private String text;
+	    
+		private String value;
+		
+		public SelectVO(String text, String value) {
+			super();
+			this.text = text;
+			this.value = value;
+		}
 	
-	private String text;
-    
-	private String value;
+		public String getText() {
+			return text;
+		}
 	
-	public SelectVO(String text, String value) {
-		super();
-		this.text = text;
-		this.value = value;
-	}
-
-	public String getText() {
-		return text;
-	}
-
-	public void setText(String text) {
-		this.text = text;
-	}
-
-	public String getValue() {
-		return value;
-	}
-
-	public void setValue(String value) {
-		this.value = value;
-	}
+		public void setText(String text) {
+			this.text = text;
+		}
 	
+		public String getValue() {
+			return value;
+		}
 	
+		public void setValue(String value) {
+			this.value = value;
+		}
+		
+		
+	}
 }
