@@ -88,6 +88,16 @@ public class EsGroupHelper {
 		return this;
 	}
 	
+	public EsGroupHelper in(String field, List<?> values) {
+		getQueryBuilder().must(QueryBuilders.termsQuery(field, values));
+		return this;
+	}
+	
+	public EsGroupHelper notIn(String field, List<?> values) {
+		getQueryBuilder().mustNot(QueryBuilders.termsQuery(field, values));
+		return this;
+	}
+	
 	public EsGroupHelper groupBy(String alias, String field) {
 		termsList.add(AggregationBuilders.terms(alias).field(field));
 		return this;
