@@ -59,7 +59,7 @@ public class EsGroupHelper {
 	}
 	
 	public EsGroupHelper andLike(String field, Object value) {
-		getQueryBuilder().must(QueryBuilders.fuzzyQuery(field, value));
+		getQueryBuilder().must(QueryBuilders.matchPhraseQuery(field, value));
 		return this;
 	}
 	
@@ -69,7 +69,7 @@ public class EsGroupHelper {
 	}
 	
 	public EsGroupHelper andNotLike(String field, Object value) {
-		getQueryBuilder().mustNot(QueryBuilders.fuzzyQuery(field, value));
+		getQueryBuilder().mustNot(QueryBuilders.matchPhraseQuery(field, value));
 		return this;
 	}
 	
@@ -97,6 +97,17 @@ public class EsGroupHelper {
 		getQueryBuilder().mustNot(QueryBuilders.termsQuery(field, values));
 		return this;
 	}
+	
+    public EsGroupHelper isNull(String field) {
+        getQueryBuilder().mustNot(QueryBuilders.existsQuery(field));
+        return this;
+    }
+    
+    public EsGroupHelper isNotNull(String field) {
+        getQueryBuilder().must(QueryBuilders.existsQuery(field));
+        return this;
+    }
+
 	
 	public EsGroupHelper groupBy(String alias, String field) {
 		termsList.add(AggregationBuilders.terms(alias).field(field));
