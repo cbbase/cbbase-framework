@@ -26,16 +26,22 @@ public class BaseService<T extends BaseDao> {
     }
     
     public int insert(Object param) {
-    	if(ObjectUtil.getFieldValue(param, "id") == null) {
-    		ObjectUtil.setFieldValue(param, "id", KeyHelper.nextKey());
+    	if(param instanceof BaseEntity) {
+    		BaseEntity entity = (BaseEntity) param;
+    		if(entity.getId() == null) {
+    			entity.setId(KeyHelper.nextKey());
+    		}
     	}
     	return baseDao.insert(param);
     }
     
     public int batchInsert(List<?> paramList) {
     	for(Object param : paramList) {
-        	if(ObjectUtil.getFieldValue(param, "id") == null) {
-        		ObjectUtil.setFieldValue(param, "id", KeyHelper.nextKey());
+        	if(param instanceof BaseEntity) {
+        		BaseEntity entity = (BaseEntity) param;
+        		if(entity.getId() == null) {
+        			entity.setId(KeyHelper.nextKey());
+        		}
         	}
     	}
     	return baseDao.batchInsert(paramList);
