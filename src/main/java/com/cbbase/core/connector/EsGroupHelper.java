@@ -15,13 +15,8 @@ import org.elasticsearch.search.aggregations.AggregationBuilders;
 import org.elasticsearch.search.aggregations.bucket.terms.Terms;
 import org.elasticsearch.search.aggregations.bucket.terms.TermsAggregationBuilder;
 import org.elasticsearch.search.builder.SearchSourceBuilder;
-import org.springframework.data.domain.PageRequest;
-import org.springframework.data.domain.Sort;
-import org.springframework.data.domain.Sort.Direction;
-import org.springframework.data.domain.Sort.Order;
+import org.elasticsearch.search.sort.FieldSortBuilder;
 import org.springframework.data.elasticsearch.core.ElasticsearchTemplate;
-import org.springframework.data.elasticsearch.core.query.NativeSearchQuery;
-
 import com.alibaba.fastjson.JSON;
 import com.cbbase.core.tools.ObjectUtil;
 
@@ -36,12 +31,11 @@ public class EsGroupHelper {
 	private BoolQueryBuilder boolQueryBuilder;
 	private List<TermsAggregationBuilder> termsList = new ArrayList<>();
 	private List<AggregationBuilder> aggList = new ArrayList<>();
+	private List<FieldSortBuilder> sortList = new ArrayList<>();
 	private String[] indices;
 	private String type;
 	private int from = 0;
 	private int size = 10;
-	private List<Order> orders = new ArrayList<>();
-	
 	
 	private EsGroupHelper(ElasticsearchTemplate elasticsearchTemplate) {
 		this.elasticsearchTemplate = elasticsearchTemplate;
@@ -168,15 +162,6 @@ public class EsGroupHelper {
 		aggList.add(AggregationBuilders.min(alias).field(field));
 		return this;
 	}
-	
-	public EsGroupHelper orderBy(String field, boolean asc) {
-		if(asc) {
-			orders.add(new Order(Direction.ASC, field));
-		}else {
-			orders.add(new Order(Direction.DESC, field));
-		}
-		return this;
-	}
 
 	public <T> List<T> query(Class<T> clazz) {
 		List<Map<String, Object>> list = query();
@@ -185,8 +170,28 @@ public class EsGroupHelper {
 	}
 	
 	public List<Map<String, Object>> query() {
+		
+		initAgg();
+		
+        SearchSourceBuilder searchBuilder = new SearchSourceBuilder();
+        searchBuilder.query(boolQueryBuilder);
+        searchBuilder.from(from).size(size);//指定返回数量，默认10条，ES默认最大不能超过10000条
+        searchBuilder.aggregation(termsList.get(0));
+        for(FieldSortBuilder sort : sortList) {
+            searchBuilder.sort(sort);
+        }
+        SearchRequest request = new SearchRequest(indices);
+        request.types(type);
+        request.source(searchBuilder);
+        
+        SearchResponse response = elasticsearchTemplate.getClient().search(request).actionGet();
+		Terms terms = response.getAggregations().get(termsList.get(0).getName());
+        return termsToList(terms);
+	}
+	
+	private void initAgg() {
 		if(termsList.size() == 0) {
-			return null;
+			throw new RuntimeException("termsList is empty");
 		}
 		TermsAggregationBuilder last = null;
 		for(TermsAggregationBuilder terms : termsList) {
@@ -200,22 +205,9 @@ public class EsGroupHelper {
 		for(AggregationBuilder agg : aggList) {
 			last.subAggregation(agg);
 		}
-		
-        SearchSourceBuilder searchBuilder = new SearchSourceBuilder();
-        searchBuilder.query(boolQueryBuilder);
-        searchBuilder.from(from).size(size);//指定返回数量，默认10条，ES默认最大不能超过10000条，如果有需要超过则需要更新ES配置
-        searchBuilder.aggregation(termsList.get(0));
-        
-        SearchRequest request = new SearchRequest(indices);
-        request.types(type);
-        request.source(searchBuilder);
-        
-        SearchResponse response = elasticsearchTemplate.getClient().search(request).actionGet();
-		Terms terms = response.getAggregations().get(termsList.get(0).getName());
-        return termsToList(terms);
 	}
 	
-	public List<Map<String, Object>> termsToList(Terms terms) {
+	private List<Map<String, Object>> termsToList(Terms terms) {
 		List<Map<String, Object>> list = new ArrayList<>();
         for(Terms.Bucket entry : terms.getBuckets()){
         	List<Aggregation> subAggList = entry.getAggregations().asList();
