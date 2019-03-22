@@ -12,6 +12,8 @@ public class CodeController extends CodeAssist {
 		StringBuilder action = new StringBuilder();
 		action.append("package "+packageName+".controller;").append("\r\n");
 		action.append("\r\n");
+		action.append("import java.util.List;");
+		action.append("\r\n");
 		action.append("import org.springframework.beans.factory.annotation.Autowired;").append("\r\n");
 		action.append("import org.springframework.stereotype.Controller;").append("\r\n");
 		action.append("import org.springframework.web.bind.annotation.RequestMapping;").append("\r\n");
@@ -61,8 +63,8 @@ public class CodeController extends CodeAssist {
 		action.append("	@ResponseBody").append("\r\n");
 		action.append("	@RequestMapping(value = \"delete.do\")").append("\r\n");
 		action.append("	@Authority(value = \""+auth_name+".modify\")").append("\r\n");
-		action.append("	public RestResponse delete("+entity_name+" param){").append("\r\n");
-		action.append("		return getSuccess("+entity_var+"Service.batchDelete(getParameterArray(\"ids\")));").append("\r\n");
+		action.append("	public RestResponse delete(List<Long> ids){").append("\r\n");
+		action.append("		return getSuccess("+entity_var+"Service.batchDelete(ids));").append("\r\n");
 		action.append("	}").append("\r\n");
 		action.append("}").append("\r\n");
 
