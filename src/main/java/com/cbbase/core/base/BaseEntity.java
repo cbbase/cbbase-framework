@@ -8,10 +8,10 @@ package com.cbbase.core.base;
 public class BaseEntity implements Cloneable {
 	
 	private Long id;
-	private String createId;
+	private Long createId;
 	private String createName;
 	private String createTime;
-	private String updateId;
+	private Long updateId;
 	private String updateName;
 	private String updateTime;
 	
@@ -22,10 +22,10 @@ public class BaseEntity implements Cloneable {
 	public void setId(Long id) {
 		this.id = id;
 	}
-	public String getCreateId() {
+	public Long getCreateId() {
 		return createId;
 	}
-	public void setCreateId(String createId) {
+	public void setCreateId(Long createId) {
 		this.createId = createId;
 	}
 	public String getCreateName() {
@@ -40,10 +40,10 @@ public class BaseEntity implements Cloneable {
 	public void setCreateTime(String createTime) {
 		this.createTime = createTime;
 	}
-	public String getUpdateId() {
+	public Long getUpdateId() {
 		return updateId;
 	}
-	public void setUpdateId(String updateId) {
+	public void setUpdateId(Long updateId) {
 		this.updateId = updateId;
 	}
 	public String getUpdateName() {
