@@ -118,7 +118,7 @@ public class CodeXml extends CodeAssist {
 		xml.append("	    where id = #{id}").append("\r\n");
 		xml.append("	</update>").append("\r\n");
 		xml.append("\r\n");
-		xml.append("	<select id=\"selectById\" resultMap=\"result\" parameterType=\"java.lang.String\">").append("\r\n");
+		xml.append("	<select id=\"selectById\" resultMap=\"result\" parameterType=\"java.lang.Long\">").append("\r\n");
 		xml.append("		select obj.* ").append("\r\n");
 		xml.append("		from "+table+" obj ").append("\r\n");
 		xml.append("		where obj.id = #{id}").append("\r\n");
@@ -148,7 +148,7 @@ public class CodeXml extends CodeAssist {
 		xml.append(")").append("\r\n");
 		xml.append("	</insert>").append("\r\n");
 		xml.append("\r\n");
-		xml.append("	<delete id=\"delete\" parameterType=\"java.lang.String\">").append("\r\n");
+		xml.append("	<delete id=\"delete\" parameterType=\"java.lang.Long\">").append("\r\n");
 		xml.append("		delete from "+table+"").append("\r\n");
 		xml.append("		where id = #{id}").append("\r\n");
 		xml.append("	</delete>").append("\r\n");
