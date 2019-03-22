@@ -2,8 +2,6 @@ package com.cbbase.core.base;
 
 import java.awt.image.RenderedImage;
 import java.io.File;
-import java.util.List;
-
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 

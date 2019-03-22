@@ -15,7 +15,7 @@ public class IdWorker{
     private long sequenceBits = 12L;
     
     private long maxWorkerId = -1L ^ (-1L << workerIdBits);
-    private long maxdataCenterId = -1L ^ (-1L << dataCenterIdBits);
+    private long maxDataCenterId = -1L ^ (-1L << dataCenterIdBits);
 
     private long workerIdShift = sequenceBits;
     private long dataCenterIdShift = sequenceBits + workerIdBits;
@@ -33,7 +33,7 @@ public class IdWorker{
         if (workerId > maxWorkerId || workerId < 0) {
             throw new IllegalArgumentException("workerId error");
         }
-        if (dataCenterId > maxdataCenterId || dataCenterId < 0) {
+        if (dataCenterId > maxDataCenterId || dataCenterId < 0) {
             throw new IllegalArgumentException("dataCenterId error");
         }
         
