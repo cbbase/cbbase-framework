@@ -11,10 +11,8 @@ public class IdWorkerConfig {
 	
     @Bean
     public IdWorker idWorker() {
-    	long workerId = ApplicationConfig.getLong("id.workerId");
-    	long dataCenterId = ApplicationConfig.getLong("id.dataCenterId");
-    	workerId = workerId == 0 ? 1 : workerId;
-    	dataCenterId = dataCenterId == 0 ? 1 : dataCenterId;
+    	long workerId = ApplicationConfig.getLong("idworker.workerId");
+    	long dataCenterId = ApplicationConfig.getLong("idworker.dataCenterId");
         return new IdWorker(workerId, dataCenterId);
     }
     

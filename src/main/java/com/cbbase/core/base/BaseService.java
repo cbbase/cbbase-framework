@@ -24,7 +24,7 @@ public class BaseService<T extends BaseDao> {
 		return baseDao.selectList(param);
 	}
     
-    public <E> E selectById(String id) {
+    public <E> E selectById(Long id) {
     	return baseDao.selectById(id);
     }
     
@@ -50,11 +50,11 @@ public class BaseService<T extends BaseDao> {
     	return baseDao.batchInsert(paramList);
     }
     
-    public int delete(String id) {
+    public int delete(Long id) {
     	return baseDao.delete(id);
     }
     
-    public int batchDelete(List<String> idList) {
+    public int batchDelete(List<Long> idList) {
     	return baseDao.batchDelete(idList);
     }
     

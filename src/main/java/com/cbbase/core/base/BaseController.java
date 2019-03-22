@@ -56,19 +56,6 @@ public abstract class BaseController {
     	pageContainer.setParam(param);
     	return pageContainer;
     }
-    
-    protected List<String> getParameterArray(String key){
-    	return ServletUtil.getParameterArray(getRequest(), key);
-    }
-    
-    protected String readRequestData(){
-    	//默认最大读取10万字符
-    	return readRequestData(100000);
-    }
-    
-    protected String readRequestData(int maxLength){
-		return ServletUtil.readRequestData(getRequest(), maxLength);
-    }
 	
     protected String getClientIp() {
 		return ServletUtil.getClientIp(getRequest());
