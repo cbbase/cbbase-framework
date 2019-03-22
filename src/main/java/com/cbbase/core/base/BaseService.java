@@ -7,7 +7,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import com.cbbase.core.container.PageContainer;
-import com.cbbase.core.tools.KeyHelper;
+import com.cbbase.core.tools.IdWorker;
 import com.cbbase.core.tools.ObjectUtil;
 
 public class BaseService<T extends BaseDao> {
@@ -16,6 +16,9 @@ public class BaseService<T extends BaseDao> {
 	
 	@Autowired
 	protected T baseDao;
+
+	@Autowired
+	protected IdWorker idWorker;
 	
 	public <E> List<E> selectList(Object param){
 		return baseDao.selectList(param);
@@ -29,7 +32,7 @@ public class BaseService<T extends BaseDao> {
     	if(param instanceof BaseEntity) {
     		BaseEntity entity = (BaseEntity) param;
     		if(entity.getId() == null) {
-    			entity.setId(KeyHelper.nextKey());
+    			entity.setId(idWorker.nextId());
     		}
     	}
     	return baseDao.insert(param);
@@ -40,7 +43,7 @@ public class BaseService<T extends BaseDao> {
         	if(param instanceof BaseEntity) {
         		BaseEntity entity = (BaseEntity) param;
         		if(entity.getId() == null) {
-        			entity.setId(KeyHelper.nextKey());
+        			entity.setId(idWorker.nextId());
         		}
         	}
     	}

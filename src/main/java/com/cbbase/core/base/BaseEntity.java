@@ -7,7 +7,7 @@ package com.cbbase.core.base;
  */
 public class BaseEntity implements Cloneable {
 	
-	private String id;
+	private Long id;
 	private String createId;
 	private String createName;
 	private String createTime;
@@ -16,10 +16,10 @@ public class BaseEntity implements Cloneable {
 	private String updateTime;
 	
 	
-	public String getId() {
+	public Long getId() {
 		return id;
 	}
-	public void setId(String id) {
+	public void setId(Long id) {
 		this.id = id;
 	}
 	public String getCreateId() {
