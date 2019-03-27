@@ -22,9 +22,9 @@ public class VoAssist {
 		List<String> list = ObjectUtil.getFields(clazz);
 		StringBuffer sb = new StringBuffer("\n");
 		for(String field : list) {
-			sb.append(StringUtil.camelToColumn(field) + " as " + field);
+			sb.append(StringUtil.camelToColumn(field) + " as " + field + ",\n");
 		}
-		sb.append("	</resultMap>").append("\n");
+		sb.append("\n");
 		System.out.println(sb.toString());
 	}
 
