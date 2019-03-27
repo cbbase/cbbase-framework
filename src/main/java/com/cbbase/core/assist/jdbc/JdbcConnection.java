@@ -14,11 +14,6 @@ import com.cbbase.core.tools.PropertiesHelper;
  * 
  */
 public class JdbcConnection {
-	
-	public static final String TYPE_ORACLE = "ORACLE";
-	public static final String TYPE_MYSQL = "MYSQL";
-	
-	public static final String[] DB_TYPE = {"ORACLE", "MYSQL", "SQLSERVER", "DB2", "INFORMIX"};
 
 	private static String CONFIG_FILE = "application.properties";
 	
@@ -33,15 +28,22 @@ public class JdbcConnection {
     		database = "jdbc";
     	}
     	DruidDataSource dataSource = dataSourceMap.get(database);
+    	if(dataSource != null){
+        	return dataSource;
+    	}
+		PropertiesHelper helper = PropertiesHelper.getPropertiesHelper(CONFIG_FILE);
+		String driverClassName = helper.getValue(database+".driverClassName");
+		String url = helper.getValue(database+".url");
+		String username = helper.getValue(database+".username");
+		String password = helper.getValue(database+".password");
+		return getDataSource(database, driverClassName, url, username, password);
+    }
+    
+    public static DruidDataSource getDataSource(String database, String driverClassName, String url, String username, String password){
+    	DruidDataSource dataSource = dataSourceMap.get(database);
     	if(dataSource == null){
-			PropertiesHelper helper = PropertiesHelper.getPropertiesHelper(CONFIG_FILE);
-			String driverClass = helper.getValue(database+".driverClassName");
-			String url = helper.getValue(database+".url");
-			String username = helper.getValue(database+".username");
-			String password = helper.getValue(database+".password");
-    		
             dataSource = new DruidDataSource();
-            dataSource.setDriverClassName(driverClass);
+            dataSource.setDriverClassName(driverClassName);
             dataSource.setUrl(url);
             dataSource.setUsername(username);
             dataSource.setPassword(password);
@@ -49,10 +51,10 @@ public class JdbcConnection {
             dataSource.setMinIdle(3);
             dataSource.setMaxActive(20);
             dataSource.setTestWhileIdle(true);
-            if(driverClass.toUpperCase().indexOf(TYPE_MYSQL) >= 0){
+            if(driverClassName.toUpperCase().indexOf(DatabaseType.MYSQL.name()) >= 0){
                 dataSource.setValidationQuery("select 1");
             }
-            if(driverClass.toUpperCase().indexOf(TYPE_ORACLE) >= 0){
+            if(driverClassName.toUpperCase().indexOf(DatabaseType.ORACLE.name()) >= 0){
                 dataSource.setValidationQuery("select 1 from dual");
                 dataSource.setOracle(true);
             }
@@ -75,23 +77,13 @@ public class JdbcConnection {
 		
 		return conn;
 	}
-	
-	public static String getDatabaseType(String database){
-		String driverClass = getDataSource(database).getDriverClassName();
-		for(String type : DB_TYPE){
-			if(driverClass.toUpperCase().indexOf(type) >= 0){
-				return type;
-			}
-		}
-		return "unkown";
-	}
 
 	public static boolean isMysql(String database){
-		return getDatabaseType(database).equals(TYPE_MYSQL);
+		return getDataSource(database).getDriverClassName().equals(DatabaseType.MYSQL.name());
 	}
 	
 	public static boolean isOracle(String database){
-		return getDatabaseType(database).equals(TYPE_ORACLE);
+		return getDataSource(database).getDriverClassName().equals(DatabaseType.ORACLE.name());
 	}
 	
 	public static String getDatabaseUser(String database){
