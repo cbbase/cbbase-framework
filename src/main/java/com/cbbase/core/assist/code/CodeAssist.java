@@ -9,7 +9,7 @@ import com.cbbase.core.tools.CommonUtil;
 import com.cbbase.core.tools.StringUtil;
 
 /**
- * 
+ * 	仅适用于单线程
  * @author changbo
  *
  */
