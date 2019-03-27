@@ -3,8 +3,8 @@ package com.cbbase.core.assist.database;
 import java.util.List;
 import java.util.Map;
 
-import com.cbbase.core.jdbc.JdbcConnection;
-import com.cbbase.core.jdbc.JdbcHelper;
+import com.cbbase.core.assist.jdbc.JdbcConnection;
+import com.cbbase.core.assist.jdbc.JdbcHelper;
 import com.cbbase.core.tools.StringUtil;
  
 

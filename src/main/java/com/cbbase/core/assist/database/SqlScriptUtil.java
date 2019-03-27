@@ -4,7 +4,7 @@ import java.io.File;
 import java.io.FilenameFilter;
 import java.util.List;
 
-import com.cbbase.core.jdbc.JdbcHelper;
+import com.cbbase.core.assist.jdbc.JdbcHelper;
 import com.cbbase.core.tools.CommonUtil;
 import com.cbbase.core.tools.FileUtil;
 import com.cbbase.core.tools.ObjectUtil;

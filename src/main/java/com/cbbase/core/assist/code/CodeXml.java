@@ -1,7 +1,7 @@
 package com.cbbase.core.assist.code;
 
 import com.cbbase.core.assist.database.DataTypeUtil;
-import com.cbbase.core.jdbc.JdbcConnection;
+import com.cbbase.core.assist.jdbc.JdbcConnection;
 import com.cbbase.core.tools.FileUtil;
 import com.cbbase.core.tools.StringUtil;
 

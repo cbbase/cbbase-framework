@@ -1,4 +1,4 @@
-package com.cbbase.core.jdbc;
+package com.cbbase.core.assist.jdbc;
 
 import java.util.HashMap;
 import java.util.List;
