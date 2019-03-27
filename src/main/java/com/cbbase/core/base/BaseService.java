@@ -29,23 +29,13 @@ public class BaseService<T extends BaseDao> {
     }
     
     public int insert(Object param) {
-    	if(param instanceof BaseEntity) {
-    		BaseEntity entity = (BaseEntity) param;
-    		if(entity.getId() == null) {
-    			entity.setId(idWorker.nextId());
-    		}
-    	}
+    	checkPrimaryId(param);
     	return baseDao.insert(param);
     }
     
     public int batchInsert(List<?> paramList) {
     	for(Object param : paramList) {
-        	if(param instanceof BaseEntity) {
-        		BaseEntity entity = (BaseEntity) param;
-        		if(entity.getId() == null) {
-        			entity.setId(idWorker.nextId());
-        		}
-        	}
+        	checkPrimaryId(param);
     	}
     	return baseDao.batchInsert(paramList);
     }
@@ -87,6 +77,15 @@ public class BaseService<T extends BaseDao> {
     	Object param = ObjectUtil.newInstance(clazz);
     	ObjectUtil.setFieldValue(param, field, value);
     	return this.select(param);
+    }
+    
+    private void checkPrimaryId(Object param) {
+    	if(param instanceof BaseEntity) {
+    		BaseEntity entity = (BaseEntity) param;
+    		if(entity.getId() == null) {
+    			entity.setId(idWorker.nextId());
+    		}
+    	}
     }
     
 }
