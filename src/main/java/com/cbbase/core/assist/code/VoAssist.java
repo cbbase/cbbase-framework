@@ -17,5 +17,15 @@ public class VoAssist {
 		sb.append("	</resultMap>").append("\n");
 		System.out.println(sb.toString());
 	}
+	
+	public static void voColumns(Class<?> clazz) {
+		List<String> list = ObjectUtil.getFields(clazz);
+		StringBuffer sb = new StringBuffer("\n");
+		for(String field : list) {
+			sb.append(StringUtil.camelToColumn(field) + " as " + field);
+		}
+		sb.append("	</resultMap>").append("\n");
+		System.out.println(sb.toString());
+	}
 
 }
