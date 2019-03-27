@@ -1,4 +1,4 @@
-package com.cbbase.core.plugin.iso8583;
+package com.cbbase.core.extension.iso8583;
 
 
 public class Field {

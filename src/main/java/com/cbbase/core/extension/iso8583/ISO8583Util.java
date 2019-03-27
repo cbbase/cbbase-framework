@@ -1,4 +1,4 @@
-package com.cbbase.core.plugin.iso8583;
+package com.cbbase.core.extension.iso8583;
 
 import com.cbbase.core.encrypt.TripleDES;
 import com.cbbase.core.tools.StringUtil;
