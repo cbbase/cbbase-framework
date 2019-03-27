@@ -61,7 +61,7 @@ public class HttpHelper {
 	private String characterSet = DUFAULT_CHARACTERSET;
 	private Map<String, String> headers = new HashMap<String, String>();
 	private Map<String, String> params = new HashMap<String, String>();
-	private String body;
+	private String formData;
 	//
 	private boolean showLog;
 	
@@ -140,8 +140,8 @@ public class HttpHelper {
 		return this;
 	}
 	
-	public HttpHelper setBody(String body) {
-		this.body = body;
+	public HttpHelper setFormData(String formData) {
+		this.formData = formData;
 		return this;
 	}
 	
@@ -215,8 +215,8 @@ public class HttpHelper {
 					http = getHttpForUploadFile();
 				}else{
 					http = new HttpPost(url);
-					if(StringUtil.hasValue(body)) {
-						((HttpPost)http).setEntity(getBodyEntity());
+					if(StringUtil.hasValue(formData)) {
+						((HttpPost)http).setEntity(getFormDataEntity());
 					}
 					if(params != null && !params.isEmpty()) {
 						((HttpPost)http).setEntity(getParamEntity());
@@ -224,8 +224,8 @@ public class HttpHelper {
 				}
 			}else if(action == 2){
 				http = new HttpPut(url);
-				if(StringUtil.hasValue(body)) {
-					((HttpPut)http).setEntity(getBodyEntity());
+				if(StringUtil.hasValue(formData)) {
+					((HttpPut)http).setEntity(getFormDataEntity());
 				}
 				if(params != null && !params.isEmpty()) {
 					((HttpPut)http).setEntity(getParamEntity());
@@ -245,7 +245,7 @@ public class HttpHelper {
 			int code = httpResponse.getStatusLine().getStatusCode();
 			String data = EntityUtils.toString(httpResponse.getEntity());
 			responseData.setStatus(code);
-			responseData.setData(data);
+			responseData.setBody(data);
 			if(code == 200){
 				if(StringUtil.hasValue(downloadFile)){
 					InputStream in = httpResponse.getEntity().getContent();
@@ -304,9 +304,9 @@ public class HttpHelper {
 		
 	}
 	
-	private StringEntity getBodyEntity() {
+	private StringEntity getFormDataEntity() {
 		try {
-		    return new StringEntity(body, characterSet);
+		    return new StringEntity(formData, characterSet);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -445,7 +445,7 @@ public class HttpHelper {
 	public class ResponseData{
 		
 		private int status;
-		private String data;
+		private String body;
 		private Exception exception;
 		
 		public int getStatus() {
@@ -454,11 +454,11 @@ public class HttpHelper {
 		public void setStatus(int status) {
 			this.status = status;
 		}
-		public String getData() {
-			return data;
+		public String getBody() {
+			return body;
 		}
-		public void setData(String data) {
-			this.data = data;
+		public void setBody(String body) {
+			this.body = body;
 		}
 		public Exception getException() {
 			return exception;
