@@ -54,13 +54,17 @@ public class DataBaseTable{
 	
 	public String querySelectColumns(String tableName, String tableSchema){
 		List<Map<String, Object>> list = queryColumns(tableName, tableSchema);
-		StringBuffer sb = new StringBuffer("select ");
+		StringBuffer sb = new StringBuffer("\nselect ");
+		int i=1;
 		for(Map<String, Object> map : list) {
 			sb.append(map.get("column_name")+", ");
+			if(sb.length() > 120*i) {
+				sb.append("\n");
+				i++;
+			}
 		}
 		sb.setLength(sb.length()-2);
-		sb.append("\n");
-		sb.append("from ");
+		sb.append("\nfrom ");
 		if(tableSchema != null) {
 			sb.append(tableSchema+".");
 		}
