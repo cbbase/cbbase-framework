@@ -45,6 +45,26 @@ public class DataBaseTable{
 		return list;
 	}
 	
+	public String querySelectColumns(String tableName){
+		return querySelectColumns(tableName, null);
+	}
+	
+	public String querySelectColumns(String tableName, String tableSchema){
+		List<Map<String, Object>> list = queryColumns(tableName, tableSchema);
+		StringBuffer sb = new StringBuffer("select ");
+		for(Map<String, Object> map : list) {
+			sb.append(map.get("column_name")+", ");
+		}
+		sb.setLength(sb.length()-2);
+		sb.append("\n");
+		sb.append("from ");
+		if(tableSchema != null) {
+			sb.append(tableSchema+".");
+		}
+		sb.append(tableName);
+		return sb.toString();
+	}
+	
 	
 	public List<Map<String, Object>> queryIndex(String tableName){
 		String sql = "";
@@ -83,4 +103,5 @@ public class DataBaseTable{
 		}
 		return null;
 	}
+	
 }
