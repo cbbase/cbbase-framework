@@ -17,6 +17,9 @@ public class DataBaseTable{
 	
 	private String database = "";
 	
+	public DataBaseTable(){
+	}
+	
 	public DataBaseTable(String database){
 		this.database = database;
 	}
