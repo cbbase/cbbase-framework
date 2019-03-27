@@ -1,4 +1,4 @@
-package com.cbbase.core.connector;
+package com.cbbase.core.assist.connector;
 
 import java.time.Duration;
 import java.util.ArrayList;

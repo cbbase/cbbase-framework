@@ -1,4 +1,4 @@
-package com.cbbase.core.connector;
+package com.cbbase.core.extension.elasticsearch;
 
 import java.util.ArrayList;
 import java.util.HashMap;

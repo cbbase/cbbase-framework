@@ -1,4 +1,4 @@
-package com.cbbase.core.connector;
+package com.cbbase.core.assist.connector;
 
 import com.cbbase.core.tools.PropertiesHelper;
 import com.mongodb.MongoClient;
