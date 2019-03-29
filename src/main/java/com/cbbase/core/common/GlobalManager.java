@@ -8,7 +8,6 @@ import org.springframework.web.context.request.RequestContextHolder;
 import org.springframework.web.context.request.ServletRequestAttributes;
 
 import com.cbbase.core.common.BeanFactory;
-import com.cbbase.core.handler.AuthHandler;
 import com.cbbase.core.handler.DataSourceHandler;
 
 /**
