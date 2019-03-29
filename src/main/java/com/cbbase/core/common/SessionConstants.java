@@ -30,7 +30,7 @@ public class SessionConstants {
 	/**
 	 * 提交token
 	 */
-	public static final String FORM_TOKEN = "fromToken";
+	public static final String FORM_TOKEN = "formToken";
 	
 	
 }
