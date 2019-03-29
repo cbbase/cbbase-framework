@@ -15,11 +15,11 @@ public class BaseMongoService {
     @Autowired
     protected MongoTemplate mongoTemplate;
 
-    public PageContainer selectPage(Class < ? > entityClass, PageContainer param, Query query) {
+    public PageContainer selectPage(Class<?> entityClass, PageContainer param, Query query) {
         return selectPage(entityClass, param, query, null);
     }
 
-    public PageContainer selectPage(Class < ? > entityClass, PageContainer param, Query query, Sort sort) {
+    public PageContainer selectPage(Class<?> entityClass, PageContainer param, Query query, Sort sort) {
         if (query == null) {
             query = new Query();
         }
@@ -32,7 +32,7 @@ public class BaseMongoService {
         // mongo分页从0开始
         PageRequest pageRequest = PageRequest.of(param.getCurrentPage() - 1, param.getPageSize());
         query.with(pageRequest);
-        List < ? > list = mongoTemplate.find(query, entityClass);
+        List<?> list = mongoTemplate.find(query, entityClass);
         param.setRowCount((int)rowCount);
         param.setData(list);
         return param;
