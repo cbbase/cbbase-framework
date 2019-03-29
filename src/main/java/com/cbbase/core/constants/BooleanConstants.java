@@ -1,4 +1,4 @@
-package com.cbbase.core.common;
+package com.cbbase.core.constants;
 
 /**
  * 	是否常量

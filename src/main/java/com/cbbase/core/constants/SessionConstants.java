@@ -1,4 +1,4 @@
-package com.cbbase.core.common;
+package com.cbbase.core.constants;
 
 /**
  * 全局常量统一管理，避免冲突

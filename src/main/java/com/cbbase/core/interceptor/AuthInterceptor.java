@@ -13,8 +13,9 @@ import org.springframework.web.servlet.handler.HandlerInterceptorAdapter;
 
 import com.cbbase.core.annotation.Authority;
 import com.cbbase.core.container.RestResponse;
-import com.cbbase.core.common.SessionConstants;
+import com.cbbase.core.common.AuthManager;
 import com.cbbase.core.common.GlobalManager;
+import com.cbbase.core.constants.SessionConstants;
 import com.cbbase.core.tools.JsonUtil;
 import com.cbbase.core.tools.ServletUtil;
 import com.cbbase.core.tools.StringUtil;
@@ -45,7 +46,7 @@ public class AuthInterceptor extends HandlerInterceptorAdapter {
         for(Authority authority : authorities) {
             //检查是否登录
     		if(authority.checkLogin()){
-    			if(GlobalManager.getLoginUser() == null){
+    			if(AuthManager.getLoginUser() == null){
     				logger.debug("authority.isLogin():"+authority.checkLogin());
     				RestResponse resp = new RestResponse(-1, "No login");
     				ServletUtil.returnString(response, JsonUtil.toJson(resp));
@@ -55,7 +56,7 @@ public class AuthInterceptor extends HandlerInterceptorAdapter {
     		
     		//检查是否拥有指定的权限
     		if(StringUtil.hasValue(authority.value())){
-    			if(!GlobalManager.checkAuth(authority.value())){
+    			if(!AuthManager.checkAuth(authority.value())){
     				logger.debug("authority.value():"+authority.value());
     				RestResponse resp = new RestResponse(-2, "No authority");
     				ServletUtil.returnString(response, JsonUtil.toJson(resp));

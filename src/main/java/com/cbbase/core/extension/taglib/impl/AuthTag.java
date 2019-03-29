@@ -2,7 +2,7 @@ package com.cbbase.core.extension.taglib.impl;
 
 import javax.servlet.jsp.JspException;
 
-import com.cbbase.core.common.GlobalManager;
+import com.cbbase.core.common.AuthManager;
 import com.cbbase.core.extension.taglib.BaseBodyTaglib;
 
 /**
@@ -20,7 +20,7 @@ public class AuthTag extends BaseBodyTaglib {
 	
 	@Override
 	public int doStartTag() throws JspException {
-		if(!GlobalManager.checkAuth(auth)) {
+		if(!AuthManager.checkAuth(auth)) {
 			return SKIP_PAGE;
 		}
 		return EVAL_BODY_INCLUDE;

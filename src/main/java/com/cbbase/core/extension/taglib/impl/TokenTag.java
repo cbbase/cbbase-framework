@@ -1,7 +1,7 @@
 package com.cbbase.core.extension.taglib.impl;
 
-import com.cbbase.core.common.SessionConstants;
 import com.cbbase.core.common.GlobalManager;
+import com.cbbase.core.constants.SessionConstants;
 import com.cbbase.core.extension.taglib.BaseTaglib;
 import com.cbbase.core.tools.RandomUtil;
 

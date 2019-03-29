@@ -22,10 +22,6 @@ public class GlobalManager {
 		return BeanFactory.getBean(DataSourceHandler.class);
 	}
 	
-	public static AuthHandler getAuthHandler() {
-		return BeanFactory.getBean(AuthHandler.class);
-	}
-	
 	public static HttpServletRequest getRequest() {
 		return ((ServletRequestAttributes)RequestContextHolder.getRequestAttributes()).getRequest();
 	}
@@ -49,18 +45,6 @@ public class GlobalManager {
 	@SuppressWarnings("unchecked")
 	public static <T> T getSession(String key) {
 		return (T) getSession().getAttribute(key);
-	}
-	
-	@SuppressWarnings("unchecked")
-	public static <T> T getLoginUser() {
-		return (T) getSession().getAttribute(SessionConstants.LOGIN_USER);
-	}
-	
-	public static boolean checkAuth(String auth) {
-		if(getAuthHandler() != null) {
-			return getAuthHandler().checkAuth(getRequest(), auth);
-		}
-		return false;
 	}
 	
 	public static String getDataSource() {
