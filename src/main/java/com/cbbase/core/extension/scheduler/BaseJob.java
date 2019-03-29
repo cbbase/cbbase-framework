@@ -1,4 +1,4 @@
-package com.cbbase.core.scheduler;
+package com.cbbase.core.extension.scheduler;
 
 import org.quartz.Job;
 import org.quartz.JobExecutionContext;

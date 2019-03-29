@@ -1,4 +1,4 @@
-package com.cbbase.core.taglib.base;
+package com.cbbase.core.extension.taglib;
 
 import java.io.IOException;
 

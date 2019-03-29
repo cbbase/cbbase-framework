@@ -1,8 +1,8 @@
-package com.cbbase.core.taglib.impl;
+package com.cbbase.core.extension.taglib.impl;
 
 import com.cbbase.core.common.BeanFactory;
 import com.cbbase.core.handler.MessageTranslateHandler;
-import com.cbbase.core.taglib.base.BaseTaglib;
+import com.cbbase.core.extension.taglib.BaseTaglib;
 
 public class MessageTag extends BaseTaglib {
 	
