@@ -39,6 +39,15 @@ public class StringUtil {
 			return false;
 		}
 	}
+
+	public static boolean isEmpty(String... ss){
+		for(String s : ss) {
+			if(!hasValue(s)) {
+				return true;
+			}
+		}
+		return false;
+	}
 	
 	public static boolean isEmpty(String s){
 		return !hasValue(s);
