@@ -183,12 +183,11 @@ public class HttpHelper {
 		return true;
 	}
 	
-	public ResponseData execute(){
-		ResponseData responseData = new ResponseData();
+	public String execute(){
 		url = StringUtil.getValue(url).trim();
 		if(!checkUrl()){
-			responseData.setException(new RuntimeException("url format error"));
-			return responseData;
+			printLog("");
+			return null;
 		}
 		CloseableHttpClient httpClient = null;
 		HttpRequestBase http = null;
@@ -244,17 +243,16 @@ public class HttpHelper {
 			
 			int code = httpResponse.getStatusLine().getStatusCode();
 			String data = EntityUtils.toString(httpResponse.getEntity());
-			responseData.setStatus(code);
-			responseData.setBody(data);
 			if(code == 200){
 				if(StringUtil.hasValue(downloadFile)){
 					InputStream in = httpResponse.getEntity().getContent();
 					FileUtil.writeInputStream2File(in, new File(downloadFile));
+					return null;
 				}
 			}
-			return responseData;
+			return data;
 		} catch (Exception e) {
-			responseData.setException(e);
+			printLog(e.getMessage());
 		} finally {
 			if(http != null){
 				http.abort();
@@ -263,7 +261,7 @@ public class HttpHelper {
 			close(httpClient);
 			close(httpResponse);
 		}
-		return responseData;
+		return null;
 	}
 	
 	private HttpRequestBase getHttpForGet() throws Exception{
@@ -440,32 +438,5 @@ public class HttpHelper {
 		if(showLog) {
 			System.out.println(log);
 		}
-	}
-	
-	public class ResponseData{
-		
-		private int status;
-		private String body;
-		private Exception exception;
-		
-		public int getStatus() {
-			return status;
-		}
-		public void setStatus(int status) {
-			this.status = status;
-		}
-		public String getBody() {
-			return body;
-		}
-		public void setBody(String body) {
-			this.body = body;
-		}
-		public Exception getException() {
-			return exception;
-		}
-		public void setException(Exception exception) {
-			this.exception = exception;
-		}
-		
 	}
 }
