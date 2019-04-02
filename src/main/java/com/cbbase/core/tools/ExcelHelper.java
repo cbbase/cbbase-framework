@@ -404,7 +404,7 @@ public class ExcelHelper {
 		if(cell == null){
 			return "";
 		}
-		CellType type = cell.getCellTypeEnum();
+		CellType type = cell.getCellType();
 		if(type.equals(CellType.BLANK)){
 			return "";
 		}
