@@ -43,4 +43,8 @@ public class RandomUtil{
 		return getRandom().nextInt(end - start) + start;
 	}
 	
+	public static String uuid() {
+		long time = System.currentTimeMillis();
+		return Long.toHexString(time).toUpperCase()+hex(21);
+	}
 }
