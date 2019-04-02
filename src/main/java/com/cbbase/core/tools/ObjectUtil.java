@@ -200,22 +200,4 @@ public class ObjectUtil {
 		}
         return _field.getType();
 	}
-	
-	public static boolean isEquals(Object obj1, Object obj2) {
-		if(obj1 == null || obj2 == null) {
-			return false;
-		}
-		if(obj1.equals(obj2)) {
-			return true;
-		}
-		if(obj2 instanceof Long || obj2 instanceof Integer) {
-			long o2 = StringUtil.stringToLong(StringUtil.getValue(obj2));
-			long o1 = StringUtil.stringToLong(StringUtil.getValue(obj1));
-			if(o1 == o2) {
-				return true;
-			}
-		}
-		
-		return false;
-	}
 }
