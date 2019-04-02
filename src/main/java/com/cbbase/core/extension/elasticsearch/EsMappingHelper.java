@@ -23,7 +23,11 @@ public class EsMappingHelper {
 		for(Field field : fields) {
 			field.setAccessible(true);
 			if(field.getType().isAssignableFrom(String.class)) {
-				properties.put(field.getName(), getFieldMap("text", analyzed));
+				if(analyzed) {
+					properties.put(field.getName(), getFieldMap("text"));
+				}else {
+					properties.put(field.getName(), getFieldMap("keyword"));
+				}
 			}
 			if(field.getType().isAssignableFrom(Long.class)) {
 				properties.put(field.getName(), getFieldMap("long"));
@@ -52,13 +56,9 @@ public class EsMappingHelper {
 	}
 	
 	private static Map<String, Object> getFieldMap(String type){
-		return getFieldMap(type, false);
-	}
-	
-	private static Map<String, Object> getFieldMap(String type, boolean analyzed){
 		Map<String, Object> mapping = new HashMap<>();
 		mapping.put("type", type);
-		mapping.put("index", analyzed);
+		mapping.put("index", true);
 		return mapping;
 	}
 
