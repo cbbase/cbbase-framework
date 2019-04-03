@@ -29,11 +29,14 @@ public class EsMappingHelper {
 					properties.put(field.getName(), getFieldMap("keyword"));
 				}
 			}
+			if(field.getType().isAssignableFrom(Integer.class)) {
+				properties.put(field.getName(), getFieldMap("integer"));
+			}
 			if(field.getType().isAssignableFrom(Long.class)) {
 				properties.put(field.getName(), getFieldMap("long"));
 			}
-			if(field.getType().isAssignableFrom(Integer.class)) {
-				properties.put(field.getName(), getFieldMap("integer"));
+			if(field.getType().isAssignableFrom(Date.class)) {
+				properties.put(field.getName(), getFieldMap("long"));
 			}
 			if(field.getType().isAssignableFrom(BigDecimal.class)) {
 				properties.put(field.getName(), getFieldMap("float"));
@@ -43,9 +46,6 @@ public class EsMappingHelper {
 			}
 			if(field.getType().isAssignableFrom(Float.class)) {
 				properties.put(field.getName(), getFieldMap("float"));
-			}
-			if(field.getType().isAssignableFrom(Date.class)) {
-				properties.put(field.getName(), getFieldMap("integer"));
 			}
 			field.setAccessible(false);
 		}
