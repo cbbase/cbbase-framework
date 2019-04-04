@@ -65,15 +65,15 @@ public class SqlScriptUtil {
 		List<String> list = ObjectUtil.getFields(clazz);
 		String sql = "";
 		if("MYSQL".equalsIgnoreCase(datbaseType)){
-			sql = createSqlByEntityOnMysql(list, clazz, tableName);
+			sql = createSqlByEntityForMysql(list, clazz, tableName);
 		}
 		if("ORACLE".equalsIgnoreCase(datbaseType)){
-			sql = createSqlByEntityOnOracle(list, clazz, tableName);
+			sql = createSqlByEntityForOracle(list, clazz, tableName);
 		}
 		FileUtil.createFileByString(sqlPath+"/"+tableName+".sql", sql);
 	}
 	
-	private static String createSqlByEntityOnMysql(List<String> list, Class<?> clazz, String tableName){
+	private static String createSqlByEntityForMysql(List<String> list, Class<?> clazz, String tableName){
 		StringBuilder sb = new StringBuilder("");
 		sb.append("DROP TABLE IF EXISTS "+tableName.toLowerCase()+";").append("\n");
 		sb.append("CREATE TABLE IF NOT EXISTS "+tableName.toLowerCase()+"(").append("\n");
@@ -85,12 +85,12 @@ public class SqlScriptUtil {
 			sb.append("	"+StringUtil.camelToColumn(field)+" "+d_type+" COMMENT '',").append("\n");
 		}
 		sb.append("	PRIMARY KEY (id)").append("\n");
-		sb.append(") ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='';").append("\n");
+		sb.append(") ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COMMENT='';").append("\n");
 		
 		return sb.toString();
 	}
 	
-	private static String createSqlByEntityOnOracle(List<String> list, Class<?> clazz, String tableName){
+	private static String createSqlByEntityForOracle(List<String> list, Class<?> clazz, String tableName){
 		StringBuilder sb = new StringBuilder("");
 		sb.append("DROP TABLE "+tableName.toUpperCase()+";").append("\n");
 		sb.append("CREATE TABLE "+tableName.toUpperCase()+"(").append("\n");

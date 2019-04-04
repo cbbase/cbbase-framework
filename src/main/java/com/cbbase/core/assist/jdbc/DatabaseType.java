@@ -8,5 +8,8 @@ package com.cbbase.core.assist.jdbc;
 public enum DatabaseType {
 	MYSQL,
 	ORACLE,
-	SQLSERVER
+	SQLSERVER,
+	DB2,
+	SQLITE,
+	MAREADB
 }

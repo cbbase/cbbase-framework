@@ -15,12 +15,12 @@ import com.cbbase.core.tools.PropertiesHelper;
  */
 public class JdbcConnection {
 
-	private static String CONFIG_FILE = "application.properties";
+	private static String configFile = "application.properties";
 	
     private static Map<String, DruidDataSource> dataSourceMap = new HashMap<String, DruidDataSource>();
     
     public static void setConfigFile(String configFile){
-    	CONFIG_FILE = configFile;
+    	JdbcConnection.configFile = configFile;
     }
     
     public static DruidDataSource getDataSource(String database){
@@ -31,7 +31,7 @@ public class JdbcConnection {
     	if(dataSource != null){
         	return dataSource;
     	}
-		PropertiesHelper helper = PropertiesHelper.getPropertiesHelper(CONFIG_FILE);
+		PropertiesHelper helper = PropertiesHelper.getPropertiesHelper(configFile);
 		String driverClassName = helper.getValue(database+".driverClassName");
 		String url = helper.getValue(database+".url");
 		String username = helper.getValue(database+".username");
@@ -79,11 +79,15 @@ public class JdbcConnection {
 	}
 
 	public static boolean isMysql(String database){
-		return getDataSource(database).getDriverClassName().equals(DatabaseType.MYSQL.name());
+		return checkType(database, DatabaseType.MYSQL);
 	}
 	
 	public static boolean isOracle(String database){
-		return getDataSource(database).getDriverClassName().equals(DatabaseType.ORACLE.name());
+		return checkType(database, DatabaseType.ORACLE);
+	}
+	
+	public static boolean checkType(String database, DatabaseType type) {
+		return getDataSource(database).getDriverClassName().indexOf(type.name()) >= 0;
 	}
 	
 	public static String getDatabaseUser(String database){

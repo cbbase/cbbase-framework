@@ -24,7 +24,7 @@ import io.lettuce.core.support.ConnectionPoolSupport;
  */
 public class RedisHelper {
 	
-	private static String CONFIG_FILE = "application.properties";
+	private static String configFile = "application.properties";
 	
 	/**
 	 * 	单机
@@ -38,7 +38,7 @@ public class RedisHelper {
 	 * @return
 	 */
 	public static RedisCommands<String, String> getRedisCommands(String prefix){
-		PropertiesHelper helper = PropertiesHelper.getPropertiesHelper(CONFIG_FILE);
+		PropertiesHelper helper = PropertiesHelper.getPropertiesHelper(configFile);
 		String host = helper.getValue(prefix+".host");
 		int port = helper.getValueAsInt(prefix+".port");
 		String password = helper.getValue(prefix+".password");
@@ -65,7 +65,7 @@ public class RedisHelper {
 	 * @return
 	 */
 	public static RedisAdvancedClusterCommands<String, String> getRedisClusterCommands(String prefix){
-		PropertiesHelper helper = PropertiesHelper.getPropertiesHelper(CONFIG_FILE);
+		PropertiesHelper helper = PropertiesHelper.getPropertiesHelper(configFile);
 		String nodes = helper.getValue(prefix+".cluster.nodes");
 		long timeout = helper.getValueAsInt(prefix+".timeout");
 		timeout = (timeout == 0) ? 10000 : timeout;

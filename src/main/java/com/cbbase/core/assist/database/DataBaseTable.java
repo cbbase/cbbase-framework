@@ -15,7 +15,7 @@ import com.cbbase.core.tools.StringUtil;
  */
 public class DataBaseTable{
 	
-	private String database = "";
+	private String database = null;
 	
 	public DataBaseTable(){
 	}

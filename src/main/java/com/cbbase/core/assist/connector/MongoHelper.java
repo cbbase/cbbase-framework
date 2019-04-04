@@ -13,16 +13,15 @@ import com.mongodb.client.MongoDatabase;
  *
  */
 public class MongoHelper {
-
-	private static String CONFIG_FILE = "application.properties";
 	
-
+	private static String configFile = "application.properties";
+	
 	public static MongoDatabase getMongoDatabase() {
 		return getMongoDatabase("spring.data.mongodb");
 	}
 	
 	public static MongoDatabase getMongoDatabase(String prefix) {
-		PropertiesHelper helper = PropertiesHelper.getPropertiesHelper(CONFIG_FILE);
+		PropertiesHelper helper = PropertiesHelper.getPropertiesHelper(configFile);
 		String host = helper.getValue(prefix+".host");
 		int port = helper.getValueAsInt(prefix+".port");
 		String database = helper.getValue(prefix+".database");
