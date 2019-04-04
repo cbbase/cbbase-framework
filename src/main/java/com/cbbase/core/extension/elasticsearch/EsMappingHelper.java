@@ -12,22 +12,17 @@ import java.util.Map;
  *
  */
 public class EsMappingHelper {
-
-	public static Map<String, Object> getMapping(Class<?> clazz){
-		return getMapping(clazz, false);
-	}
 	
-	public static Map<String, Object> getMapping(Class<?> clazz, boolean analyzed){
+	public static Map<String, Object> getMapping(Class<?> clazz){
 		Map<String, Object> properties = new HashMap<>();
 		Field[] fields = clazz.getDeclaredFields();
 		for(Field field : fields) {
 			field.setAccessible(true);
 			if(field.getType().isAssignableFrom(String.class)) {
-				if(analyzed) {
-					properties.put(field.getName(), getFieldMap("text"));
-				}else {
-					properties.put(field.getName(), getFieldMap("keyword"));
-				}
+				properties.put(field.getName(), getStringMap());
+			}
+			if(field.getType().isAssignableFrom(Short.class)) {
+				properties.put(field.getName(), getFieldMap("short"));
 			}
 			if(field.getType().isAssignableFrom(Integer.class)) {
 				properties.put(field.getName(), getFieldMap("integer"));
@@ -35,17 +30,17 @@ public class EsMappingHelper {
 			if(field.getType().isAssignableFrom(Long.class)) {
 				properties.put(field.getName(), getFieldMap("long"));
 			}
-			if(field.getType().isAssignableFrom(Date.class)) {
-				properties.put(field.getName(), getFieldMap("long"));
-			}
 			if(field.getType().isAssignableFrom(BigDecimal.class)) {
-				properties.put(field.getName(), getFieldMap("float"));
+				properties.put(field.getName(), getDecimalMap());
 			}
 			if(field.getType().isAssignableFrom(Double.class)) {
-				properties.put(field.getName(), getFieldMap("float"));
+				properties.put(field.getName(), getDecimalMap());
 			}
 			if(field.getType().isAssignableFrom(Float.class)) {
-				properties.put(field.getName(), getFieldMap("float"));
+				properties.put(field.getName(), getDecimalMap());
+			}
+			if(field.getType().isAssignableFrom(Date.class)) {
+				properties.put(field.getName(), getFieldMap("long"));
 			}
 			field.setAccessible(false);
 		}
@@ -61,5 +56,22 @@ public class EsMappingHelper {
 		mapping.put("index", true);
 		return mapping;
 	}
-
+	
+	private static Map<String, Object> getStringMap(){
+		Map<String, Object> keyword = new HashMap<>();
+		keyword.put("type", "keyword");
+		keyword.put("ignore_above", "256");
+		
+		Map<String, Object> mapping = new HashMap<>();
+		mapping.put("keyword", keyword);
+		return mapping;
+	}
+	
+	private static Map<String, Object> getDecimalMap(){
+		Map<String, Object> mapping = new HashMap<>();
+		mapping.put("type", "type");
+		mapping.put("scaling_factor", 1000000);
+		return mapping;
+	}
+	
 }
