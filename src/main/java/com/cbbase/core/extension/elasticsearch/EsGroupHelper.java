@@ -197,7 +197,7 @@ public class EsGroupHelper {
 	
 	private void initAgg() {
 		if(termsList.size() == 0) {
-			throw new RuntimeException("termsList is empty");
+			throw new IllegalArgumentException("termsList is empty");
 		}
 		TermsAggregationBuilder last = null;
 		for(TermsAggregationBuilder terms : termsList) {
