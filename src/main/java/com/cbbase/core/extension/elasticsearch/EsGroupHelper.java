@@ -224,11 +224,16 @@ public class EsGroupHelper {
         		if(subAgg instanceof Terms) {
         			Terms sub = (Terms) subAgg;
         			List<Map<String, Object>> subList = termsToList(sub);
-        			if(subList.size() == 1) {
-        				map.putAll(subList.get(0));
-        			}else if(subList.size() > 1){
-        				map.put(sub.getName(), subList);
-        			}
+                    if (subList.size() >= 1) {
+                    	int length = subList.size();
+                        for(int i=1; i<length; i++) {
+                        	Map<String, Object> newMap = new HashMap<>();
+                        	newMap.putAll(map);
+                        	newMap.putAll(subList.get(i));
+                            list.add(newMap);
+                        }
+                        map.putAll(subList.get(0));
+                    }
         		}else {
             		Object val = ObjectUtil.getFieldValue(entry.getAggregations().get(subAgg.getName()), "value");
     	        	map.put(subAgg.getName(), val);
