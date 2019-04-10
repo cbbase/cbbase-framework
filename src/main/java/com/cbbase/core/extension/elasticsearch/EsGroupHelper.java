@@ -36,7 +36,7 @@ public class EsGroupHelper {
 	private String type;
 	private int from = 0;
 	private int size = 10;
-	private int querySize = 1000000;
+	private int querySize = 10000;
 	
 	private EsGroupHelper(ElasticsearchTemplate elasticsearchTemplate) {
 		this.elasticsearchTemplate = elasticsearchTemplate;
