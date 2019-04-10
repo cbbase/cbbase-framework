@@ -36,7 +36,7 @@ public class EsGroupHelper {
 	private String type;
 	private int from = 0;
 	private int size = 10;
-	private int rowSize = 1000000;
+	private int querySize = 1000000;
 	
 	private EsGroupHelper(ElasticsearchTemplate elasticsearchTemplate) {
 		this.elasticsearchTemplate = elasticsearchTemplate;
@@ -78,8 +78,8 @@ public class EsGroupHelper {
 		return this;
 	}
 	
-	public EsGroupHelper rowSize(int rowSize) {
-		this.rowSize = rowSize;
+	public EsGroupHelper querySize(int querySize) {
+		this.querySize = querySize;
 		return this;
 	}
 	
@@ -201,7 +201,7 @@ public class EsGroupHelper {
 		}
 		TermsAggregationBuilder last = null;
 		for(TermsAggregationBuilder terms : termsList) {
-			terms.size(rowSize);
+			terms.size(querySize);
 			if(last == null) {
 				last = terms;
 			}else {
