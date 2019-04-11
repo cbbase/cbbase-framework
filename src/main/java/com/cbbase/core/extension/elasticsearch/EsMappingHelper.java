@@ -1,9 +1,12 @@
 package com.cbbase.core.extension.elasticsearch;
 
 import java.lang.reflect.Field;
+import java.lang.reflect.ParameterizedType;
+import java.lang.reflect.Type;
 import java.math.BigDecimal;
 import java.util.Date;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -41,6 +44,16 @@ public class EsMappingHelper {
 			}
 			if(field.getType().isAssignableFrom(Date.class)) {
 				properties.put(field.getName(), getFieldMap("long"));
+			}
+			if(field.getType().isAssignableFrom(List.class)) {
+				Type genericType = field.getGenericType();
+				if(genericType instanceof ParameterizedType){
+	                ParameterizedType pt = (ParameterizedType) genericType;
+	                //得到泛型里的class类型对象
+	                Class<?> parameterClazz = (Class<?>)pt.getActualTypeArguments()[0];
+	                Map<String, Object> subMap = getMapping(parameterClazz);
+					properties.put(field.getName(), subMap);
+				}
 			}
 			field.setAccessible(false);
 		}
