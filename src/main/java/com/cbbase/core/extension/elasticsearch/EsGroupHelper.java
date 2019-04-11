@@ -34,9 +34,7 @@ public class EsGroupHelper {
 	private List<FieldSortBuilder> sortList = new ArrayList<>();
 	private String[] indices;
 	private String type;
-	private int from = 0;
-	private int size = 10;
-	private int querySize = 10000;
+	private int aggSize = 10000;
 	
 	private EsGroupHelper(ElasticsearchTemplate elasticsearchTemplate) {
 		this.elasticsearchTemplate = elasticsearchTemplate;
@@ -67,19 +65,9 @@ public class EsGroupHelper {
 		this.type = type;
 		return this;
 	}
-
-	public EsGroupHelper from(int size) {
-		this.size = size;
-		return this;
-	}
 	
-	public EsGroupHelper size(int size) {
-		this.size = size;
-		return this;
-	}
-	
-	public EsGroupHelper querySize(int querySize) {
-		this.querySize = querySize;
+	public EsGroupHelper aggSize(int aggSize) {
+		this.aggSize = aggSize;
 		return this;
 	}
 	
@@ -181,7 +169,7 @@ public class EsGroupHelper {
 		
         SearchSourceBuilder searchBuilder = new SearchSourceBuilder();
         searchBuilder.query(boolQueryBuilder);
-        searchBuilder.from(from).size(size);//指定返回数量，默认10条，ES默认最大不能超过10000条
+        searchBuilder.size(0);//不返回查询的原始数据
         searchBuilder.aggregation(termsList.get(0));
         for(FieldSortBuilder sort : sortList) {
             searchBuilder.sort(sort);
@@ -201,7 +189,7 @@ public class EsGroupHelper {
 		}
 		TermsAggregationBuilder last = null;
 		for(TermsAggregationBuilder terms : termsList) {
-			terms.size(querySize);
+			terms.size(aggSize);
 			if(last == null) {
 				last = terms;
 			}else {
