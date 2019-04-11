@@ -86,7 +86,7 @@ public class EsMappingHelper {
 	
 	private static Map<String, Object> getDecimalMap(){
 		Map<String, Object> mapping = new HashMap<>();
-		mapping.put("type", "type");
+		mapping.put("type", "scaled_float");
 		mapping.put("scaling_factor", 1000000);
 		return mapping;
 	}
