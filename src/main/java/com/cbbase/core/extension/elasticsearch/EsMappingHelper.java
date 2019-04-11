@@ -75,8 +75,12 @@ public class EsMappingHelper {
 		keyword.put("type", "keyword");
 		keyword.put("ignore_above", "256");
 		
+		Map<String, Object> fields = new HashMap<>();
+		fields.put("keyword", keyword);
+		
 		Map<String, Object> mapping = new HashMap<>();
-		mapping.put("keyword", keyword);
+		mapping.put("type", "text");
+		mapping.put("fields", fields);
 		return mapping;
 	}
 	
