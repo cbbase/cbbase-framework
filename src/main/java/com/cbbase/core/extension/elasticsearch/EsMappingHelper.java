@@ -33,14 +33,14 @@ public class EsMappingHelper {
 			if(field.getType().isAssignableFrom(Long.class)) {
 				properties.put(field.getName(), getFieldMap("long"));
 			}
-			if(field.getType().isAssignableFrom(BigDecimal.class)) {
-				properties.put(field.getName(), getDecimalMap());
+			if(field.getType().isAssignableFrom(Float.class)) {
+				properties.put(field.getName(), getFieldMap("float"));
 			}
 			if(field.getType().isAssignableFrom(Double.class)) {
-				properties.put(field.getName(), getDecimalMap());
+				properties.put(field.getName(), getFieldMap("double"));
 			}
-			if(field.getType().isAssignableFrom(Float.class)) {
-				properties.put(field.getName(), getDecimalMap());
+			if(field.getType().isAssignableFrom(BigDecimal.class)) {
+				properties.put(field.getName(), getFieldMap("double"));
 			}
 			if(field.getType().isAssignableFrom(Date.class)) {
 				properties.put(field.getName(), getFieldMap("long"));
@@ -73,7 +73,7 @@ public class EsMappingHelper {
 	private static Map<String, Object> getStringMap(){
 		Map<String, Object> keyword = new HashMap<>();
 		keyword.put("type", "keyword");
-		keyword.put("ignore_above", "256");
+		keyword.put("ignore_above", 256);
 		
 		Map<String, Object> fields = new HashMap<>();
 		fields.put("keyword", keyword);
@@ -81,13 +81,6 @@ public class EsMappingHelper {
 		Map<String, Object> mapping = new HashMap<>();
 		mapping.put("type", "text");
 		mapping.put("fields", fields);
-		return mapping;
-	}
-	
-	private static Map<String, Object> getDecimalMap(){
-		Map<String, Object> mapping = new HashMap<>();
-		mapping.put("type", "scaled_float");
-		mapping.put("scaling_factor", 1000000);
 		return mapping;
 	}
 	
