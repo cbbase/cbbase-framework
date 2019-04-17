@@ -3,6 +3,8 @@ package com.cbbase.core.config;
 import java.math.BigInteger;
 import java.util.List;
 
+import org.springframework.boot.autoconfigure.http.HttpMessageConverters;
+import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.core.Ordered;
 import org.springframework.http.converter.HttpMessageConverter;
@@ -27,6 +29,15 @@ public class CustomWebMvcConfigurer implements WebMvcConfigurer {
         registry.addViewController("/").setViewName("forward:/index.jsp");
         registry.setOrder(Ordered.HIGHEST_PRECEDENCE);
     }
+    
+    /**
+     * 
+     * @return
+     */
+    @Bean
+    public HttpMessageConverters fastJsonHttpMessageConverter() {
+        return new HttpMessageConverters(new FastJsonHttpMessageConverter());
+    }
 
     /**
      * JSON数据long转string
@@ -35,6 +46,7 @@ public class CustomWebMvcConfigurer implements WebMvcConfigurer {
     public void configureMessageConverters(List<HttpMessageConverter<?>> converters) {
         FastJsonHttpMessageConverter fastConverter = 
         new FastJsonHttpMessageConverter();
+ 
         FastJsonConfig fastJsonConfig = new FastJsonConfig();
         SerializeConfig serializeConfig = SerializeConfig.globalInstance;
         serializeConfig.put(BigInteger.class, ToStringSerializer.instance);
