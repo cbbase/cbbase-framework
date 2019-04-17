@@ -1,5 +1,7 @@
 package com.cbbase.core.base;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+
 /**
  * id:主键
  * @author changbo
