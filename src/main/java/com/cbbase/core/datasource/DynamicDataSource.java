@@ -9,27 +9,21 @@ import org.springframework.jdbc.datasource.lookup.AbstractRoutingDataSource;
  */
 public class DynamicDataSource extends AbstractRoutingDataSource {
 	
-	private static final ThreadLocal<String> DATA_SOURCE = new ThreadLocal<String>();
+	private static final ThreadLocal<String> dataDource = new ThreadLocal<String>();
 
 	public static String getDataSource() {
-		return (String) DATA_SOURCE.get();
+		return (String) dataDource.get();
 	}
 
 	public static void setDataSource(String dataSource) {
-		DATA_SOURCE.set(dataSource);
+		dataDource.set(dataSource);
 	}
 
 	public static void clearDataSource() {
-		DATA_SOURCE.remove();
+		dataDource.remove();
 	}
 
 	protected Object determineCurrentLookupKey() {
 		return getDataSource();
-	}
-	
-	@Override
-	public void afterPropertiesSet() {
-		
-		super.afterPropertiesSet();
 	}
 }
