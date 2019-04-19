@@ -47,9 +47,9 @@ public class JdbcConnection {
             dataSource.setUrl(url);
             dataSource.setUsername(username);
             dataSource.setPassword(password);
-            dataSource.setInitialSize(3);
-            dataSource.setMinIdle(3);
-            dataSource.setMaxActive(20);
+            dataSource.setInitialSize(2);
+            dataSource.setMinIdle(2);
+            dataSource.setMaxActive(50);
             dataSource.setTestWhileIdle(true);
             if(driverClassName.toUpperCase().indexOf(DatabaseType.MYSQL.name()) >= 0){
                 dataSource.setValidationQuery("select 1");
