@@ -179,7 +179,6 @@ public class HttpHelper {
 	public String execute(){
 		url = StringUtil.getValue(url).trim();
 		if(!checkUrl()){
-			LogUtil.printLog("url format error");
 			return null;
 		}
 		CloseableHttpClient httpClient = null;
@@ -245,7 +244,7 @@ public class HttpHelper {
 			}
 			return data;
 		} catch (Exception e) {
-			LogUtil.printLog(e.getMessage());
+			e.printStackTrace();
 		} finally {
 			if(http != null){
 				http.abort();
@@ -263,7 +262,6 @@ public class HttpHelper {
         	for (Map.Entry<String, String> query : params.entrySet()) {
         		if (StringUtil.hasValue(query.getKey()) && StringUtil.hasValue(query.getValue())) {
         			sb.append("&").append(query.getKey()+"="+query.getValue());
-        			LogUtil.printLog(query.getKey()+"->"+query.getValue());
                 }
         	}
         }
@@ -281,7 +279,6 @@ public class HttpHelper {
 		if(params != null){
 			for(Entry<String, String> entry : params.entrySet()){
 				paramList.add(new BasicNameValuePair(entry.getKey(), entry.getValue().toString()));
-				LogUtil.printLog(entry.getKey()+"->"+entry.getValue());
 			}
 		}
 		try {
