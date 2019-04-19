@@ -299,6 +299,10 @@
                         <exclude>*.properties</exclude>
                         <exclude>**.xml</exclude>
                     </excludes>
+                    <archive>
+                    	<!-- 排除pom.xml文件 -->
+						<addMavenDescriptor>false</addMavenDescriptor>
+					</archive>
 	            </configuration>
 	        </plugin>
 			<plugin>
