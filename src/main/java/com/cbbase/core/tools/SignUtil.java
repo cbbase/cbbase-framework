@@ -11,8 +11,6 @@ import java.util.Map.Entry;
  */
 public class SignUtil {
 	
-	private static boolean showLog = false;
-	
 	public static String calcSign(Map<String, String> map, String key){
 		return calcSign(map, key, null, "&", "MD5", false);
 	}
@@ -60,7 +58,7 @@ public class SignUtil {
 		if(sb.length() > 0){
 			sign_str = sb.substring(1);
 		}
-		printLog("sign_str", sign_str);
+		LogUtil.printLog("sign_str:"+sign_str);
 		String sign = null;
 		if("MD5".equalsIgnoreCase(signType)){
 			sign = HashUtil.getMD5(sign_str);
@@ -88,7 +86,7 @@ public class SignUtil {
 		if(sb.length() > 0){
 			sign_str = sb.substring(1);
 		}
-		printLog("sign_str", sign_str);
+		LogUtil.printLog("sign_str:"+sign_str);
 		return sign_str;
 	}
 
@@ -107,7 +105,7 @@ public class SignUtil {
 			sb.append(key);
 		}
 		String sign_str = sb.toString();
-		printLog("sign_str", sign_str);
+		LogUtil.printLog("sign_str:"+sign_str);
 		String sign = null;
 		if("MD5".equalsIgnoreCase(signType)){
 			sign = HashUtil.getMD5(sign_str);
@@ -117,16 +115,6 @@ public class SignUtil {
 			sign = HashUtil.getSHA256(sign_str);
 		}
 		return sign;
-	}
-	
-	public static void printLog(String key, String msg) {
-		if(showLog){
-			System.out.println("[SignUtil]"+key+":"+msg);
-		}
-	}
-	
-	public static void setShowLog(boolean showLog) {
-		SignUtil.showLog = showLog;
 	}
 	
 }

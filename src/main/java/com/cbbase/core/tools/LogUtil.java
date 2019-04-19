@@ -2,13 +2,16 @@ package com.cbbase.core.tools;
 
 public class LogUtil {
 	
-	public static ThreadLocal<Long> timer = new ThreadLocal<Long>();
-	
-	public static void timerStart() {
-		timer.set(System.currentTimeMillis());
+	private static boolean showLog = false;
+
+	public static void setShowLog(boolean showLog) {
+		LogUtil.showLog = showLog;
 	}
 	
-	public static void timerUsed() {
-		System.out.println("[LogUtil]timerUsed:"+(System.currentTimeMillis() - timer.get()));
+	public static void printLog(String log) {
+		if(!showLog){
+			return;
+		}
+		System.out.println(log);
 	}
 }
