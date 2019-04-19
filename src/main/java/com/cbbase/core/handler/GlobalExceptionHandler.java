@@ -35,7 +35,7 @@ public class GlobalExceptionHandler {
     @ExceptionHandler(BusinessException.class)
     @ResponseBody
     public RestResponse handleBusinessException(BusinessException e) {
-        return new RestResponse(1, null, e.getMessage());
+        return new RestResponse(e.getErrorCode(), null, e.getMessage());
     }
 
 }
