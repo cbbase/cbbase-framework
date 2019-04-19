@@ -2,7 +2,7 @@ package com.cbbase.core.common;
 
 public class BusinessException extends RuntimeException{
 
-
+	private int errorCode = 1;
     /**
 	 * 
 	 */
@@ -23,4 +23,22 @@ public class BusinessException extends RuntimeException{
     public BusinessException() {
         super();
     }
+
+    public BusinessException(int errorCode, String message) {
+        super(message);
+        this.errorCode = errorCode;
+    }
+
+	public BusinessException(int errorCode, String message, Throwable cause) {
+        super(message, cause);
+        this.errorCode = errorCode;
+    }
+
+	public int getErrorCode() {
+		return errorCode;
+	}
+
+	public void setErrorCode(int errorCode) {
+		this.errorCode = errorCode;
+	}
 }
