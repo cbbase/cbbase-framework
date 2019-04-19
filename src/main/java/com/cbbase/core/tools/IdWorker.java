@@ -8,7 +8,7 @@ package com.cbbase.core.tools;
  */
 public class IdWorker{
 
-    private long twepoch = 1483200000000L;
+    private long twepoch = 1500000000000L;
     
     private long dataCenterIdBits = 5L;
     private long workerIdBits = 5L;
