@@ -87,7 +87,7 @@ public class JdbcConnection {
 	}
 	
 	public static boolean checkType(String database, DatabaseType type) {
-		return getDataSource(database).getDriverClassName().indexOf(type.name()) >= 0;
+		return getDataSource(database).getDriverClassName().toUpperCase().indexOf(type.name()) >= 0;
 	}
 	
 	public static String getDatabaseUser(String database){
