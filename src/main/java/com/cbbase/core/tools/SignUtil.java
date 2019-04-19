@@ -60,9 +60,7 @@ public class SignUtil {
 		if(sb.length() > 0){
 			sign_str = sb.substring(1);
 		}
-		if(showLog){
-			System.out.println("[SignUtil]sign_str:"+sign_str);
-		}
+		printLog("sign_str", sign_str);
 		String sign = null;
 		if("MD5".equalsIgnoreCase(signType)){
 			sign = HashUtil.getMD5(sign_str);
@@ -90,9 +88,7 @@ public class SignUtil {
 		if(sb.length() > 0){
 			sign_str = sb.substring(1);
 		}
-		if(showLog){
-			System.out.println("[SignUtil]sign_str:"+sign_str);
-		}
+		printLog("sign_str", sign_str);
 		return sign_str;
 	}
 
@@ -111,9 +107,7 @@ public class SignUtil {
 			sb.append(key);
 		}
 		String sign_str = sb.toString();
-		if(showLog){
-			System.out.println("[SignUtil]sign_str:"+sign_str);
-		}
+		printLog("sign_str", sign_str);
 		String sign = null;
 		if("MD5".equalsIgnoreCase(signType)){
 			sign = HashUtil.getMD5(sign_str);
@@ -123,6 +117,12 @@ public class SignUtil {
 			sign = HashUtil.getSHA256(sign_str);
 		}
 		return sign;
+	}
+	
+	public static void printLog(String key, String msg) {
+		if(showLog){
+			System.out.println("[SignUtil]"+key+":"+msg);
+		}
 	}
 	
 	public static void setShowLog(boolean showLog) {
