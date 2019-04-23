@@ -46,7 +46,7 @@ public class AuthInterceptor extends HandlerInterceptorAdapter {
         for(Authority authority : authorities) {
             //检查是否登录
     		if(authority.checkLogin()){
-    			if(AuthManager.getLoginUser() == null){
+    			if(AuthManager.getUserId() == null){
     				logger.debug("authority.isLogin():"+authority.checkLogin());
     				RestResponse resp = new RestResponse(-1, "No login");
     				ServletUtil.returnString(response, JsonUtil.toJson(resp));

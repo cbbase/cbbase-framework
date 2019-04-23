@@ -1,6 +1,5 @@
 package com.cbbase.core.common;
 
-import com.cbbase.core.constants.SessionConstants;
 import com.cbbase.core.handler.AuthHandler;
 
 public class AuthManager {
@@ -10,9 +9,12 @@ public class AuthManager {
 		return BeanFactory.getBean(AuthHandler.class);
 	}
 	
-	@SuppressWarnings("unchecked")
-	public static <T> T getLoginUser() {
-		return (T) GlobalManager.getSession().getAttribute(SessionConstants.LOGIN_USER);
+	public static Long getUserId() {
+		return getAuthHandler().getUserId();
+	}
+	
+	public static String getUserName() {
+		return getAuthHandler().getUserName();
 	}
 	
 	public static boolean checkAuth(String auth) {
