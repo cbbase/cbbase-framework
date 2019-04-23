@@ -1,26 +1,39 @@
 package com.cbbase.core.config;
 
-import java.math.BigInteger;
 import java.util.List;
 
-import org.springframework.boot.autoconfigure.http.HttpMessageConverters;
-import org.springframework.context.annotation.Bean;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.core.Ordered;
 import org.springframework.http.converter.HttpMessageConverter;
+import org.springframework.http.converter.StringHttpMessageConverter;
+import org.springframework.http.converter.json.MappingJackson2HttpMessageConverter;
+import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
 import org.springframework.web.servlet.config.annotation.ViewControllerRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
-import com.alibaba.fastjson.serializer.SerializeConfig;
-import com.alibaba.fastjson.serializer.ToStringSerializer;
-import com.alibaba.fastjson.support.config.FastJsonConfig;
-import com.alibaba.fastjson.support.spring.FastJsonHttpMessageConverter;
+import com.cbbase.core.interceptor.AuthInterceptor;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.databind.module.SimpleModule;
+import com.fasterxml.jackson.databind.ser.std.ToStringSerializer;
 
 /**
  * web配置类，与原web.xml功能相同
  */
 @Configuration
 public class CustomWebMvcConfigurer implements WebMvcConfigurer {
+
+    @Autowired
+    private AuthInterceptor authInterceptor;
+    
+    /**
+     * 	设置权限拦截器
+     */
+    @Override
+    public void addInterceptors(InterceptorRegistry registry) {
+        registry.addInterceptor(authInterceptor).addPathPatterns("/web/**");
+    }
+    
 	/**
 	 * 	设置默认访问页
 	 */
@@ -29,32 +42,23 @@ public class CustomWebMvcConfigurer implements WebMvcConfigurer {
         registry.addViewController("/").setViewName("forward:/index.jsp");
         registry.setOrder(Ordered.HIGHEST_PRECEDENCE);
     }
-    
-    /**
-     * 
-     * @return
-     */
-    @Bean
-    public HttpMessageConverters fastJsonHttpMessageConverter() {
-        return new HttpMessageConverters(new FastJsonHttpMessageConverter());
-    }
 
     /**
      * JSON数据long转string
      */
     @Override
     public void configureMessageConverters(List<HttpMessageConverter<?>> converters) {
-        FastJsonHttpMessageConverter fastConverter = 
-        new FastJsonHttpMessageConverter();
- 
-        FastJsonConfig fastJsonConfig = new FastJsonConfig();
-        SerializeConfig serializeConfig = SerializeConfig.globalInstance;
-        serializeConfig.put(BigInteger.class, ToStringSerializer.instance);
-        serializeConfig.put(Long.class, ToStringSerializer.instance);
-        serializeConfig.put(Long.TYPE, ToStringSerializer.instance);
-        fastJsonConfig.setSerializeConfig(serializeConfig);
-        fastConverter.setFastJsonConfig(fastJsonConfig);
-        converters.add(fastConverter);
+        MappingJackson2HttpMessageConverter jackson2HttpMessageConverter = new MappingJackson2HttpMessageConverter();
+        SimpleModule simpleModule = new SimpleModule();
+        // 解决由于Long类型数据过大，js解析数据时会丢失数据精度
+        simpleModule.addSerializer(Long.class, ToStringSerializer.instance);
+        simpleModule.addSerializer(Long.TYPE, ToStringSerializer.instance);
+        
+        ObjectMapper objectMapper = new ObjectMapper();
+        objectMapper.registerModule(simpleModule);
+        jackson2HttpMessageConverter.setObjectMapper(objectMapper);
+        converters.add(0, jackson2HttpMessageConverter);
+        converters.add(new StringHttpMessageConverter());
     }
     
 }
