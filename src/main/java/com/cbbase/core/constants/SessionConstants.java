@@ -15,7 +15,12 @@ public class SessionConstants {
 	/**
 	 * 登录用户
 	 */
-	public static final String LOGIN_USER = "loginUser";
+	public static final String LOGIN_USER_ID = "loginUserId";
+	
+	/**
+	 * 登录用户
+	 */
+	public static final String LOGIN_USER_NAME = "loginUserName";
 	
 	/**
 	 * 登录用户角色
