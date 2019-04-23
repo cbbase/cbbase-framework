@@ -26,7 +26,7 @@ public class CodeController extends CodeAssist {
 		action.append("import com.cbbase.core.container.RestResponse;").append("\r\n");
 		action.append("\r\n");
 		action.append("@Controller").append("\r\n");
-		action.append("@RequestMapping(\""+model_path+"\")").append("\r\n");
+		action.append("@RequestMapping(\"/web/"+model_path+"\")").append("\r\n");
 		action.append("public class "+entity_name+"Controller extends BaseController {").append("\r\n");
 		action.append("\r\n");
 		action.append("	@Autowired").append("\r\n");
