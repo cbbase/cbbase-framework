@@ -9,5 +9,7 @@
 		<setting name="defaultExecutorType" value="REUSE" />
 		<setting name="lazyLoadingEnabled" value="true" />
 		<setting name="defaultStatementTimeout" value="10000" />
+		<setting name="jdbcTypeForNull" value="NULL" />
+		<setting name="mapUnderscoreToCamelCase" value="true"/>
 	</settings>
 </configuration> 
