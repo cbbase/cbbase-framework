@@ -3,7 +3,7 @@ package com.cbbase.core.tools;
 import java.util.concurrent.ThreadLocalRandom;
 
 /**
- * 不要使用UUID.randomUUID()创建uuid,这个方法占用资源特别高,效率很低
+ * 
  * @author changbo
  * 
  */
