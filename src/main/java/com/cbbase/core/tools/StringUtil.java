@@ -263,10 +263,6 @@ public class StringUtil {
 		return false;
 	}
 	
-	public static int stringToInt(String s){
-		return toInt(s);
-	}
-	
 	public static int toInt(String s){
 		if(isEmpty(s)){
 			return 0;
@@ -278,10 +274,7 @@ public class StringUtil {
 		}
 		return 0;
 	}
-
-	public static long stringToLong(String s){
-		return toLong(s);
-	}
+	
 	public static long toLong(String s){
 		if(isEmpty(s)){
 			return 0;
@@ -293,9 +286,7 @@ public class StringUtil {
 		}
 		return 0;
 	}
-	public static double stringToDouble(String s){
-		return toDouble(s);
-	}
+	
 	public static double toDouble(String s){
 		if(isEmpty(s)){
 			return 0;
@@ -307,9 +298,7 @@ public class StringUtil {
 		}
 		return 0;
 	}
-	public static boolean stringToBoolean(String s){
-		return toBoolean(s);
-	}
+	
 	public static boolean toBoolean(String s){
 		if(isEmpty(s)){
 			return false;
@@ -321,6 +310,7 @@ public class StringUtil {
 		}
 		return false;
 	}
+	
 	public static String formatCamel(String str){
 		if(isEmpty(str)){
 			return "";

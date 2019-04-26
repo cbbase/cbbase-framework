@@ -55,9 +55,9 @@ public class AmountUtil {
 		String cn = "";
 		//元
 		String temp = tt.substring(0, tt.length()-3);
-		long tn = StringUtil.stringToLong(temp);
+		long tn = StringUtil.toLong(temp);
 		if(tn > 0){
-			cn = cn + numToChinese(StringUtil.stringToLong(temp)) + RMB_UNIT[0];
+			cn = cn + numToChinese(StringUtil.toLong(temp)) + RMB_UNIT[0];
 		}
 		if(cn.length() > 2 && tt.endsWith(".00")) {
 			cn = cn + "整";
@@ -65,15 +65,15 @@ public class AmountUtil {
 		}
 		//角
 		temp = tt.substring(tt.length()-2, tt.length()-1);
-		tn = StringUtil.stringToLong(temp);
+		tn = StringUtil.toLong(temp);
 		if(tn > 0){
-			cn = cn + numToChinese(StringUtil.stringToLong(temp)) + RMB_UNIT[1];
+			cn = cn + numToChinese(StringUtil.toLong(temp)) + RMB_UNIT[1];
 		}
 		//分
 		temp = tt.substring(tt.length()-1, tt.length());
-		tn = StringUtil.stringToLong(temp);
+		tn = StringUtil.toLong(temp);
 		if(tn > 0){
-			cn = cn + numToChinese(StringUtil.stringToLong(temp)) + RMB_UNIT[2];
+			cn = cn + numToChinese(StringUtil.toLong(temp)) + RMB_UNIT[2];
 		}
 		
 		return cn;
@@ -130,19 +130,19 @@ public class AmountUtil {
 	}
 	
 	public static String add(String a, String b){
-		return ""+(StringUtil.stringToLong(a)+StringUtil.stringToLong(b));
+		return ""+(StringUtil.toLong(a)+StringUtil.toLong(b));
 	}
 	
 	public static String sub(String a, String b){
-		return ""+(StringUtil.stringToLong(a)-StringUtil.stringToLong(b));
+		return ""+(StringUtil.toLong(a)-StringUtil.toLong(b));
 	}
 	
 	public static String mul(String a, String b){
-		return ""+(StringUtil.stringToLong(a)*StringUtil.stringToLong(b));
+		return ""+(StringUtil.toLong(a)*StringUtil.toLong(b));
 	}
 	
 	public static String div(String a, String b){
-		return ""+(StringUtil.stringToLong(a)/StringUtil.stringToLong(b));
+		return ""+(StringUtil.toLong(a)/StringUtil.toLong(b));
 	}
 	
 

@@ -276,7 +276,7 @@ public class DateUtil {
      * @return
      */
     public static boolean checkCurrentTime(String times, long expireTime){
-    	long tt = StringUtil.stringToLong(times);
+    	long tt = StringUtil.toLong(times);
     	long cc = new Date().getTime();
     	if(Math.abs(tt-cc) > expireTime){
     		return false;

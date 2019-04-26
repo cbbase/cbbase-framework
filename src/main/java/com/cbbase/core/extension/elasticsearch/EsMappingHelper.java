@@ -9,6 +9,8 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import com.cbbase.core.tools.StringUtil;
+
 /**
  * 	生成ES字段映射
  * @author changbo
@@ -17,12 +19,19 @@ import java.util.Map;
 public class EsMappingHelper {
 	
 	public static Map<String, Object> getMapping(Class<?> clazz){
+		Map<String, String> config = new HashMap<>();
+		config.put("searchEnable", "true");
+		config.put("searchTextMaxLength", "256");
+		return getMapping(clazz, config);
+	}
+	
+	public static Map<String, Object> getMapping(Class<?> clazz, Map<String, String> config){
 		Map<String, Object> properties = new HashMap<>();
 		Field[] fields = clazz.getDeclaredFields();
 		for(Field field : fields) {
 			field.setAccessible(true);
 			if(field.getType().isAssignableFrom(String.class)) {
-				properties.put(field.getName(), getStringMap());
+				properties.put(field.getName(), getStringMap(config));
 			}
 			if(field.getType().isAssignableFrom(Short.class)) {
 				properties.put(field.getName(), getFieldMap("short"));
@@ -70,10 +79,18 @@ public class EsMappingHelper {
 		return mapping;
 	}
 	
-	private static Map<String, Object> getStringMap(){
+	private static Map<String, Object> getStringMap(Map<String, String> config){
+		boolean searchEnable = StringUtil.toBoolean(config.get("searchEnable"));
+		if(!searchEnable) {
+			Map<String, Object> mapping = new HashMap<>();
+			mapping.put("type", "text");
+			mapping.put("index", false);
+			return mapping;
+		}
+		
 		Map<String, Object> keyword = new HashMap<>();
 		keyword.put("type", "keyword");
-		keyword.put("ignore_above", 256);
+		keyword.put("ignore_above", StringUtil.toInt(config.get("searchTextMaxLength")));
 		
 		Map<String, Object> fields = new HashMap<>();
 		fields.put("keyword", keyword);
