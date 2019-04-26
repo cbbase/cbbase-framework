@@ -1,6 +1,7 @@
 package com.cbbase.core.tools;
 
 import java.text.DecimalFormat;
+import java.util.Arrays;
 import java.util.Base64;
 import java.util.List;
 import java.util.regex.Pattern;
@@ -24,14 +25,6 @@ public class StringUtil {
 	public static final Pattern PATTERN_CHINESE = Pattern.compile("^[\u4e00-\u9fa5]*$");
 	public static final DecimalFormat df = new DecimalFormat("###0.##");
 	
-	public static boolean hasValue(String s){
-		if(s != null && s.trim().length() > 0){
-			return true;
-		}else{
-			return false;
-		}
-	}
-	
 	public static boolean hasValue(Object o){
 		if(o != null && o.toString().trim().length() > 0){
 			return true;
@@ -40,17 +33,13 @@ public class StringUtil {
 		}
 	}
 
-	public static boolean isEmpty(String... ss){
+	public static boolean hasEmpty(String... ss){
 		for(String s : ss) {
 			if(!hasValue(s)) {
 				return true;
 			}
 		}
 		return false;
-	}
-	
-	public static boolean isEmpty(String s){
-		return !hasValue(s);
 	}
 	
 	public static boolean isEmpty(Object o){
@@ -154,7 +143,7 @@ public class StringUtil {
 		}
 		return s.trim();
 	}
-
+	
 	public static String decodeNull(String... strs){
 		for(int i=0; strs!=null && i<strs.length; i++){
 			if(strs[i] != null){
@@ -400,26 +389,15 @@ public class StringUtil {
 		return toString(list, ";");
 	}
 	
+	public static String toString(Object[] strArray){
+		return toString(Arrays.asList(strArray), ";");
+	}
+	
 	public static String toString(List<?> list, String delimiter){
 		StringBuilder sb = new StringBuilder();
 		for(int i=0; list!=null && i<list.size(); i++){
 			sb.append(toString(list.get(i)));
 			if(i < list.size()-1){
-				sb.append(delimiter);
-			}
-		}
-		return sb.toString();
-	}
-	
-	public static String toString(Object[] strArray){
-		return toString(strArray, 0, ";");
-	}
-	
-	public static String toString(Object[] strArray, int offset, String delimiter){
-		StringBuilder sb = new StringBuilder();
-		for(int i=offset; strArray!=null && i<strArray.length; i++){
-			sb.append(toString(strArray[i]));
-			if(i < strArray.length-1){
 				sb.append(delimiter);
 			}
 		}
