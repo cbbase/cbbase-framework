@@ -13,6 +13,16 @@ public class SelectVO {
 	//显示数据
 	private String text;
 	
+	public SelectVO() {
+		super();
+	}
+	
+	public SelectVO(String value, String text) {
+		super();
+		this.value = value;
+		this.text = text;
+	}
+	
 	public String getValue() {
 		return value;
 	}
