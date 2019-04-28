@@ -13,7 +13,5 @@ public class MessageTag extends BaseTaglib {
 		MessageTranslateHandler mth = BeanFactory.getBean(MessageTranslateHandler.class);
 		writeJsp(mth.translate(key));
 	}
-	
-	
 
 }

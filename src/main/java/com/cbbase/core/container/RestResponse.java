@@ -3,6 +3,11 @@ package com.cbbase.core.container;
 import com.cbbase.core.tools.JsonUtil;
 import com.cbbase.core.tools.StringUtil;
 
+/**
+ * 	REST数据对象
+ * @author changbo
+ *
+ */
 public class RestResponse {
 
 	public static final int SUCCESS_CODE = 0;
