@@ -106,9 +106,14 @@ public class CodeXml extends CodeAssist {
 		for(int i=0; i<columns.size(); i++){
 			String db_column = columns.get(i).get("column_name").toString().toLowerCase();
 			String column_name = StringUtil.formatCamel(db_column);
-			String str = "	    "+db_column+" = #{"+column_name+"},";
+			String jdbcType = "";
+			if(xmlJdbcType) {
+				String type = DataTypeUtil.toMybatisType(columns.get(i).get("data_type").toString());
+				jdbcType = ", jdbcType="+type;
+			}
+			String str = "	    "+db_column+" = #{"+column_name+jdbcType+"},";
 			if(i == columns.size()-1){
-				str = "	    "+db_column+" = #{"+column_name+"}";
+				str = "	    "+db_column+" = #{"+column_name+jdbcType+"}";
 			}
 			if("id".equals(column_name)){
 				continue;
@@ -139,11 +144,16 @@ public class CodeXml extends CodeAssist {
 		for(int i=0; i<columns.size(); i++){
 			String db_column = columns.get(i).get("column_name").toString().toLowerCase();
 			String column_name = StringUtil.formatCamel(db_column);
-			String str = "#{"+column_name+"}, ";
-			if(i == columns.size()-1){
-				str = "#{"+column_name+"} ";
+			String jdbcType = "";
+			if(xmlJdbcType) {
+				String type = DataTypeUtil.toMybatisType(columns.get(i).get("data_type").toString());
+				jdbcType = ", jdbcType="+type;
 			}
-			xml.append(str);
+			String str = "			#{"+column_name+jdbcType+"}, ";
+			if(i == columns.size()-1){
+				str = "			#{"+column_name+jdbcType+"} ";
+			}
+			xml.append(str).append("\n");
 		}
 		xml.append(")").append("\r\n");
 		xml.append("	</insert>").append("\r\n");

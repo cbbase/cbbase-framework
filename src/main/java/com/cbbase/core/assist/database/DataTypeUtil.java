@@ -13,6 +13,7 @@ public class DataTypeUtil {
 	private static Map<String, Class<?>> typeMap = new HashMap<String, Class<?>>();
 	private static Map<Class<?>, String> typeMapMysql = new HashMap<Class<?>, String>();
 	private static Map<Class<?>, String> typeMapOracle = new HashMap<Class<?>, String>();
+	private static Map<String, String> mybatisTypeMap = new HashMap<String, String>();
 	
 	static{
 		typeMap.put("CHAR", String.class);
@@ -51,6 +52,23 @@ public class DataTypeUtil {
 		typeMapOracle.put(int.class, "INT");
 		typeMapOracle.put(double.class, "DECIMAL(18,6)");
 		typeMapOracle.put(byte[].class, "BLOB");
+
+		mybatisTypeMap.put("CHAR", "VARCHAR");
+		mybatisTypeMap.put("VARCHAR", "VARCHAR");
+		mybatisTypeMap.put("VARCHAR2", "VARCHAR");
+		mybatisTypeMap.put("TEXT", "VARCHAR");
+		mybatisTypeMap.put("MEDIUMTEXT", "VARCHAR");
+		mybatisTypeMap.put("INT", "DECIMAL");
+		mybatisTypeMap.put("TINYINT", "DECIMAL");
+		mybatisTypeMap.put("BIGINT", "DECIMAL");
+		mybatisTypeMap.put("NUMBER", "DECIMAL");
+		mybatisTypeMap.put("DECIMAL", "DECIMAL");
+		mybatisTypeMap.put("DATETIME", "TIMESTAMP");
+		mybatisTypeMap.put("DATE", "TIMESTAMP");
+		mybatisTypeMap.put("TIMESTAMP", "TIMESTAMP");
+		mybatisTypeMap.put("TINYBLOB", "BLOB");
+		mybatisTypeMap.put("BLOB", "BLOB");
+		mybatisTypeMap.put("MEDIUMBLOB", "BLOB");
 	}
 	
 	public static Class<?> toClass(String columnType, Object scale){
@@ -71,6 +89,10 @@ public class DataTypeUtil {
 	
 	public static String toJavaType(String columnType, Object scale){
 		return toClass(columnType, scale).getSimpleName();
+	}
+	
+	public static String toMybatisType(String columnType){
+		return mybatisTypeMap.get(columnType.toUpperCase());
 	}
 	
 	public static String toJavaFullType(String columnType, Object scale){
