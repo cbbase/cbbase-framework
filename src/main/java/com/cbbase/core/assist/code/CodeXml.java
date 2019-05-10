@@ -149,13 +149,16 @@ public class CodeXml extends CodeAssist {
 				String type = DataTypeUtil.toMybatisType(columns.get(i).get("data_type").toString());
 				jdbcType = ", jdbcType="+type;
 			}
-			String str = "			#{"+column_name+jdbcType+"}, ";
+			String str = "#{"+column_name+jdbcType+"}, ";
 			if(i == columns.size()-1){
-				str = "			#{"+column_name+jdbcType+"} ";
+				str = "#{"+column_name+jdbcType+"} ";
+			}
+			if(i != 0) {
+				str = "			"+str;
 			}
 			xml.append(str).append("\n");
 		}
-		xml.append(")").append("\r\n");
+		xml.append("			)").append("\r\n");
 		xml.append("	</insert>").append("\r\n");
 		xml.append("\r\n");
 		xml.append("	<delete id=\"delete\" parameterType=\"java.lang.Long\">").append("\r\n");
