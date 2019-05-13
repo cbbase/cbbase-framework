@@ -39,43 +39,41 @@ public class AuthInterceptor extends HandlerInterceptorAdapter {
 	    HandlerMethod handlerMethod = (HandlerMethod) handler;
 	    Method method = handlerMethod.getMethod();
 	    
-        Authority[] authorities = method.getAnnotationsByType(Authority.class);
-        if(authorities == null || authorities.length == 0) {
+        Authority authority = method.getAnnotation(Authority.class);
+        if(authority == null) {
         	return true;
         }
-        for(Authority authority : authorities) {
-            //检查是否登录
-    		if(authority.checkLogin()){
-    			if(AuthManager.getUserId() == null){
-    				logger.debug("authority.isLogin():"+authority.checkLogin());
-    				RestResponse resp = new RestResponse(-1, "No login");
-    				ServletUtil.returnString(response, JsonUtil.toJson(resp));
-    				return false;
-    			}
-    		}
-    		
-    		//检查是否拥有指定的权限
-    		if(StringUtil.hasValue(authority.value())){
-    			if(!AuthManager.checkAuth(authority.value())){
-    				logger.debug("authority.value():"+authority.value());
-    				RestResponse resp = new RestResponse(-2, "No authority");
-    				ServletUtil.returnString(response, JsonUtil.toJson(resp));
-    				return false;
-    			}
-    		}
-    		
-            //检查sessionToken
-    		if(authority.formToken()){
-    	    	String requestToken = (String) request.getParameter(SessionConstants.FORM_TOKEN);
-    	    	String sessionToken = GlobalManager.getSession(SessionConstants.FORM_TOKEN);
-    	    	if(!StringUtil.isEqualIgnoreCase(requestToken, sessionToken)) {
-    				logger.debug("authority.fromToken():"+authority.formToken());
-    				RestResponse resp = new RestResponse(-3, "Token error");
-    				ServletUtil.returnString(response, JsonUtil.toJson(resp));
-    				return false;
-    	    	}
-    		}
-        }
+        //检查是否登录
+		if(authority.checkLogin()){
+			if(AuthManager.getUserId() == null){
+				logger.debug("authority.isLogin():"+authority.checkLogin());
+				RestResponse resp = new RestResponse(-1, "No login");
+				ServletUtil.returnString(response, JsonUtil.toJson(resp));
+				return false;
+			}
+		}
+		
+		//检查是否拥有指定的权限
+		if(StringUtil.hasValue(authority.value())){
+			if(!AuthManager.checkAuth(authority.value())){
+				logger.debug("authority.value():"+authority.value());
+				RestResponse resp = new RestResponse(-2, "No authority");
+				ServletUtil.returnString(response, JsonUtil.toJson(resp));
+				return false;
+			}
+		}
+		
+        //检查sessionToken
+		if(authority.formToken()){
+	    	String requestToken = (String) request.getParameter(SessionConstants.FORM_TOKEN);
+	    	String sessionToken = GlobalManager.getSession(SessionConstants.FORM_TOKEN);
+	    	if(!StringUtil.isEqualIgnoreCase(requestToken, sessionToken)) {
+				logger.debug("authority.fromToken():"+authority.formToken());
+				RestResponse resp = new RestResponse(-3, "Token error");
+				ServletUtil.returnString(response, JsonUtil.toJson(resp));
+				return false;
+	    	}
+		}
         
 		return true;
 	}
