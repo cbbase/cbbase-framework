@@ -54,8 +54,11 @@ public class BaseService<T extends BaseDao> {
 	
     public PageContainer selectPage(PageContainer pageContainer) {
 		Integer total = baseDao.selectPageTotal(pageContainer);
-		List<Object> list = baseDao.selectPageList(pageContainer);
 		pageContainer.setRowCount(total);
+		if(pageContainer.getStartRow() > total) {
+			return pageContainer;
+		}
+		List<Object> list = baseDao.selectPageList(pageContainer);
 		pageContainer.setData(list);
 		return pageContainer;
     }
