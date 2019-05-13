@@ -29,10 +29,11 @@ public class ValidatorManager {
 						}
 					}
 				}
-			}
-			String result = checkField(request.getParameter(fv.getCode()), fv);
-			if(result != null) {
-				return result;
+			}else {
+				String result = checkField(request.getParameter(fv.getCode()), fv);
+				if(result != null) {
+					return result;
+				}
 			}
 		}
 		return null;
@@ -53,6 +54,12 @@ public class ValidatorManager {
 		if(fv.getMaxLength() > 0) {
 			if(value.length() > fv.getMaxLength()) {
 				return fv.getName()+"最大长度为"+fv.getMaxLength();
+			}
+		}
+		
+		if(fv.getMinLength() > 0) {
+			if(value.length() < fv.getMinLength()) {
+				return fv.getName()+"最小长度为"+fv.getMinLength();
 			}
 		}
 		

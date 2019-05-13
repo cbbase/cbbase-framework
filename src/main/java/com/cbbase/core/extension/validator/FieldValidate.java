@@ -7,6 +7,7 @@ public class FieldValidate {
 	private String code;
 	private String name;
 	private boolean required;
+	private int minLength;
 	private int maxLength;
 	private String regex;
 	private String regexMsg;
@@ -28,6 +29,12 @@ public class FieldValidate {
 	}
 	public void setRequired(boolean required) {
 		this.required = required;
+	}
+	public int getMinLength() {
+		return minLength;
+	}
+	public void setMinLength(int minLength) {
+		this.minLength = minLength;
 	}
 	public int getMaxLength() {
 		return maxLength;
