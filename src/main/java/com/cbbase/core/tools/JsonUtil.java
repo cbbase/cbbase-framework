@@ -37,6 +37,10 @@ public class JsonUtil {
 		return JSON.parseObject(json, clazz);
 	}
 	
+	public static <T> List<T> toList(String json, Class<T> clazz){
+		return JSON.parseArray(json, clazz);
+	}
+	
 	public static String toJson(Object obj){
 		return JSON.toJSONString(obj, SerializerFeature.SortField);
 	}
