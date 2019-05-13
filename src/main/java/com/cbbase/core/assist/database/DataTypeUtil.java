@@ -72,6 +72,9 @@ public class DataTypeUtil {
 	}
 	
 	public static Class<?> toClass(String columnType, Object scale){
+		if(StringUtil.hasValue(scale)) {
+			return BigDecimal.class;
+		}
 		Class<?> clazz = typeMap.get(columnType.toUpperCase());
 		if(clazz == null){
 			return String.class;

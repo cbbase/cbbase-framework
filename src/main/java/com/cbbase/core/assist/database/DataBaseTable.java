@@ -31,11 +31,11 @@ public class DataBaseTable{
 	public List<Map<String, Object>> queryColumns(String tableName, String tableSchema){
 		String sql = "";
 		if(JdbcConnection.isOracle(database)){
-			sql = "select col.column_name, col.data_type, col.data_length, col.data_scale, decode(col.column_name, 'ID', 'Y', 'N') is_primary, col.nullable, com.comments  ";
-			sql += "from user_tab_columns col ";
-			sql += "left join user_col_comments com ";
-			sql += "on com.table_name = col.table_name and com.column_name = col.column_name ";
-			sql += "where col.table_name='" + tableName +"' ";
+			sql = "select col.column_name, col.data_type, col.data_length, col.data_scale, decode(col.column_name, 'ID', 'Y', 'N') is_primary, col.nullable, com.comments  "
+			+ "from user_tab_columns col "
+			+ "left join user_col_comments com "
+			+ "on com.table_name = col.table_name and com.column_name = col.column_name "
+			+ "where col.table_name='" + tableName +"' ";
 		}else if(JdbcConnection.isMysql(database)){
 			sql = "select column_name, data_type, character_maximum_length data_length, numeric_scale data_scale, if(column_key = 'PRI', 'Y', 'N') is_primary, if(is_nullable = 'YES', 'Y', 'N') nullable, column_comment comments  "
 				+ "from information_schema.COLUMNS where table_name = '" + tableName +"'";
