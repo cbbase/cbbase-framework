@@ -10,7 +10,6 @@ import org.slf4j.LoggerFactory;
 import com.cbbase.core.common.GlobalManager;
 import com.cbbase.core.container.PageContainer;
 import com.cbbase.core.container.RestResponse;
-import com.cbbase.core.tools.ObjectUtil;
 import com.cbbase.core.tools.ServletUtil;
 import com.cbbase.core.tools.StringUtil;
 
@@ -40,17 +39,6 @@ public abstract class BaseController {
     	PageContainer pageContainer = new PageContainer();
     	pageContainer.setCurrentPage(StringUtil.toInt(getRequest().getParameter("currentPage")));
     	pageContainer.setPageSize(StringUtil.toInt(getRequest().getParameter("pageSize")));
-    	
-    	//order和sort是使用$方式引用的,存在SQL注入风险,必须检查他们的值 
-    	String sortType = getRequest().getParameter("sortType");
-    	String sortField = getRequest().getParameter("sortField");
-		if("ASC".equalsIgnoreCase(sortType) || "DESC".equalsIgnoreCase(sortType)){
-        	pageContainer.setSortType(sortType);
-		}
-		if(ObjectUtil.isClassField(param.getClass(), sortField)){
-        	pageContainer.setSortField(StringUtil.camelToColumn(sortField));
-		}
-    	
     	pageContainer.setParam(param);
     	return pageContainer;
     }
