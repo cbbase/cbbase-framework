@@ -35,9 +35,6 @@ public class CodeXml extends CodeAssist {
 				xml.append("		<if test=\"sortField != null and sortField != '' and sortType != null\">").append("\r\n");
 				xml.append("			order by obj.${sortField} ${sortType}").append("\r\n");
 				xml.append("		</if>").append("\r\n");
-				xml.append("		<if test=\"sortField == null\">").append("\r\n");
-				xml.append("			order by obj.id desc").append("\r\n");
-				xml.append("		</if>").append("\r\n");
 				xml.append("		LIMIT ${startRow}, ${pageSize}").append("\r\n");
 				
 			}else if(JdbcConnection.isOracle(jdbc_name)){
@@ -48,9 +45,6 @@ public class CodeXml extends CodeAssist {
 				xml.append("			</where>").append("\r\n");
 				xml.append("			<if test=\"sortField != null and sortField != '' and sortType != null\">").append("\r\n");
 				xml.append("				order by obj.${sortField} ${sortType}").append("\r\n");
-				xml.append("			</if>").append("\r\n");
-				xml.append("			<if test=\"sortField == null\">").append("\r\n");
-				xml.append("				order by obj.id desc").append("\r\n");
 				xml.append("			</if>").append("\r\n");
 				xml.append("			)A WHERE ROWNUM &lt;= ${endRow})").append("\r\n");
 				xml.append("		WHERE RN &gt;= ${startRow}+1").append("\r\n");
@@ -98,7 +92,6 @@ public class CodeXml extends CodeAssist {
 			xml.append("			</if>").append("\r\n");
 		}
 		xml.append("		</where>").append("\r\n");
-		xml.append("		order by obj.id desc").append("\r\n");
 		xml.append("	</select>").append("\r\n");
 		xml.append("\r\n");
 		xml.append("	<update id=\"update\" parameterType=\""+packageName+".entity."+entity_name+"\">").append("\r\n");
