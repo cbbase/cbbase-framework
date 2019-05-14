@@ -16,12 +16,12 @@ public class ThreadCache {
 		return map;
 	}
 	
-	public static void setCache(String key, Object value) {
+	public static void put(String key, Object value) {
 		getCacheMap().put(key, value);
 	}
 	
 	@SuppressWarnings("unchecked")
-	public static <T> T getCache(String key){
+	public static <T> T get(String key){
 		return (T) getCacheMap().get(key);
 	}
 	
