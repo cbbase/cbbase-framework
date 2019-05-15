@@ -1,4 +1,4 @@
-package com.cbbase.core.common;
+package com.cbbase.core.cache;
 
 import java.util.HashMap;
 import java.util.Map;
