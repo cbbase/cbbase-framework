@@ -221,13 +221,14 @@ public class HttpHelper {
 			httpResponse = httpClient.execute(http);//执行请求
 			
 			int code = httpResponse.getStatusLine().getStatusCode();
+			if(code != 200) {
+				return null;
+			}
 			String data = EntityUtils.toString(httpResponse.getEntity());
-			if(code == 200){
-				if(StringUtil.hasValue(downloadFile)){
-					InputStream in = httpResponse.getEntity().getContent();
-					FileUtil.writeInputStream2File(in, new File(downloadFile));
-					return null;
-				}
+			if(StringUtil.hasValue(downloadFile)){
+				InputStream in = httpResponse.getEntity().getContent();
+				FileUtil.writeInputStream2File(in, new File(downloadFile));
+				return null;
 			}
 			return data;
 		} catch (Exception e) {
