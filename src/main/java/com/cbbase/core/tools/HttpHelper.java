@@ -113,19 +113,6 @@ public class HttpHelper {
 		return this;
 	}
 	
-	public HttpHelper randomVirtualIp(){
-		return setVirtualIp(getRandomIp()+", "+getRandomIp());
-	}
-	
-	private String getRandomIp(){
-		int ip1 = RandomUtil.random(10, 126);
-		int ip2 = RandomUtil.random(10, 255);
-		int ip3 = RandomUtil.random(10, 255);
-		int ip4 = RandomUtil.random(10, 255);
-		String ip = ""+ip1+"."+ip2+"."+ip3+"."+ip4;
-		return ip;
-	}
-	
 	public HttpHelper setCharacterSet(String characterSet) {
 		this.characterSet = characterSet;
 		return this;
