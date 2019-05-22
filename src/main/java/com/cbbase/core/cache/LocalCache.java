@@ -1,7 +1,11 @@
 package com.cbbase.core.cache;
 
+import java.util.HashMap;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
+
+import com.cbbase.core.tools.JsonUtil;
+import com.cbbase.core.tools.StringUtil;
 
 
 /**
@@ -23,7 +27,7 @@ public class LocalCache {
 	
 	public static int getAsInt(String key) {
 		String value = map.get(key);
-		if(value == null || value.trim().length() == 0 || "null".equalsIgnoreCase(value)) {
+		if(StringUtil.isEmpty(value)) {
 			return 0;
 		}
 		try {
@@ -35,13 +39,37 @@ public class LocalCache {
 	
 	public static long getAsLong(String key) {
 		String value = map.get(key);
-		if(value == null || value.trim().length() == 0 || "null".equalsIgnoreCase(value)) {
+		if(StringUtil.isEmpty(value)) {
 			return 0;
 		}
 		try {
 			return Long.valueOf(map.get(value));
 		}catch (Exception e) {
 			return 0;
+		}
+	}
+	
+	public static Map<String, String> getAsMap(String key) {
+		String value = map.get(key);
+		if(StringUtil.isEmpty(value)) {
+			return new HashMap<>();
+		}
+		try {
+			return JsonUtil.toMap(value);
+		}catch (Exception e) {
+			return new HashMap<>();
+		}
+	}
+	
+	public static <T> T getAsObject(String key, Class<T> clazz) {
+		String value = map.get(key);
+		if(StringUtil.isEmpty(value)) {
+			return null;
+		}
+		try {
+			return JsonUtil.toObject(value, clazz);
+		}catch (Exception e) {
+			return null;
 		}
 	}
 
