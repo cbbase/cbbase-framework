@@ -7,9 +7,11 @@ import org.apache.commons.pool2.impl.GenericObjectPool;
 import org.apache.commons.pool2.impl.GenericObjectPoolConfig;
 
 import com.cbbase.core.tools.PropertiesHelper;
+import com.cbbase.core.tools.StringUtil;
 
 import io.lettuce.core.RedisClient;
 import io.lettuce.core.RedisURI;
+import io.lettuce.core.RedisURI.Builder;
 import io.lettuce.core.api.StatefulRedisConnection;
 import io.lettuce.core.api.sync.RedisCommands;
 import io.lettuce.core.cluster.RedisClusterClient;
@@ -44,11 +46,13 @@ public class RedisHelper {
 		String password = helper.getValue(prefix+".password");
 		long timeout = helper.getValueAsInt(prefix+".timeout");
 		timeout = (timeout == 0) ? 10000 : timeout;
-		RedisURI redisURI= RedisURI.Builder
+		Builder builder = RedisURI.Builder
 				.redis(host, port)
-				.withPassword(password)
-				.withTimeout(Duration.ofMillis(timeout))
-				.build();
+				.withTimeout(Duration.ofMillis(timeout));
+		if(!StringUtil.isEmpty(password)) {
+			builder.withPassword(password);
+		}
+		RedisURI redisURI = builder.build();
 		RedisClient client = RedisClient.create(redisURI);
 		StatefulRedisConnection<String, String> connection = client.connect();
 		//异步使用connection.async();
