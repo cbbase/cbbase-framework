@@ -113,7 +113,7 @@ public class CodeJsp extends CodeAssist {
 		jsp_index.append("			<div class=\"layui-form-item\">").append("\r\n");
 		jsp_index.append("				<tag:Auth auth=\""+getAuthName()+".modify\">").append("\r\n");
 		jsp_index.append("					<button class=\"layui-btn\" onclick=\"openAdd();\" type=\"button\">新增</button>").append("\r\n");
-		jsp_index.append("					<button class=\"layui-btn\" onclick=\"doBatchDelete();\" type=\"button\">批量删除</button>").append("\r\n");
+		jsp_index.append("					<button class=\"layui-btn layui-btn-danger\" onclick=\"doBatchDelete();\" type=\"button\">批量删除</button>").append("\r\n");
 		jsp_index.append("					<input type=\"hidden\" id=\"hasAuthModify\" value=\"1\">").append("\r\n");
 		jsp_index.append("				</tag:Auth>").append("\r\n");
 		jsp_index.append("				<table id=\"tableObj\"></table>").append("\r\n");
