@@ -112,7 +112,7 @@ public class CodeJsp extends CodeAssist {
 		jsp_index.append("			</div>").append("\r\n");
 		jsp_index.append("			<div class=\"layui-form-item\">").append("\r\n");
 		jsp_index.append("				<tag:Auth auth=\""+getAuthName()+".modify\">").append("\r\n");
-		jsp_index.append("					<button class=\"layui-btn\" onclick=\"openAdd();\" type=\"button\">新增</button>").append("\r\n");
+		jsp_index.append("					<button class=\"layui-btn layui-btn-normal\" onclick=\"openAdd();\" type=\"button\">新增</button>").append("\r\n");
 		jsp_index.append("					<button class=\"layui-btn layui-btn-danger\" onclick=\"doBatchDelete();\" type=\"button\">批量删除</button>").append("\r\n");
 		jsp_index.append("					<input type=\"hidden\" id=\"hasAuthModify\" value=\"1\">").append("\r\n");
 		jsp_index.append("				</tag:Auth>").append("\r\n");
@@ -152,7 +152,7 @@ public class CodeJsp extends CodeAssist {
 		jsp_index.append("	function getOperateHtml(row){").append("\r\n");
 		jsp_index.append("		var html = \"\";").append("\r\n");
 		jsp_index.append("		if($(\"#hasAuthModify\").val() == \"1\"){").append("\r\n");
-		jsp_index.append("			html = html + '<button class=\"layui-btn layui-btn-sm\" onclick=openUpdate(\"'+row.id+'\"); type=\"button\">修改</button>';").append("\r\n");
+		jsp_index.append("			html = html + '<button class=\"layui-btn layui-btn-sm layui-btn-normal\" onclick=openUpdate(\"'+row.id+'\"); type=\"button\">修改</button>';").append("\r\n");
 		jsp_index.append("			html = html + '<button class=\"layui-btn layui-btn-sm layui-btn-danger\" onclick=doDelete(\"'+row.id+'\"); type=\"button\">删除</button>';").append("\r\n");
 		jsp_index.append("		}").append("\r\n");
 		jsp_index.append("		return html;").append("\r\n");
