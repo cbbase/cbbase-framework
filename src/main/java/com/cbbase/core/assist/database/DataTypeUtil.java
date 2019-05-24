@@ -72,6 +72,9 @@ public class DataTypeUtil {
 	}
 	
 	public static Class<?> toClass(String columnType, Object scale){
+		if(columnType.indexOf("(") >= 0) {
+			columnType = columnType.substring(0, columnType.indexOf("("));
+		}
 		if(StringUtil.hasValue(scale)) {
 			return BigDecimal.class;
 		}
@@ -91,10 +94,16 @@ public class DataTypeUtil {
 	}
 	
 	public static String toJavaType(String columnType, Object scale){
+		if(columnType.indexOf("(") >= 0) {
+			columnType = columnType.substring(0, columnType.indexOf("("));
+		}
 		return toClass(columnType, scale).getSimpleName();
 	}
 	
 	public static String toMybatisType(String columnType){
+		if(columnType.indexOf("(") >= 0) {
+			columnType = columnType.substring(0, columnType.indexOf("("));
+		}
 		return mybatisTypeMap.get(columnType.toUpperCase());
 	}
 	
