@@ -132,7 +132,7 @@ public class CodeJsp extends CodeAssist {
 		jsp_index.append("	function initTable(){").append("\r\n");
 		jsp_index.append("		loadTable({").append("\r\n");
 		jsp_index.append("	    	elem: '#tableObj'").append("\r\n");
-		jsp_index.append("	    	,url: basePath+'/web/"+model_path+"/selectPage.do' //数据接口").append("\r\n");
+		jsp_index.append("	    	,url: basePath+'/web/"+model_path+"/selectPage' //数据接口").append("\r\n");
 		jsp_index.append("	    	,where: $(\"#queryForm\").serializeJson()	//数据接口参数").append("\r\n");
 		jsp_index.append("			,cols: [[ //表格数据").append("\r\n");
 		jsp_index.append("				{type:'checkbox'}").append("\r\n");
@@ -181,7 +181,7 @@ public class CodeJsp extends CodeAssist {
 		jsp_index.append("	}").append("\r\n");
 		jsp_index.append("	").append("\r\n");
 		jsp_index.append("	function saveAdd(){").append("\r\n");
-		jsp_index.append("		doFormRequest(\"addForm\", basePath+\"/web/"+model_path+"/add.do\", function(){").append("\r\n");
+		jsp_index.append("		doFormRequest(\"addForm\", basePath+\"/web/"+model_path+"/add\", function(){").append("\r\n");
 		jsp_index.append("			layer.close(layer.index);").append("\r\n");
 		jsp_index.append("			reloadTable();").append("\r\n");
 		jsp_index.append("		});").append("\r\n");
@@ -205,7 +205,7 @@ public class CodeJsp extends CodeAssist {
 		jsp_index.append("	}").append("\r\n");
 		jsp_index.append("	").append("\r\n");
 		jsp_index.append("	function saveUpdate(){").append("\r\n");
-		jsp_index.append("		doFormRequest(\"updateForm\", basePath+\"/web/"+model_path+"/update.do\", function(){").append("\r\n");
+		jsp_index.append("		doFormRequest(\"updateForm\", basePath+\"/web/"+model_path+"/update\", function(){").append("\r\n");
 		jsp_index.append("			layer.close(layer.index);").append("\r\n");
 		jsp_index.append("			reloadTable();").append("\r\n");
 		jsp_index.append("		});").append("\r\n");
@@ -214,7 +214,7 @@ public class CodeJsp extends CodeAssist {
 		jsp_index.append("	function doDelete(id){").append("\r\n");
 		jsp_index.append("		openConfirm(\"你确认删除这条数据吗?\", function(){").append("\r\n");
 		jsp_index.append("			var ids = [id];").append("\r\n");
-		jsp_index.append("			doParamRequest({\"ids\": ids}, basePath+'/web/"+model_path+"/delete.do', reloadTable);").append("\r\n");
+		jsp_index.append("			doParamRequest({\"ids\": ids}, basePath+'/web/"+model_path+"/delete', reloadTable);").append("\r\n");
 		jsp_index.append("		});").append("\r\n");
 		jsp_index.append("	}").append("\r\n");
 		jsp_index.append("	").append("\r\n");
@@ -225,7 +225,7 @@ public class CodeJsp extends CodeAssist {
 		jsp_index.append("  			return;").append("\r\n");
 		jsp_index.append("  		}").append("\r\n");
 		jsp_index.append("		openConfirm(\"你确认删除所选中的数据吗?\", function(){").append("\r\n");
-		jsp_index.append("			doParamRequest({\"ids\": ids}, basePath+'/web/"+model_path+"/delete.do', reloadTable);").append("\r\n");
+		jsp_index.append("			doParamRequest({\"ids\": ids}, basePath+'/web/"+model_path+"/delete', reloadTable);").append("\r\n");
 		jsp_index.append("		});").append("\r\n");
 		jsp_index.append("	}").append("\r\n");
 		jsp_index.append("	").append("\r\n");
@@ -290,7 +290,7 @@ public class CodeJsp extends CodeAssist {
 		jsp_update.append("		form.render();").append("\r\n");
 		jsp_update.append("		//填充数据").append("\r\n");
 		jsp_update.append("		var id = $(\"#updateForm [name=id]\").val();").append("\r\n");
-		jsp_update.append("		initFormData(\"updateForm\", basePath+\"/web/"+model_path+"/select.do\", {\"id\":id});").append("\r\n");
+		jsp_update.append("		initFormData(\"updateForm\", basePath+\"/web/"+model_path+"/select\", {\"id\":id});").append("\r\n");
 		jsp_update.append("	})").append("\r\n");
 		jsp_update.append("	").append("\r\n");
 		jsp_update.append("</script>").append("\r\n");
