@@ -59,7 +59,7 @@ public class CodeAssist {
 		table_comment = new DataBaseTable(jdbc_name).getTableComment(table);
 		entity_name = getEntityName();
 		entity_var = StringUtil.lowerFirst(entity_name);
-		model_path = getEntityName().toLowerCase();
+		model_path = StringUtil.lowerFirst(entity_name);
 		auth_name = getAuthName();
 		package_folder = getPackageFolder();
 		package_last = getPackageLast();
