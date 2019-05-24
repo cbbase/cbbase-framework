@@ -153,7 +153,7 @@ public class CodeJsp extends CodeAssist {
 		jsp_index.append("		var html = \"\";").append("\r\n");
 		jsp_index.append("		if($(\"#hasAuthModify\").val() == \"1\"){").append("\r\n");
 		jsp_index.append("			html = html + '<button class=\"layui-btn layui-btn-sm\" onclick=openUpdate(\"'+row.id+'\"); type=\"button\">修改</button>';").append("\r\n");
-		jsp_index.append("			html = html + '<button class=\"layui-btn layui-btn-sm\" onclick=doDelete(\"'+row.id+'\"); type=\"button\">删除</button>';").append("\r\n");
+		jsp_index.append("			html = html + '<button class=\"layui-btn layui-btn-sm layui-btn-danger\" onclick=doDelete(\"'+row.id+'\"); type=\"button\">删除</button>';").append("\r\n");
 		jsp_index.append("		}").append("\r\n");
 		jsp_index.append("		return html;").append("\r\n");
 		jsp_index.append("	}").append("\r\n");
@@ -302,6 +302,10 @@ public class CodeJsp extends CodeAssist {
 		if(showContent) {
 			System.out.println("===============================");
 			System.out.println(jsp_index.toString());
+			System.out.println("===============================");
+			System.out.println(jsp_add.toString());
+			System.out.println("===============================");
+			System.out.println(jsp_update.toString());
 		}
 		
 		if(writeFile) {

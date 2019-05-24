@@ -122,7 +122,7 @@ public class CodeAssist {
 
 	protected static String getFieldTitle(int i) {
 		String title = StringUtil.formatCamel(columns.get(i).get("column_name").toString());
-		String comments = StringUtil.getValue(columns.get(i).get("comments").toString());
+		String comments = StringUtil.getValue(columns.get(i).get("comments"));
 		if(commentAsTitle && StringUtil.hasValue(comments)) {
 			String split = null;
 			int index = 10;
