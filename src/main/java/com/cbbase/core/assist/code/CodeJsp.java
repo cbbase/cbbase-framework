@@ -38,12 +38,22 @@ public class CodeJsp extends CodeAssist {
 			if(fieldCount%2 == 0) {
 				jsp_add.append("			<div class=\"layui-form-item\">").append("\r\n");
 			}
-			jsp_add.append("				<div class=\"layui-inline\">").append("\r\n");
-			jsp_add.append("					<label class=\"layui-form-label\">"+title+"</label>").append("\r\n");
-			jsp_add.append("					<div class=\"layui-input-inline\">").append("\r\n");
-			jsp_add.append("						<input type=\"text\" name=\""+field_name+"\" class=\"layui-input\">").append("\r\n");
-			jsp_add.append("					</div>").append("\r\n");
-			jsp_add.append("				</div>").append("\r\n");
+			if(isSelectField(field_name)) {
+				jsp_add.append("				<div class=\"layui-inline\">").append("\r\n");
+				jsp_add.append("					<label class=\"layui-form-label\">"+title+"</label>").append("\r\n");
+				jsp_add.append("					<div class=\"layui-input-inline\">").append("\r\n");
+				jsp_add.append("						<select name=\""+field_name+"\">").append("\r\n");
+				jsp_add.append("						</select>").append("\r\n");
+				jsp_add.append("					</div>").append("\r\n");
+				jsp_add.append("				</div>").append("\r\n");
+			}else {
+				jsp_add.append("				<div class=\"layui-inline\">").append("\r\n");
+				jsp_add.append("					<label class=\"layui-form-label\">"+title+"</label>").append("\r\n");
+				jsp_add.append("					<div class=\"layui-input-inline\">").append("\r\n");
+				jsp_add.append("						<input type=\"text\" name=\""+field_name+"\" class=\"layui-input\">").append("\r\n");
+				jsp_add.append("					</div>").append("\r\n");
+				jsp_add.append("				</div>").append("\r\n");
+			}
 			if(fieldCount%2 == 1) {
 				jsp_add.append("			</div>").append("\r\n");
 			}
@@ -93,7 +103,7 @@ public class CodeJsp extends CodeAssist {
 		jsp_index.append("		<form id=\"queryForm\" class=\"layui-form\" action=\"\">").append("\r\n");
 		jsp_index.append("			<div class=\"layui-form-item\">").append("\r\n");
 		for(int i=0; i<columns.size(); i++){
-			String column_name = columns.get(i).get("column_name").toString();
+			String column_name = columns.get(i).get("column_name").toString().toLowerCase();
 			String field_name = StringUtil.formatCamel(columns.get(i).get("column_name").toString());
 			String title = getFieldTitle(i);
 			if("id".equals(field_name) || isBaseEntityField(field_name)){
@@ -104,6 +114,15 @@ public class CodeJsp extends CodeAssist {
 				jsp_index.append("					<label class=\"layui-form-label\">"+title+"</label>").append("\r\n");
 				jsp_index.append("					<div class=\"layui-input-inline\">").append("\r\n");
 				jsp_index.append("						<input type=\"tel\" name=\""+field_name+"\" class=\"layui-input\">").append("\r\n");
+				jsp_index.append("					</div>").append("\r\n");
+				jsp_index.append("				</div>").append("\r\n");
+			}
+			if(isSelectField(field_name)) {
+				jsp_index.append("				<div class=\"layui-inline\">").append("\r\n");
+				jsp_index.append("					<label class=\"layui-form-label\">"+title+"</label>").append("\r\n");
+				jsp_index.append("					<div class=\"layui-input-inline\">").append("\r\n");
+				jsp_index.append("						<select name=\""+field_name+"\">").append("\r\n");
+				jsp_index.append("						</select>").append("\r\n");
 				jsp_index.append("					</div>").append("\r\n");
 				jsp_index.append("				</div>").append("\r\n");
 			}
@@ -278,12 +297,22 @@ public class CodeJsp extends CodeAssist {
 			if(fieldCount%2 == 0) {
 				jsp_update.append("			<div class=\"layui-form-item\">").append("\r\n");
 			}
-			jsp_update.append("				<div class=\"layui-inline\">").append("\r\n");
-			jsp_update.append("					<label class=\"layui-form-label\">"+title+"</label>").append("\r\n");
-			jsp_update.append("					<div class=\"layui-input-inline\">").append("\r\n");
-			jsp_update.append("						<input type=\"text\" name=\""+field_name+"\" class=\"layui-input\">").append("\r\n");
-			jsp_update.append("					</div>").append("\r\n");
-			jsp_update.append("				</div>").append("\r\n");
+			if(isSelectField(field_name)) {
+				jsp_add.append("				<div class=\"layui-inline\">").append("\r\n");
+				jsp_add.append("					<label class=\"layui-form-label\">"+title+"</label>").append("\r\n");
+				jsp_add.append("					<div class=\"layui-input-inline\">").append("\r\n");
+				jsp_add.append("						<select name=\""+field_name+"\">").append("\r\n");
+				jsp_add.append("						</select>").append("\r\n");
+				jsp_add.append("					</div>").append("\r\n");
+				jsp_add.append("				</div>").append("\r\n");
+			}else {
+				jsp_update.append("				<div class=\"layui-inline\">").append("\r\n");
+				jsp_update.append("					<label class=\"layui-form-label\">"+title+"</label>").append("\r\n");
+				jsp_update.append("					<div class=\"layui-input-inline\">").append("\r\n");
+				jsp_update.append("						<input type=\"text\" name=\""+field_name+"\" class=\"layui-input\">").append("\r\n");
+				jsp_update.append("					</div>").append("\r\n");
+				jsp_update.append("				</div>").append("\r\n");
+			}
 			if(fieldCount%2 == 1) {
 				jsp_update.append("			</div>").append("\r\n");
 			}

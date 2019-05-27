@@ -120,6 +120,15 @@ public class CodeAssist {
 		v.add("updateName");
 		return v.contains(field);
 	}
+	
+	protected static boolean isSelectField(String field) {
+		if(field.toLowerCase().endsWith("type") 
+				|| field.toLowerCase().endsWith("status")
+				|| field.toLowerCase().endsWith("id")) {
+			return true;
+		}
+		return false;
+	}
 
 	protected static String getFieldTitle(int i) {
 		String title = StringUtil.formatCamel(columns.get(i).get("column_name").toString());
