@@ -45,7 +45,7 @@ public class AuthInterceptor extends HandlerInterceptorAdapter {
 		if(authority.checkLogin()){
 			if(AuthManager.getUserId() == null){
 				logger.debug("authority.isLogin():"+authority.checkLogin());
-				RestResponse resp = new RestResponse(-1, "No login");
+				RestResponse resp = new RestResponse(1000, "No login");
 				ServletUtil.returnString(response, JsonUtil.toJson(resp));
 				return false;
 			}
@@ -55,7 +55,7 @@ public class AuthInterceptor extends HandlerInterceptorAdapter {
 		if(StringUtil.hasValue(authority.value())){
 			if(!AuthManager.checkAuth(authority.value())){
 				logger.debug("authority.value():"+authority.value());
-				RestResponse resp = new RestResponse(-2, "No authority");
+				RestResponse resp = new RestResponse(1001, "No authority");
 				ServletUtil.returnString(response, JsonUtil.toJson(resp));
 				return false;
 			}
@@ -67,7 +67,7 @@ public class AuthInterceptor extends HandlerInterceptorAdapter {
 	    	String sessionToken = GlobalManager.getSession(SessionConstants.FORM_TOKEN);
 	    	if(!StringUtil.isEqualIgnoreCase(requestToken, sessionToken)) {
 				logger.debug("authority.fromToken():"+authority.formToken());
-				RestResponse resp = new RestResponse(-3, "Token error");
+				RestResponse resp = new RestResponse(1002, "Token error");
 				ServletUtil.returnString(response, JsonUtil.toJson(resp));
 				return false;
 	    	}

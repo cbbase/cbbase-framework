@@ -39,7 +39,7 @@ public class ValidatorManager {
 		return null;
 	}
 
-	public static String checkField(String value, FieldValidate fv) {
+	private static String checkField(String value, FieldValidate fv) {
 		
 		if(fv.getRequired()) {
 			if(StringUtil.isEmpty(value)) {
