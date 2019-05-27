@@ -134,13 +134,13 @@ public class CodeJsp extends CodeAssist {
 		jsp_index.append("			<div class=\"layui-form-item\">").append("\r\n");
 		if(addAuth) {
 			jsp_index.append("				<tag:Auth auth=\""+getAuthName()+".modify\">").append("\r\n");
-			jsp_index.append("					<button class=\"layui-btn layui-btn-normal\" onclick=\"openAdd();\" type=\"button\">新增</button>").append("\r\n");
-			jsp_index.append("					<button class=\"layui-btn layui-btn-danger\" onclick=\"doBatchDelete();\" type=\"button\">批量删除</button>").append("\r\n");
+			jsp_index.append("					<button class=\"layui-btn layui-btn-sm layui-btn-normal\" onclick=\"openAdd();\" type=\"button\">新增</button>").append("\r\n");
+			jsp_index.append("					<button class=\"layui-btn layui-btn-sm layui-btn-danger\" onclick=\"doBatchDelete();\" type=\"button\">批量删除</button>").append("\r\n");
 			jsp_index.append("					<input type=\"hidden\" id=\"hasAuthModify\" value=\"1\">").append("\r\n");
 			jsp_index.append("				</tag:Auth>").append("\r\n");
 		}else {
-			jsp_index.append("				<button class=\"layui-btn layui-btn-normal\" onclick=\"openAdd();\" type=\"button\">新增</button>").append("\r\n");
-			jsp_index.append("				<button class=\"layui-btn layui-btn-danger\" onclick=\"doBatchDelete();\" type=\"button\">批量删除</button>").append("\r\n");
+			jsp_index.append("				<button class=\"layui-btn layui-btn-sm layui-btn-normal\" onclick=\"openAdd();\" type=\"button\">新增</button>").append("\r\n");
+			jsp_index.append("				<button class=\"layui-btn layui-btn-sm layui-btn-danger\" onclick=\"doBatchDelete();\" type=\"button\">批量删除</button>").append("\r\n");
 		}
 		jsp_index.append("				<table id=\"tableObj\"></table>").append("\r\n");
 		jsp_index.append("			</div>").append("\r\n");
