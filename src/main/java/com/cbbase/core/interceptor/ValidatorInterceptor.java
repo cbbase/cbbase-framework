@@ -11,6 +11,7 @@ import org.springframework.web.method.HandlerMethod;
 import org.springframework.web.servlet.handler.HandlerInterceptorAdapter;
 
 import com.cbbase.core.annotation.Validator;
+import com.cbbase.core.common.ApplicationConfig;
 import com.cbbase.core.container.RestResponse;
 import com.cbbase.core.extension.validator.ValidatorManager;
 import com.cbbase.core.tools.JsonUtil;
@@ -36,7 +37,10 @@ public class ValidatorInterceptor extends HandlerInterceptorAdapter {
 		}
 		
 		if(StringUtil.hasValue(validator.value())){
-			String result = ValidatorManager.check(request, validator.value());
+			String prefix = ApplicationConfig.getParam("param.validator.prefix", "");
+			String suffix = ApplicationConfig.getParam("param.validator.suffix", "");
+			String validatorFile = prefix+validator.value()+suffix;
+			String result = ValidatorManager.check(request, validatorFile);
 			if(StringUtil.hasValue(validator.value())) {
 				RestResponse resp = new RestResponse(2000, "参数错误:"+result);
 				ServletUtil.returnString(response, JsonUtil.toJson(resp));
