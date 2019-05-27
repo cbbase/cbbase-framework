@@ -38,6 +38,7 @@ public class CodeAssist {
 	public static boolean pageXml = true;//xml文件里是否要包含分页查询语句
 	public static boolean commentAsTitle = true;//表里面的注释作为字段标题
 	public static boolean xmlJdbcType = false;//是否将生成的代码.直接写成文件
+	public static boolean addAuth = true;//是否将生成的代码.直接写成文件
 	
 	public static boolean isMavenProject = true;//是否是maven项目
 	public static boolean showContent = false;//是否在控制台输出生成的内容
