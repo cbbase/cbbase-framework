@@ -22,7 +22,9 @@ public class CodeController extends CodeAssist {
 		action.append("\r\n");
 		action.append("import "+packageName+".entity."+entity_name+";").append("\r\n");
 		action.append("import "+packageName+".service."+entity_name+"Service;").append("\r\n");
-		action.append("import com.cbbase.core.annotation.Authority;").append("\r\n");
+		if(addAuth) {
+			action.append("import com.cbbase.core.annotation.Authority;").append("\r\n");
+		}
 		action.append("import com.cbbase.core.base.BaseController;").append("\r\n");
 		action.append("import com.cbbase.core.container.RestResponse;").append("\r\n");
 		action.append("\r\n");
