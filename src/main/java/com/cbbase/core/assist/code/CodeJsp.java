@@ -73,7 +73,9 @@ public class CodeJsp extends CodeAssist {
 		StringBuilder jsp_index = new StringBuilder();
 		jsp_index.append("<%@ page language=\"java\" import=\"java.util.*\" pageEncoding=\"UTF-8\"%>").append("\r\n");
 		jsp_index.append("<%@ taglib prefix=\"c\" uri=\"http://java.sun.com/jsp/jstl/core\"%>").append("\r\n");
-		jsp_index.append("<%@ taglib prefix=\"tag\" uri=\"http://www.cbbase.com/framework/taglib\"%>").append("\r\n");
+		if(addAuth) {
+			jsp_index.append("<%@ taglib prefix=\"tag\" uri=\"http://www.cbbase.com/framework/taglib\"%>").append("\r\n");
+		}
 		jsp_index.append("<%@ include file=\"/header.jsp\" %>").append("\r\n");
 		jsp_index.append("").append("\r\n");
 		jsp_index.append("<!DOCTYPE html>").append("\r\n");
@@ -111,11 +113,16 @@ public class CodeJsp extends CodeAssist {
 		jsp_index.append("				</div>").append("\r\n");
 		jsp_index.append("			</div>").append("\r\n");
 		jsp_index.append("			<div class=\"layui-form-item\">").append("\r\n");
-		jsp_index.append("				<tag:Auth auth=\""+getAuthName()+".modify\">").append("\r\n");
-		jsp_index.append("					<button class=\"layui-btn layui-btn-normal\" onclick=\"openAdd();\" type=\"button\">新增</button>").append("\r\n");
-		jsp_index.append("					<button class=\"layui-btn layui-btn-danger\" onclick=\"doBatchDelete();\" type=\"button\">批量删除</button>").append("\r\n");
-		jsp_index.append("					<input type=\"hidden\" id=\"hasAuthModify\" value=\"1\">").append("\r\n");
-		jsp_index.append("				</tag:Auth>").append("\r\n");
+		if(addAuth) {
+			jsp_index.append("				<tag:Auth auth=\""+getAuthName()+".modify\">").append("\r\n");
+			jsp_index.append("					<button class=\"layui-btn layui-btn-normal\" onclick=\"openAdd();\" type=\"button\">新增</button>").append("\r\n");
+			jsp_index.append("					<button class=\"layui-btn layui-btn-danger\" onclick=\"doBatchDelete();\" type=\"button\">批量删除</button>").append("\r\n");
+			jsp_index.append("					<input type=\"hidden\" id=\"hasAuthModify\" value=\"1\">").append("\r\n");
+			jsp_index.append("				</tag:Auth>").append("\r\n");
+		}else {
+			jsp_index.append("				<button class=\"layui-btn layui-btn-normal\" onclick=\"openAdd();\" type=\"button\">新增</button>").append("\r\n");
+			jsp_index.append("				<button class=\"layui-btn layui-btn-danger\" onclick=\"doBatchDelete();\" type=\"button\">批量删除</button>").append("\r\n");
+		}
 		jsp_index.append("				<table id=\"tableObj\"></table>").append("\r\n");
 		jsp_index.append("			</div>").append("\r\n");
 		jsp_index.append("		</form>").append("\r\n");
@@ -151,10 +158,15 @@ public class CodeJsp extends CodeAssist {
 		jsp_index.append("	").append("\r\n");
 		jsp_index.append("	function getOperateHtml(row){").append("\r\n");
 		jsp_index.append("		var html = \"\";").append("\r\n");
-		jsp_index.append("		if($(\"#hasAuthModify\").val() == \"1\"){").append("\r\n");
-		jsp_index.append("			html = html + '<button class=\"layui-btn layui-btn-sm layui-btn-normal\" onclick=openUpdate(\"'+row.id+'\"); type=\"button\">修改</button>';").append("\r\n");
-		jsp_index.append("			html = html + '<button class=\"layui-btn layui-btn-sm layui-btn-danger\" onclick=doDelete(\"'+row.id+'\"); type=\"button\">删除</button>';").append("\r\n");
-		jsp_index.append("		}").append("\r\n");
+		if(addAuth) {
+			jsp_index.append("		if($(\"#hasAuthModify\").val() == \"1\"){").append("\r\n");
+			jsp_index.append("			html = html + '<button class=\"layui-btn layui-btn-sm layui-btn-normal\" onclick=openUpdate(\"'+row.id+'\"); type=\"button\">修改</button>';").append("\r\n");
+			jsp_index.append("			html = html + '<button class=\"layui-btn layui-btn-sm layui-btn-danger\" onclick=doDelete(\"'+row.id+'\"); type=\"button\">删除</button>';").append("\r\n");
+			jsp_index.append("		}").append("\r\n");
+		}else {
+			jsp_index.append("		html = html + '<button class=\"layui-btn layui-btn-sm layui-btn-normal\" onclick=openUpdate(\"'+row.id+'\"); type=\"button\">修改</button>';").append("\r\n");
+			jsp_index.append("		html = html + '<button class=\"layui-btn layui-btn-sm layui-btn-danger\" onclick=doDelete(\"'+row.id+'\"); type=\"button\">删除</button>';").append("\r\n");
+		}
 		jsp_index.append("		return html;").append("\r\n");
 		jsp_index.append("	}").append("\r\n");
 		jsp_index.append("	").append("\r\n");
