@@ -44,7 +44,7 @@ public class CodeAssist {
 	public static boolean writeFile = true;//是否将生成的代码.直接写成文件
 	
 	//中间变量
-	protected static List<Map<String,Object>> columns = null;
+	protected static List<Map<String, Object>> columns = null;
 	protected static String entity_name = null;
 	protected static String entity_var = null;
 	protected static String model_path = null;
@@ -78,22 +78,22 @@ public class CodeAssist {
 	}
 	
 	protected static String getEntityName(){
-		String id = table;
+		String name = table;
 		if(table.startsWith(table_profix)){
-			id = table.substring(table_profix.length());
+			name = table.substring(table_profix.length());
 		}
-		id = StringUtil.formatCamel(id);
-		id = StringUtil.upperFirst(id);
-		return id;
+		name = StringUtil.formatCamel(name);
+		name = StringUtil.upperFirst(name);
+		return name;
 	}
 	
 	protected static String getAuthName(){
-		String id = table;
+		String name = table;
 		if(table.startsWith(table_profix)){
-			id = table.substring(table_profix.length());
+			name = table.substring(table_profix.length());
 		}
-		id = id.replaceAll("_", ".");
-		return id;
+		name = name.replaceAll("_", ".");
+		return name;
 	}
 	
 	protected static boolean hasColumn(String col){
