@@ -113,7 +113,7 @@ public class CodeJsp extends CodeAssist {
 				jsp_index.append("				<div class=\"layui-inline\">").append("\r\n");
 				jsp_index.append("					<label class=\"layui-form-label\">"+title+"</label>").append("\r\n");
 				jsp_index.append("					<div class=\"layui-input-inline\">").append("\r\n");
-				jsp_index.append("						<input type=\"tel\" name=\""+field_name+"\" class=\"layui-input\">").append("\r\n");
+				jsp_index.append("						<input type=\"text\" name=\""+field_name+"\" class=\"layui-input\">").append("\r\n");
 				jsp_index.append("					</div>").append("\r\n");
 				jsp_index.append("				</div>").append("\r\n");
 			}
