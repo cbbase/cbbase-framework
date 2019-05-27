@@ -22,17 +22,6 @@ import com.fasterxml.jackson.databind.ser.std.ToStringSerializer;
  */
 @Configuration
 public class CustomWebMvcConfigurer implements WebMvcConfigurer {
-
-    @Autowired
-    private AuthInterceptor authInterceptor;
-    
-    /**
-     * 	设置权限拦截器
-     */
-    @Override
-    public void addInterceptors(InterceptorRegistry registry) {
-        registry.addInterceptor(authInterceptor).addPathPatterns("/web/**");
-    }
     
 	/**
 	 * 	设置默认访问页
