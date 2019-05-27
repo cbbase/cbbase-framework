@@ -12,8 +12,8 @@ import com.cbbase.core.tools.StringUtil;
 
 public class ValidatorManager {
 	
-	public static String check(HttpServletRequest request, String validator) {
-		String file = PropertiesHelper.class.getClassLoader().getResource("validator/"+validator+".json").getFile();
+	public static String check(HttpServletRequest request, String validatorFile) {
+		String file = PropertiesHelper.class.getClassLoader().getResource(validatorFile).getFile();
 		String json = FileUtil.readAsString(file);
 		List<FieldValidate> list = JsonUtil.toList(json, FieldValidate.class);
 		Map<String, String[]> param = request.getParameterMap();
