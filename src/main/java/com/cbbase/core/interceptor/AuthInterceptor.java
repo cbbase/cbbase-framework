@@ -7,7 +7,6 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.stereotype.Component;
 import org.springframework.web.method.HandlerMethod;
 import org.springframework.web.servlet.handler.HandlerInterceptorAdapter;
 
@@ -25,7 +24,6 @@ import com.cbbase.core.tools.StringUtil;
  * @author changbo
  *
  */
-@Component
 public class AuthInterceptor extends HandlerInterceptorAdapter {
 
 	protected Logger logger = LoggerFactory.getLogger(this.getClass());
