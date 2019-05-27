@@ -147,6 +147,9 @@ public class CodeAssist {
 			if(title.length() > 10) {
 				title = title.substring(0, 10);
 			}
+			if(title.toLowerCase().indexOf("id") >= 0) {
+				title = title.toLowerCase().replaceAll("id", "");
+			}
 		}
 		return title;
 	}
