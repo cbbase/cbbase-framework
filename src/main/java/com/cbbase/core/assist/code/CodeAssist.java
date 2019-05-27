@@ -40,7 +40,6 @@ public class CodeAssist {
 	public static boolean xmlJdbcType = false;//xml文件中是否包含jdbcType
 	public static boolean addAuth = true;//是否将生成的代码.直接写成文件
 	
-	public static boolean isMavenProject = true;//是否是maven项目
 	public static boolean showContent = false;//是否在控制台输出生成的内容
 	public static boolean writeFile = true;//是否将生成的代码.直接写成文件
 	
@@ -66,10 +65,6 @@ public class CodeAssist {
 		package_last = getPackageLast();
 		if(!root_path.endsWith("/")){
 			root_path = root_path+"/";
-		}
-		if(!isMavenProject) {
-			java_path = "src/";
-			jsp_path = "WebContent/pages/";
 		}
 	}
 
