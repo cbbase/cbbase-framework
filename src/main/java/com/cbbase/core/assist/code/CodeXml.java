@@ -15,8 +15,8 @@ public class CodeXml extends CodeAssist {
 		xml.append("    PUBLIC \"-//mybatis.org//DTD Mapper 3.0//EN\"  ").append("\r\n");
 		xml.append("    \"http://mybatis.org/dtd/mybatis-3-mapper.dtd\">  ").append("\r\n");
 		xml.append("\r\n");
-		xml.append("<mapper namespace=\""+packageName+".dao."+entity_name+"Dao\">").append("\r\n");
-		xml.append("	<resultMap id=\"result\" type=\""+packageName+".entity."+entity_name+"\" > ").append("\r\n");
+		xml.append("<mapper namespace=\""+package_name+".dao."+entity_name+"Dao\">").append("\r\n");
+		xml.append("	<resultMap id=\"result\" type=\""+package_name+".entity."+entity_name+"\" > ").append("\r\n");
 		for(int i=0; i<columns.size(); i++){
 			String db_column = columns.get(i).get("column_name").toString().toLowerCase();
 			String column_name = StringUtil.formatCamel(db_column);
@@ -75,7 +75,7 @@ public class CodeXml extends CodeAssist {
 			xml.append("	</sql>").append("\r\n");
 			xml.append("\r\n");
 		}
-		xml.append("	<select id=\"selectList\" resultMap=\"result\" parameterType=\""+packageName+".entity."+entity_name+"\">").append("\r\n");
+		xml.append("	<select id=\"selectList\" resultMap=\"result\" parameterType=\""+package_name+".entity."+entity_name+"\">").append("\r\n");
 		xml.append("		select obj.* ").append("\r\n");
 		xml.append("		from "+table+" obj ").append("\r\n");
 		xml.append("		<where>").append("\r\n");
@@ -94,7 +94,7 @@ public class CodeXml extends CodeAssist {
 		xml.append("		</where>").append("\r\n");
 		xml.append("	</select>").append("\r\n");
 		xml.append("\r\n");
-		xml.append("	<update id=\"update\" parameterType=\""+packageName+".entity."+entity_name+"\">").append("\r\n");
+		xml.append("	<update id=\"update\" parameterType=\""+package_name+".entity."+entity_name+"\">").append("\r\n");
 		xml.append("	    update "+table+" set ").append("\r\n");
 		for(int i=0; i<columns.size(); i++){
 			String db_column = columns.get(i).get("column_name").toString().toLowerCase();
@@ -117,7 +117,7 @@ public class CodeXml extends CodeAssist {
 		xml.append("		where obj.id = #{id}").append("\r\n");
 		xml.append("	</select>").append("\r\n");
 		xml.append("\r\n");
-		xml.append("	<insert id=\"insert\" parameterType=\""+packageName+".entity."+entity_name+"\">").append("\r\n");
+		xml.append("	<insert id=\"insert\" parameterType=\""+package_name+".entity."+entity_name+"\">").append("\r\n");
 		xml.append("	  	insert into "+table+"(");
 		for(int i=0; i<columns.size(); i++){
 			String db_column = columns.get(i).get("column_name").toString().toLowerCase();
@@ -197,15 +197,19 @@ public class CodeXml extends CodeAssist {
 		xml.append("	</delete>").append("\r\n");
 		xml.append("</mapper >").append("\r\n");
 		xml.append("\r\n");
-		
+
+		String text = xml.toString();
+		if(coverCore) {
+			text = text.replaceAll("com.cbbase", basePackage);
+		}
 		if(showContent) {
 			System.out.println("===============================");
-			System.out.println(xml.toString());
+			System.out.println(text);
 		}
 		
 		if(writeFile) {
 			String file_path = root_path + java_path + package_folder + "\\dao\\";
-			FileUtil.createFileByString(file_path + entity_name +"Dao.xml", xml.toString());
+			FileUtil.createFileByString(file_path + entity_name +"Dao.xml", text);
 		}
 		
 		

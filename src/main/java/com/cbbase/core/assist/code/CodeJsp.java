@@ -158,7 +158,7 @@ public class CodeJsp extends CodeAssist {
 		jsp_index.append("	function initTable(){").append("\r\n");
 		jsp_index.append("		loadTable({").append("\r\n");
 		jsp_index.append("	    	elem: '#tableObj'").append("\r\n");
-		jsp_index.append("	    	,url: basePath+'/web/"+model_path+"/selectPage' //数据接口").append("\r\n");
+		jsp_index.append("	    	,url: basePath+'/web/"+entity_var+"/selectPage' //数据接口").append("\r\n");
 		jsp_index.append("	    	,where: $(\"#queryForm\").serializeJson()	//数据接口参数").append("\r\n");
 		jsp_index.append("			,cols: [[ //表格数据").append("\r\n");
 		jsp_index.append("				{type:'checkbox'}").append("\r\n");
@@ -194,7 +194,7 @@ public class CodeJsp extends CodeAssist {
 		jsp_index.append("	}").append("\r\n");
 		jsp_index.append("	").append("\r\n");
 		jsp_index.append("	function openAdd(){").append("\r\n");
-		jsp_index.append("		$.post(basePath+'/pages/"+package_last+"/"+model_path+"/add.jsp', {}, function(html){").append("\r\n");
+		jsp_index.append("		$.post(basePath+'/pages/"+modelName+"/"+entity_var+"/add.jsp', {}, function(html){").append("\r\n");
 		jsp_index.append("			layer.open({").append("\r\n");
 		jsp_index.append("			    type: 1,").append("\r\n");
 		jsp_index.append("			    title: \"新增\",").append("\r\n");
@@ -212,14 +212,14 @@ public class CodeJsp extends CodeAssist {
 		jsp_index.append("	}").append("\r\n");
 		jsp_index.append("	").append("\r\n");
 		jsp_index.append("	function saveAdd(){").append("\r\n");
-		jsp_index.append("		doFormRequest(\"addForm\", basePath+\"/web/"+model_path+"/add\", function(){").append("\r\n");
+		jsp_index.append("		doFormRequest(\"addForm\", basePath+\"/web/"+entity_var+"/add\", function(){").append("\r\n");
 		jsp_index.append("			layer.close(layer.index);").append("\r\n");
 		jsp_index.append("			reloadTable();").append("\r\n");
 		jsp_index.append("		});").append("\r\n");
 		jsp_index.append("	}").append("\r\n");
 		jsp_index.append("").append("\r\n");
 		jsp_index.append("	function openUpdate(id){").append("\r\n");
-		jsp_index.append("		$.post(basePath+'/pages/"+package_last+"/"+model_path+"/update.jsp?id='+id, {}, function(html){").append("\r\n");
+		jsp_index.append("		$.post(basePath+'/pages/"+modelName+"/"+entity_var+"/update.jsp?id='+id, {}, function(html){").append("\r\n");
 		jsp_index.append("			layer.open({").append("\r\n");
 		jsp_index.append("			    type: 1,").append("\r\n");
 		jsp_index.append("			    content: html,").append("\r\n");
@@ -236,7 +236,7 @@ public class CodeJsp extends CodeAssist {
 		jsp_index.append("	}").append("\r\n");
 		jsp_index.append("	").append("\r\n");
 		jsp_index.append("	function saveUpdate(){").append("\r\n");
-		jsp_index.append("		doFormRequest(\"updateForm\", basePath+\"/web/"+model_path+"/update\", function(){").append("\r\n");
+		jsp_index.append("		doFormRequest(\"updateForm\", basePath+\"/web/"+entity_var+"/update\", function(){").append("\r\n");
 		jsp_index.append("			layer.close(layer.index);").append("\r\n");
 		jsp_index.append("			reloadTable();").append("\r\n");
 		jsp_index.append("		});").append("\r\n");
@@ -245,7 +245,7 @@ public class CodeJsp extends CodeAssist {
 		jsp_index.append("	function doDelete(id){").append("\r\n");
 		jsp_index.append("		openConfirm(\"你确认删除这条数据吗?\", function(){").append("\r\n");
 		jsp_index.append("			var ids = [id];").append("\r\n");
-		jsp_index.append("			doParamRequest({\"ids\": ids}, basePath+'/web/"+model_path+"/delete', reloadTable);").append("\r\n");
+		jsp_index.append("			doParamRequest({\"ids\": ids}, basePath+'/web/"+entity_var+"/delete', reloadTable);").append("\r\n");
 		jsp_index.append("		});").append("\r\n");
 		jsp_index.append("	}").append("\r\n");
 		jsp_index.append("	").append("\r\n");
@@ -256,7 +256,7 @@ public class CodeJsp extends CodeAssist {
 		jsp_index.append("  			return;").append("\r\n");
 		jsp_index.append("  		}").append("\r\n");
 		jsp_index.append("		openConfirm(\"你确认删除所选中的数据吗?\", function(){").append("\r\n");
-		jsp_index.append("			doParamRequest({\"ids\": ids}, basePath+'/web/"+model_path+"/delete', reloadTable);").append("\r\n");
+		jsp_index.append("			doParamRequest({\"ids\": ids}, basePath+'/web/"+entity_var+"/delete', reloadTable);").append("\r\n");
 		jsp_index.append("		});").append("\r\n");
 		jsp_index.append("	}").append("\r\n");
 		jsp_index.append("	").append("\r\n");
@@ -331,7 +331,7 @@ public class CodeJsp extends CodeAssist {
 		jsp_update.append("		form.render();").append("\r\n");
 		jsp_update.append("		//填充数据").append("\r\n");
 		jsp_update.append("		var id = $(\"#updateForm [name=id]\").val();").append("\r\n");
-		jsp_update.append("		initFormData(\"updateForm\", basePath+\"/web/"+model_path+"/select\", {\"id\":id});").append("\r\n");
+		jsp_update.append("		initFormData(\"updateForm\", basePath+\"/web/"+entity_var+"/select\", {\"id\":id});").append("\r\n");
 		jsp_update.append("	})").append("\r\n");
 		jsp_update.append("	").append("\r\n");
 		jsp_update.append("</script>").append("\r\n");
@@ -339,7 +339,6 @@ public class CodeJsp extends CodeAssist {
 		jsp_update.append("</html>").append("\r\n");
 		jsp_update.append("").append("\r\n");
 		
-
 		if(showContent) {
 			System.out.println("===============================");
 			System.out.println(jsp_index.toString());
@@ -350,7 +349,7 @@ public class CodeJsp extends CodeAssist {
 		}
 		
 		if(writeFile) {
-			String file_path = root_path + jsp_path + package_last + "\\" + model_path;
+			String file_path = root_path + jsp_path + modelName + "\\" + entity_var;
 			FileUtil.createFileByString(file_path+"\\add.jsp", jsp_add.toString());
 			FileUtil.createFileByString(file_path+"\\index.jsp", jsp_index.toString());
 			FileUtil.createFileByString(file_path+"\\update.jsp", jsp_update.toString());

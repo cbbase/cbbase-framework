@@ -12,7 +12,7 @@ public class CodeEntity extends CodeAssist {
 	public static void create(){
 
 		StringBuilder entity = new StringBuilder();
-		entity.append("package "+packageName+".entity;").append("\r\n");
+		entity.append("package "+package_name+".entity;").append("\r\n");
 		entity.append("\r\n");
 		
 		Set<String> importSet = new HashSet<String>();
@@ -73,15 +73,20 @@ public class CodeEntity extends CodeAssist {
 		}
 		entity.append("\r\n");
 		entity.append("}").append("\r\n");
-
+		
+		
+		String text = entity.toString();
+		if(coverCore) {
+			text = text.replaceAll("com.cbbase", basePackage);
+		}
 		if(showContent) {
 			System.out.println("===============================");
-			System.out.println(entity.toString());
+			System.out.println(text);
 		}
 		
 		if(writeFile) {
 			String file_path = root_path + java_path + package_folder + "\\entity\\";
-			FileUtil.createFileByString(file_path + entity_name +".java", entity.toString());
+			FileUtil.createFileByString(file_path + entity_name +".java", text);
 		}
 	}
 }

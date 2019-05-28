@@ -1,5 +1,6 @@
 package com.cbbase.core.assist.code;
 
+import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
 import java.util.Vector;
@@ -16,7 +17,8 @@ import com.cbbase.core.tools.StringUtil;
 public class CodeAssist {
 	
 	//基本参数
-	public static String packageName = "com.cbbase.admin";
+	public static String basePackage = "com.cbbase";
+	public static String modelName = "admin";
 	public static String table = "t_sys_login_log";//表名
 	public static String table_schema = null;//schema(暂时用不到)
 	public static String table_profix = "t_";//表名前缀(生成的代码中将去除)
@@ -34,47 +36,47 @@ public class CodeAssist {
 	public static boolean createService = true;//是否创建Service类java文件
 	public static boolean createDao = true;//是否创建Dao类java文件
 	
-	public static boolean extendBaseEntity = true;//实体类是否继承BaseEntity
 	public static boolean pageXml = true;//xml文件里是否要包含分页查询语句
 	public static boolean commentAsTitle = true;//表里面的注释作为字段标题
-	public static boolean xmlJdbcType = false;//xml文件中是否包含jdbcType
 	public static boolean addAuth = true;//是否将生成的代码.直接写成文件
+	public static boolean coverCore = false;
 	
 	public static boolean showContent = false;//是否在控制台输出生成的内容
 	public static boolean writeFile = true;//是否将生成的代码.直接写成文件
 	
+	public static boolean extendBaseEntity = true;//实体类是否继承BaseEntity
+	public static String[] baseEntityField = {"id", "createTime", "createId", "createName", "updateTime", "updateId", "updateName"};
+	
+	
 	//中间变量
 	protected static List<Map<String, Object>> columns = null;
+	protected static String package_name = null;
+	protected static String package_folder = null;
 	protected static String entity_name = null;
 	protected static String entity_var = null;
-	protected static String model_path = null;
 	protected static String auth_name = null;
-	protected static String package_folder = null;
-	protected static String package_last = null;
 	protected static String table_comment = null;
 	
 	
 	protected static void init(){
 		columns = new DataBaseTable(jdbc_name).queryColumns(table, table_schema);
 		table_comment = new DataBaseTable(jdbc_name).getTableComment(table);
+		package_name = getPackageName();
+		package_folder = getPackageFolder();
 		entity_name = getEntityName();
 		entity_var = StringUtil.lowerFirst(entity_name);
-		model_path = StringUtil.lowerFirst(entity_name);
 		auth_name = getAuthName();
-		package_folder = getPackageFolder();
-		package_last = getPackageLast();
 		if(!root_path.endsWith("/")){
 			root_path = root_path+"/";
 		}
 	}
-
-	protected static String getPackageFolder(){
-		return packageName.replaceAll("\\.", "\\\\");
+	
+	protected static String getPackageName(){
+		return basePackage + "." + modelName;
 	}
 
-	protected static String getPackageLast(){
-		String[] ps = packageName.split("\\.");
-		return ps[ps.length-1];
+	protected static String getPackageFolder(){
+		return getPackageName().replaceAll("\\.", "\\\\");
 	}
 	
 	protected static String getEntityName(){
@@ -105,15 +107,8 @@ public class CodeAssist {
 	}
 	
 	protected static boolean isBaseEntityField(String field) {
-		Vector<String> v = new Vector<String>();
-		v.add("id");
-		v.add("createTime");
-		v.add("createId");
-		v.add("createName");
-		v.add("updateTime");
-		v.add("updateId");
-		v.add("updateName");
-		return v.contains(field);
+		List<String> list = Arrays.asList(baseEntityField);
+		return list.contains(field);
 	}
 	
 	protected static boolean isSelectField(String field) {
