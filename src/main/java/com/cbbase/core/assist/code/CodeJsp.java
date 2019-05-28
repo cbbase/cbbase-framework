@@ -298,13 +298,13 @@ public class CodeJsp extends CodeAssist {
 				jsp_update.append("			<div class=\"layui-form-item\">").append("\r\n");
 			}
 			if(isSelectField(field_name)) {
-				jsp_add.append("				<div class=\"layui-inline\">").append("\r\n");
-				jsp_add.append("					<label class=\"layui-form-label\">"+title+"</label>").append("\r\n");
-				jsp_add.append("					<div class=\"layui-input-inline\">").append("\r\n");
-				jsp_add.append("						<select name=\""+field_name+"\">").append("\r\n");
-				jsp_add.append("						</select>").append("\r\n");
-				jsp_add.append("					</div>").append("\r\n");
-				jsp_add.append("				</div>").append("\r\n");
+				jsp_update.append("				<div class=\"layui-inline\">").append("\r\n");
+				jsp_update.append("					<label class=\"layui-form-label\">"+title+"</label>").append("\r\n");
+				jsp_update.append("					<div class=\"layui-input-inline\">").append("\r\n");
+				jsp_update.append("						<select name=\""+field_name+"\">").append("\r\n");
+				jsp_update.append("						</select>").append("\r\n");
+				jsp_update.append("					</div>").append("\r\n");
+				jsp_update.append("				</div>").append("\r\n");
 			}else {
 				jsp_update.append("				<div class=\"layui-inline\">").append("\r\n");
 				jsp_update.append("					<label class=\"layui-form-label\">"+title+"</label>").append("\r\n");

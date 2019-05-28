@@ -127,7 +127,7 @@ public class CodeXml extends CodeAssist {
 			}
 			xml.append(str);
 			if(i>0 && i%9 == 0 && i != columns.size()-1) {
-				xml.append("\r\n");
+				xml.append("\r\n	        ");
 			}
 		}
 		xml.append(")").append("\r\n");
@@ -139,15 +139,12 @@ public class CodeXml extends CodeAssist {
 			if(i == columns.size()-1){
 				str = "#{"+column_name+"} ";
 			}
-			if(i != 0) {
-				str = "			"+str;
-			}
 			xml.append(str);
 			if(i>0 && i%9 == 0 && i != columns.size()-1) {
-				xml.append("\r\n");
+				xml.append("\r\n	        ");
 			}
 		}
-		xml.append("			)").append("\r\n");
+		xml.append(")").append("\r\n");
 		xml.append("	</insert>").append("\r\n");
 		xml.append("\r\n");
 		xml.append("	<delete id=\"delete\" parameterType=\"java.lang.Long\">").append("\r\n");
@@ -165,7 +162,7 @@ public class CodeXml extends CodeAssist {
 			}
 			xml.append(str);
 			if(i>0 && i%9 == 0 && i != columns.size()-1) {
-				xml.append("\r\n");
+				xml.append("\r\n	        ");
 			}
 		}
 		xml.append(")").append("\r\n");
@@ -181,7 +178,7 @@ public class CodeXml extends CodeAssist {
 			}
 			xml.append(str);
 			if(i>0 && i%9 == 0 && i != columns.size()-1) {
-				xml.append("\r\n");
+				xml.append("\r\n	        ");
 			}
 		}
 		xml.append(")").append("\r\n");
