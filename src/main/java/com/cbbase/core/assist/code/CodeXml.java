@@ -106,7 +106,7 @@ public class CodeXml extends CodeAssist {
 			if("id".equals(column_name)){
 				continue;
 			}
-			xml.append(str);
+			xml.append(str).append("\r\n");
 		}
 		xml.append("	    where id = #{id}").append("\r\n");
 		xml.append("	</update>").append("\r\n");
@@ -126,6 +126,9 @@ public class CodeXml extends CodeAssist {
 				str = db_column;
 			}
 			xml.append(str);
+			if(i>0 && i%9 == 0 && i != columns.size()-1) {
+				xml.append("\r\n");
+			}
 		}
 		xml.append(")").append("\r\n");
 		xml.append("	  	values(");
@@ -140,6 +143,9 @@ public class CodeXml extends CodeAssist {
 				str = "			"+str;
 			}
 			xml.append(str);
+			if(i>0 && i%9 == 0 && i != columns.size()-1) {
+				xml.append("\r\n");
+			}
 		}
 		xml.append("			)").append("\r\n");
 		xml.append("	</insert>").append("\r\n");
@@ -153,12 +159,14 @@ public class CodeXml extends CodeAssist {
 		xml.append("	  	insert into "+table+"(");
 		for(int i=0; i<columns.size(); i++){
 			String db_column = columns.get(i).get("column_name").toString().toLowerCase();
-//			String column_name = StringUtil.formatCamel(db_column);
 			String str = db_column+", ";
 			if(i == columns.size()-1){
 				str = db_column;
 			}
 			xml.append(str);
+			if(i>0 && i%9 == 0 && i != columns.size()-1) {
+				xml.append("\r\n");
+			}
 		}
 		xml.append(")").append("\r\n");
 		xml.append("	    values ").append("\r\n");
@@ -172,6 +180,9 @@ public class CodeXml extends CodeAssist {
 				str = "#{item."+column_name+"} ";
 			}
 			xml.append(str);
+			if(i>0 && i%9 == 0 && i != columns.size()-1) {
+				xml.append("\r\n");
+			}
 		}
 		xml.append(")").append("\r\n");
 		xml.append("	    </foreach>").append("\r\n");
