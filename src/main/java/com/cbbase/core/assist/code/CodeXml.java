@@ -62,7 +62,7 @@ public class CodeXml extends CodeAssist {
 			for(int i=0; i<columns.size(); i++){
 				String db_column = columns.get(i).get("column_name").toString().toLowerCase();
 				String column_name = StringUtil.formatCamel(db_column);
-				if(db_column.endsWith("id")){
+				if(isSelectField(column_name)){
 					xml.append("		<if test=\"param."+column_name+" != null  and  param."+column_name+" != '' \">").append("\r\n");
 					xml.append("			and obj."+db_column+" = #{param."+column_name+"}").append("\r\n");
 					xml.append("		</if>").append("\r\n");
