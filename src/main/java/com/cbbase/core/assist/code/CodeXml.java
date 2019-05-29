@@ -68,7 +68,11 @@ public class CodeXml extends CodeAssist {
 					xml.append("		</if>").append("\r\n");
 				}else if(db_column.endsWith("code") || db_column.endsWith("name")){
 					xml.append("		<if test=\"param."+column_name+" != null  and  param."+column_name+" != '' \">").append("\r\n");
-					xml.append("			and obj."+db_column+" like CONCAT('%', #{param."+column_name+"}, '%')").append("\r\n");
+					if(JdbcConnection.isMysql(jdbc_name)){
+						xml.append("			and obj."+db_column+" like CONCAT('%', #{param."+column_name+"}, '%')").append("\r\n");
+					}else if(JdbcConnection.isOracle(jdbc_name)){
+						xml.append("			and obj."+db_column+" like CONCAT('%', CONCAT(#{param."+column_name+"}, '%'))").append("\r\n");
+					}
 					xml.append("		</if>").append("\r\n");
 				}
 			}
