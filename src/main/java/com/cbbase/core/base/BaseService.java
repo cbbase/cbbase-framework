@@ -10,6 +10,11 @@ import com.cbbase.core.container.PageContainer;
 import com.cbbase.core.tools.IdWorker;
 import com.cbbase.core.tools.ObjectUtil;
 
+/**
+ * 
+ * @author changbo
+ *
+ */
 public class BaseService<T extends BaseDao> {
 
 	protected Logger logger = LoggerFactory.getLogger(this.getClass());
