@@ -62,19 +62,22 @@ public class CodeXml extends CodeAssist {
 			for(int i=0; i<columns.size(); i++){
 				String db_column = columns.get(i).get("column_name").toString().toLowerCase();
 				String column_name = StringUtil.formatCamel(db_column);
+				String column_type = columns.get(i).get("data_type").toString().toUpperCase();
+				if(DataTypeUtil.isNumberType(column_type)){
+					xml.append("		<if test=\"param."+column_name+" != null \">").append("\r\n");
+				}else {
+					xml.append("		<if test=\"param."+column_name+" != null and  param."+column_name+" != '' \">").append("\r\n");
+				}
 				if(isSelectField(column_name)){
-					xml.append("		<if test=\"param."+column_name+" != null  and  param."+column_name+" != '' \">").append("\r\n");
 					xml.append("			and obj."+db_column+" = #{param."+column_name+"}").append("\r\n");
-					xml.append("		</if>").append("\r\n");
 				}else if(db_column.endsWith("code") || db_column.endsWith("name")){
-					xml.append("		<if test=\"param."+column_name+" != null  and  param."+column_name+" != '' \">").append("\r\n");
 					if(JdbcConnection.isMysql(jdbc_name)){
 						xml.append("			and obj."+db_column+" like CONCAT('%', #{param."+column_name+"}, '%')").append("\r\n");
 					}else if(JdbcConnection.isOracle(jdbc_name)){
 						xml.append("			and obj."+db_column+" like CONCAT('%', CONCAT(#{param."+column_name+"}, '%'))").append("\r\n");
 					}
-					xml.append("		</if>").append("\r\n");
 				}
+				xml.append("		</if>").append("\r\n");
 			}
 			xml.append("	</sql>").append("\r\n");
 			xml.append("\r\n");
