@@ -36,6 +36,7 @@ public class CodeAssist {
 	public static boolean createService = true;//是否创建Service类java文件
 	public static boolean createDao = true;//是否创建Dao类java文件
 	
+	public static boolean toJsp = true;
 	public static boolean pageXml = true;//xml文件里是否要包含分页查询语句
 	public static boolean commentAsTitle = true;//表里面的注释作为字段标题
 	public static boolean addAuth = true;//是否将生成的代码.直接写成文件
