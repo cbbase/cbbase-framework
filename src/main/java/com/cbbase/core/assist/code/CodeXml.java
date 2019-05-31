@@ -63,6 +63,9 @@ public class CodeXml extends CodeAssist {
 				String db_column = columns.get(i).get("column_name").toString().toLowerCase();
 				String column_name = StringUtil.formatCamel(db_column);
 				String column_type = columns.get(i).get("data_type").toString().toUpperCase();
+				if(!isSelectField(column_name) && !db_column.endsWith("code") && !db_column.endsWith("name")) {
+					continue;
+				}
 				if(DataTypeUtil.isNumberType(column_type)){
 					xml.append("		<if test=\"param."+column_name+" != null \">").append("\r\n");
 				}else {
