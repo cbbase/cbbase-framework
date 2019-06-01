@@ -35,6 +35,14 @@ public class CodeController extends CodeAssist {
 		controller.append("	@Autowired").append("\r\n");
 		controller.append("	private "+entity_name+"Service "+entity_var+"Service;").append("\r\n");
 		controller.append("\r\n");
+		controller.append("	@RequestMapping(\"toIndex\")").append("\r\n");
+		if(addAuth) {
+			controller.append("	@Authority(\""+auth_name+".view\")").append("\r\n");
+		}
+		controller.append("	public RestResponse toIndex("+entity_name+" param){").append("\r\n");
+		controller.append("		return \""+modelName+"/"+entity_var+"/index\"").append("\r\n");
+		controller.append("	}").append("\r\n");
+		controller.append("\r\n");
 		controller.append("	@ResponseBody").append("\r\n");
 		controller.append("	@RequestMapping(\"selectPage\")").append("\r\n");
 		if(addAuth) {
@@ -53,6 +61,14 @@ public class CodeController extends CodeAssist {
 		controller.append("		return getSuccess("+entity_var+"Service.select(param));").append("\r\n");
 		controller.append("	}").append("\r\n");
 		controller.append("\r\n");
+		controller.append("	@RequestMapping(\"toAdd\")").append("\r\n");
+		if(addAuth) {
+			controller.append("	@Authority(\""+auth_name+".modify\")").append("\r\n");
+		}
+		controller.append("	public RestResponse toAdd("+entity_name+" param){").append("\r\n");
+		controller.append("		return \""+modelName+"/"+entity_var+"/add\"").append("\r\n");
+		controller.append("	}").append("\r\n");
+		controller.append("\r\n");
 		controller.append("	@ResponseBody").append("\r\n");
 		controller.append("	@RequestMapping(\"add\")").append("\r\n");
 		if(addAuth) {
@@ -60,6 +76,14 @@ public class CodeController extends CodeAssist {
 		}
 		controller.append("	public RestResponse add("+entity_name+" param){").append("\r\n");
 		controller.append("		return getSuccess("+entity_var+"Service.insert(param));").append("\r\n");
+		controller.append("	}").append("\r\n");
+		controller.append("\r\n");
+		controller.append("	@RequestMapping(\"toUpdate\")").append("\r\n");
+		if(addAuth) {
+			controller.append("	@Authority(\""+auth_name+".modify\")").append("\r\n");
+		}
+		controller.append("	public RestResponse toUpdate("+entity_name+" param){").append("\r\n");
+		controller.append("		return \""+modelName+"/"+entity_var+"/update\"").append("\r\n");
 		controller.append("	}").append("\r\n");
 		controller.append("\r\n");
 		controller.append("	@ResponseBody").append("\r\n");

@@ -26,7 +26,7 @@ public class CodeAssist {
 	public static String jdbc_name = "jdbc";//application.properties中数据源配置的前缀
 	public static String root_path = CommonUtil.getProjectPath()+"/";//项目路径
 	public static String java_path = "src/main/java/";//java代码根目录
-	public static String jsp_path = "src/main/webapp/pages/";//jsp代码根目录
+	public static String jsp_path = "src/main/WEB-INF/webapp/pages/";//jsp代码根目录
 	
 	//创建的代码
 	public static boolean createXml = true;//是否创建实体类的xml文件(mybatis的xml文件)
