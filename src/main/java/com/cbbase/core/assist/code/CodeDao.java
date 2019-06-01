@@ -8,14 +8,14 @@ public class CodeDao extends CodeAssist {
 
 
 		StringBuilder dao = new StringBuilder();
-		dao.append("package "+package_name+".dao;").append("\r\n");
+		dao.append("package "+packageName+".dao;").append("\r\n");
 		dao.append("\r\n");
 		dao.append("import org.springframework.stereotype.Repository;").append("\r\n");
 		dao.append("\r\n");
 		dao.append("import com.cbbase.core.base.BaseDao;").append("\r\n");
 		dao.append("\r\n");
 		dao.append("@Repository").append("\r\n");
-		dao.append("public interface "+entity_name+"Dao extends BaseDao {").append("\r\n");
+		dao.append("public interface "+entityName+"Dao extends BaseDao {").append("\r\n");
 		dao.append("\r\n");
 		dao.append("}").append("\r\n");
 		dao.append("").append("\r\n");
@@ -31,8 +31,8 @@ public class CodeDao extends CodeAssist {
 		}
 		
 		if(writeFile) {
-			String file_path = root_path + java_path + package_folder + "\\dao\\";
-			FileUtil.createFileByString(file_path + entity_name +"Dao.java", text);
+			String filePath = rootPath + javaPath + packageFolder + "\\dao\\";
+			FileUtil.createFileByString(filePath + entityName +"Dao.java", text);
 		}
 		
 	}

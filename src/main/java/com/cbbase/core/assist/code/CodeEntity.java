@@ -12,7 +12,7 @@ public class CodeEntity extends CodeAssist {
 	public static void create(){
 
 		StringBuilder entity = new StringBuilder();
-		entity.append("package "+package_name+".entity;").append("\r\n");
+		entity.append("package "+packageName+".entity;").append("\r\n");
 		entity.append("\r\n");
 		
 		Set<String> importSet = new HashSet<String>();
@@ -40,9 +40,9 @@ public class CodeEntity extends CodeAssist {
 		}
 		entity.append("/**").append("\r\n");
 		entity.append(" * @author ").append("\r\n");
-		entity.append(" * @Description "+table_comment).append("\r\n");
+		entity.append(" * @Description "+tableComment).append("\r\n");
 		entity.append(" **/").append("\r\n");
-		entity.append("public class "+entity_name+ext+" {").append("\r\n");
+		entity.append("public class "+entityName+ext+" {").append("\r\n");
 		entity.append("\r\n");
 		for(int i=0; i<columns.size(); i++){
 			String column_name = StringUtil.formatCamel(columns.get(i).get("column_name").toString());
@@ -85,8 +85,8 @@ public class CodeEntity extends CodeAssist {
 		}
 		
 		if(writeFile) {
-			String file_path = root_path + java_path + package_folder + "\\entity\\";
-			FileUtil.createFileByString(file_path + entity_name +".java", text);
+			String filePath = rootPath + javaPath + packageFolder + "\\entity\\";
+			FileUtil.createFileByString(filePath + entityName +".java", text);
 		}
 	}
 }

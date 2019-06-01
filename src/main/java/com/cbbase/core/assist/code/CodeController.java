@@ -10,98 +10,106 @@ public class CodeController extends CodeAssist {
 		 * controller
 		 */
 		StringBuilder controller = new StringBuilder();
-		controller.append("package "+package_name+".controller;").append("\r\n");
+		controller.append("package "+packageName+".controller;").append("\r\n");
 		controller.append("\r\n");
 		controller.append("import java.util.List;");
 		controller.append("\r\n");
 		controller.append("import org.springframework.beans.factory.annotation.Autowired;").append("\r\n");
 		controller.append("import org.springframework.stereotype.Controller;").append("\r\n");
+		controller.append("import org.springframework.ui.Model;").append("\r\n");
 		controller.append("import org.springframework.web.bind.annotation.RequestMapping;").append("\r\n");
 		controller.append("import org.springframework.web.bind.annotation.RequestParam;").append("\r\n");
 		controller.append("import org.springframework.web.bind.annotation.ResponseBody;").append("\r\n");
 		controller.append("\r\n");
-		controller.append("import "+package_name+".entity."+entity_name+";").append("\r\n");
-		controller.append("import "+package_name+".service."+entity_name+"Service;").append("\r\n");
+		controller.append("import "+packageName+".entity."+entityName+";").append("\r\n");
+		controller.append("import "+packageName+".service."+entityName+"Service;").append("\r\n");
 		if(addAuth) {
 			controller.append("import com.cbbase.core.annotation.Authority;").append("\r\n");
 		}
 		controller.append("import com.cbbase.core.base.BaseController;").append("\r\n");
+		controller.append("import com.cbbase.core.container.PageContainer;").append("\r\n");
 		controller.append("import com.cbbase.core.container.RestResponse;").append("\r\n");
 		controller.append("\r\n");
 		controller.append("@Controller").append("\r\n");
-		controller.append("@RequestMapping(\"/web/"+entity_var+"\")").append("\r\n");
-		controller.append("public class "+entity_name+"Controller extends BaseController {").append("\r\n");
+		controller.append("@RequestMapping(\"/web/"+entityVar+"\")").append("\r\n");
+		controller.append("public class "+entityName+"Controller extends BaseController {").append("\r\n");
 		controller.append("\r\n");
 		controller.append("	@Autowired").append("\r\n");
-		controller.append("	private "+entity_name+"Service "+entity_var+"Service;").append("\r\n");
+		controller.append("	private "+entityName+"Service "+entityVar+"Service;").append("\r\n");
 		controller.append("\r\n");
-		controller.append("	@RequestMapping(\"toIndex\")").append("\r\n");
-		if(addAuth) {
-			controller.append("	@Authority(\""+auth_name+".view\")").append("\r\n");
+		//index
+		if(jspUrl) {
+			controller.append("	@RequestMapping(\"index\")").append("\r\n");
+			if(addAuth) {
+				controller.append("	@Authority(\""+authName+".view\")").append("\r\n");
+			}
+			controller.append("	public RestResponse index(Model model){").append("\r\n");
+			controller.append("		return \""+modelName+"/"+entityVar+"/index\"").append("\r\n");
+			controller.append("	}").append("\r\n");
+			controller.append("\r\n");
 		}
-		controller.append("	public RestResponse toIndex("+entity_name+" param){").append("\r\n");
-		controller.append("		return \""+modelName+"/"+entity_var+"/index\"").append("\r\n");
-		controller.append("	}").append("\r\n");
-		controller.append("\r\n");
+		//selectPage
 		controller.append("	@ResponseBody").append("\r\n");
 		controller.append("	@RequestMapping(\"selectPage\")").append("\r\n");
 		if(addAuth) {
-			controller.append("	@Authority(\""+auth_name+".view\")").append("\r\n");
+			controller.append("	@Authority(\""+authName+".view\")").append("\r\n");
 		}
-		controller.append("	public RestResponse selectPage("+entity_name+" param){").append("\r\n");
-		controller.append("		return getSuccess("+entity_var+"Service.selectPage(getPageContainer(param)));").append("\r\n");
+		controller.append("	public RestResponse selectPage("+entityName+" param){").append("\r\n");
+		controller.append("		PageContainer page = getPageContainer(param);").append("\r\n");
+		controller.append("		return getSuccess("+entityVar+"Service.selectPage(page));").append("\r\n");
 		controller.append("	}").append("\r\n");
 		controller.append("\r\n");
+		//add
+		if(jspUrl) {
+			controller.append("	@RequestMapping(\"add\")").append("\r\n");
+			if(addAuth) {
+				controller.append("	@Authority(\""+authName+".modify\")").append("\r\n");
+			}
+			controller.append("	public RestResponse add(Model model){").append("\r\n");
+			controller.append("		return \""+modelName+"/"+entityVar+"/add\"").append("\r\n");
+			controller.append("	}").append("\r\n");
+			controller.append("\r\n");
+		}
+		//saveAdd
 		controller.append("	@ResponseBody").append("\r\n");
-		controller.append("	@RequestMapping(\"select\")").append("\r\n");
+		controller.append("	@RequestMapping(\"saveAdd\")").append("\r\n");
 		if(addAuth) {
-			controller.append("	@Authority(\""+auth_name+".view\")").append("\r\n");
+			controller.append("	@Authority(\""+authName+".modify\")").append("\r\n");
 		}
-		controller.append("	public RestResponse select("+entity_name+" param){").append("\r\n");
-		controller.append("		return getSuccess("+entity_var+"Service.select(param));").append("\r\n");
+		controller.append("	public RestResponse saveAdd("+entityName+" param){").append("\r\n");
+		controller.append("		return getSuccess("+entityVar+"Service.insert(param));").append("\r\n");
 		controller.append("	}").append("\r\n");
 		controller.append("\r\n");
-		controller.append("	@RequestMapping(\"toAdd\")").append("\r\n");
-		if(addAuth) {
-			controller.append("	@Authority(\""+auth_name+".modify\")").append("\r\n");
+		//update
+		if(jspUrl) {
+			controller.append("	@RequestMapping(\"update\")").append("\r\n");
+			if(addAuth) {
+				controller.append("	@Authority(\""+authName+".modify\")").append("\r\n");
+			}
+			controller.append("	public RestResponse update(Model model, Long id){").append("\r\n");
+			controller.append("		model.addAttribute(\"entity\", "+entityVar+"Service.selectById(id));").append("\r\n");
+			controller.append("		return \""+modelName+"/"+entityVar+"/update\"").append("\r\n");
+			controller.append("	}").append("\r\n");
+			controller.append("\r\n");
 		}
-		controller.append("	public RestResponse toAdd("+entity_name+" param){").append("\r\n");
-		controller.append("		return \""+modelName+"/"+entity_var+"/add\"").append("\r\n");
-		controller.append("	}").append("\r\n");
-		controller.append("\r\n");
+		//saveUpdate
 		controller.append("	@ResponseBody").append("\r\n");
-		controller.append("	@RequestMapping(\"add\")").append("\r\n");
+		controller.append("	@RequestMapping(\"saveUpdate\")").append("\r\n");
 		if(addAuth) {
-			controller.append("	@Authority(\""+auth_name+".modify\")").append("\r\n");
+			controller.append("	@Authority(\""+authName+".modify\")").append("\r\n");
 		}
-		controller.append("	public RestResponse add("+entity_name+" param){").append("\r\n");
-		controller.append("		return getSuccess("+entity_var+"Service.insert(param));").append("\r\n");
+		controller.append("	public RestResponse saveUpdate("+entityName+" param){").append("\r\n");
+		controller.append("		return getSuccess("+entityVar+"Service.update(param));").append("\r\n");
 		controller.append("	}").append("\r\n");
 		controller.append("\r\n");
-		controller.append("	@RequestMapping(\"toUpdate\")").append("\r\n");
-		if(addAuth) {
-			controller.append("	@Authority(\""+auth_name+".modify\")").append("\r\n");
-		}
-		controller.append("	public RestResponse toUpdate("+entity_name+" param){").append("\r\n");
-		controller.append("		return \""+modelName+"/"+entity_var+"/update\"").append("\r\n");
-		controller.append("	}").append("\r\n");
-		controller.append("\r\n");
-		controller.append("	@ResponseBody").append("\r\n");
-		controller.append("	@RequestMapping(\"update\")").append("\r\n");
-		if(addAuth) {
-			controller.append("	@Authority(\""+auth_name+".modify\")").append("\r\n");
-		}
-		controller.append("	public RestResponse update("+entity_name+" param){").append("\r\n");
-		controller.append("		return getSuccess("+entity_var+"Service.update(param));").append("\r\n");
-		controller.append("	}").append("\r\n");
-		controller.append("\r\n");
+		//delete
 		controller.append("	@ResponseBody").append("\r\n");
 		controller.append("	@RequestMapping(\"delete\")").append("\r\n");
 		if(addAuth) {
-			controller.append("	@Authority(\""+auth_name+".modify\")").append("\r\n");
+			controller.append("	@Authority(\""+authName+".modify\")").append("\r\n");
 		}
 		controller.append("	public RestResponse delete(@RequestParam(\"ids\") List<Long> ids){").append("\r\n");
-		controller.append("		return getSuccess("+entity_var+"Service.batchDelete(ids));").append("\r\n");
+		controller.append("		return getSuccess("+entityVar+"Service.batchDelete(ids));").append("\r\n");
 		controller.append("	}").append("\r\n");
 		controller.append("}").append("\r\n");
 		
@@ -116,8 +124,8 @@ public class CodeController extends CodeAssist {
 		}
 		
 		if(writeFile) {
-			String file_path = root_path + java_path + package_folder + "\\controller\\";
-			FileUtil.createFileByString(file_path + entity_name +"Controller.java", text);
+			String filePath = rootPath + javaPath + packageFolder + "\\controller\\";
+			FileUtil.createFileByString(filePath + entityName +"Controller.java", text);
 		}
 	}
 

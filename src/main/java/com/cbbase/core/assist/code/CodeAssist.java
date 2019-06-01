@@ -20,13 +20,13 @@ public class CodeAssist {
 	public static String basePackage = "com.cbbase";
 	public static String modelName = "admin";
 	public static String table = "t_sys_login_log";//表名
-	public static String table_schema = null;//schema(暂时用不到)
-	public static String table_profix = "t_";//表名前缀(生成的代码中将去除)
+	public static String tableSchema = null;//schema(暂时用不到)
+	public static String tableProfix = "t_";//表名前缀(生成的代码中将去除)
 	
-	public static String jdbc_name = "jdbc";//application.properties中数据源配置的前缀
-	public static String root_path = CommonUtil.getProjectPath()+"/";//项目路径
-	public static String java_path = "src/main/java/";//java代码根目录
-	public static String jsp_path = "src/main/WEB-INF/webapp/pages/";//jsp代码根目录
+	public static String jdbcName = "jdbc";//application.properties中数据源配置的前缀
+	public static String rootPath = CommonUtil.getProjectPath()+"/";//项目路径
+	public static String javaPath = "src/main/java/";//java代码根目录
+	public static String jspPath = "src/main/webapp/WEB-INF/pages/";//jsp代码根目录
 	
 	//创建的代码
 	public static boolean createXml = true;//是否创建实体类的xml文件(mybatis的xml文件)
@@ -36,7 +36,7 @@ public class CodeAssist {
 	public static boolean createService = true;//是否创建Service类java文件
 	public static boolean createDao = true;//是否创建Dao类java文件
 	
-	public static boolean toJsp = true;
+	public static boolean jspUrl = true;
 	public static boolean pageXml = true;//xml文件里是否要包含分页查询语句
 	public static boolean commentAsTitle = true;//表里面的注释作为字段标题
 	public static boolean addAuth = true;//是否将生成的代码.直接写成文件
@@ -51,24 +51,24 @@ public class CodeAssist {
 	
 	//中间变量
 	protected static List<Map<String, Object>> columns = null;
-	protected static String package_name = null;
-	protected static String package_folder = null;
-	protected static String entity_name = null;
-	protected static String entity_var = null;
-	protected static String auth_name = null;
-	protected static String table_comment = null;
+	protected static String packageName = null;
+	protected static String packageFolder = null;
+	protected static String entityName = null;
+	protected static String entityVar = null;
+	protected static String authName = null;
+	protected static String tableComment = null;
 	
 	
 	protected static void init(){
-		columns = new DataBaseTable(jdbc_name).queryColumns(table, table_schema);
-		table_comment = new DataBaseTable(jdbc_name).getTableComment(table);
-		package_name = getPackageName();
-		package_folder = getPackageFolder();
-		entity_name = getEntityName();
-		entity_var = StringUtil.lowerFirst(entity_name);
-		auth_name = getAuthName();
-		if(!root_path.endsWith("/")){
-			root_path = root_path+"/";
+		columns = new DataBaseTable(jdbcName).queryColumns(table, tableSchema);
+		tableComment = new DataBaseTable(jdbcName).getTableComment(table);
+		packageName = getPackageName();
+		packageFolder = getPackageFolder();
+		entityName = getEntityName();
+		entityVar = StringUtil.lowerFirst(entityName);
+		authName = getAuthName();
+		if(!rootPath.endsWith("/")){
+			rootPath = rootPath+"/";
 		}
 	}
 	
@@ -82,8 +82,8 @@ public class CodeAssist {
 	
 	protected static String getEntityName(){
 		String name = table;
-		if(table.startsWith(table_profix)){
-			name = table.substring(table_profix.length());
+		if(table.startsWith(tableProfix)){
+			name = table.substring(tableProfix.length());
 		}
 		name = StringUtil.formatCamel(name);
 		name = StringUtil.upperFirst(name);
@@ -92,8 +92,8 @@ public class CodeAssist {
 	
 	protected static String getAuthName(){
 		String name = table;
-		if(table.startsWith(table_profix)){
-			name = table.substring(table_profix.length());
+		if(table.startsWith(tableProfix)){
+			name = table.substring(tableProfix.length());
 		}
 		name = name.replaceAll("_", ".");
 		return name;
@@ -113,9 +113,7 @@ public class CodeAssist {
 	}
 	
 	protected static boolean isSelectField(String field) {
-		if(field.toLowerCase().endsWith("type") 
-				|| field.toLowerCase().endsWith("status")
-				|| field.toLowerCase().endsWith("id")) {
+		if(field.toLowerCase().endsWith("type") || field.toLowerCase().endsWith("status")) {
 			return true;
 		}
 		return false;
