@@ -43,7 +43,7 @@ public class CodeController extends CodeAssist {
 			if(addAuth) {
 				controller.append("	@Authority(\""+authName+".view\")").append("\r\n");
 			}
-			controller.append("	public RestResponse index(Model model){").append("\r\n");
+			controller.append("	public String index(Model model){").append("\r\n");
 			controller.append("		return \""+modelName+"/"+entityVar+"/index\";").append("\r\n");
 			controller.append("	}").append("\r\n");
 			controller.append("\r\n");
@@ -65,7 +65,7 @@ public class CodeController extends CodeAssist {
 			if(addAuth) {
 				controller.append("	@Authority(\""+authName+".modify\")").append("\r\n");
 			}
-			controller.append("	public RestResponse add(Model model){").append("\r\n");
+			controller.append("	public String add(Model model){").append("\r\n");
 			controller.append("		return \""+modelName+"/"+entityVar+"/add\";").append("\r\n");
 			controller.append("	}").append("\r\n");
 			controller.append("\r\n");
@@ -86,7 +86,7 @@ public class CodeController extends CodeAssist {
 			if(addAuth) {
 				controller.append("	@Authority(\""+authName+".modify\")").append("\r\n");
 			}
-			controller.append("	public RestResponse update(Model model, Long id){").append("\r\n");
+			controller.append("	public String update(Model model, Long id){").append("\r\n");
 			controller.append("		model.addAttribute(\"entity\", "+entityVar+"Service.selectById(id));").append("\r\n");
 			controller.append("		return \""+modelName+"/"+entityVar+"/update\";").append("\r\n");
 			controller.append("	}").append("\r\n");
