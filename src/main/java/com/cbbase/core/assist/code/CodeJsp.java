@@ -84,7 +84,7 @@ public class CodeJsp extends CodeAssist {
 		jspIndex.append("<%@ page language=\"java\" import=\"java.util.*\" pageEncoding=\"UTF-8\"%>").append("\r\n");
 		jspIndex.append("<%@ taglib prefix=\"c\" uri=\"http://java.sun.com/jsp/jstl/core\"%>").append("\r\n");
 		if(addAuth) {
-			jspIndex.append("<%@ taglib prefix=\"tag\" uri=\"http://www.cbbase.com/framework/taglib\"%>").append("\r\n");
+			jspIndex.append("<%@ taglib prefix=\"tag\" uri=\"http://www.cbbase.com/core/taglib\"%>").append("\r\n");
 		}
 		jspIndex.append("<%@ include file=\"/header.jsp\" %>").append("\r\n");
 		jspIndex.append("").append("\r\n");
