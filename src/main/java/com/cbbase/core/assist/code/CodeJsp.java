@@ -46,6 +46,18 @@ public class CodeJsp extends CodeAssist {
 				jspAdd.append("						</select>").append("\r\n");
 				jspAdd.append("					</div>").append("\r\n");
 				jspAdd.append("				</div>").append("\r\n");
+			}else if(field_name.toLowerCase().endsWith("id")) {
+				jspAdd.append("				<div class=\"layui-inline\">").append("\r\n");
+				jspAdd.append("					<label class=\"layui-form-label\">"+title+"</label>").append("\r\n");
+				jspAdd.append("					<div class=\"layui-input-inline\">").append("\r\n");
+				jspAdd.append("						<select name=\""+field_name+"\">").append("\r\n");
+				String listVar = field_name.substring(0, field_name.length()-2)+"List";
+				jspAdd.append("							<c:forEach items=\"${"+listVar+"}\" var=\"v\">").append("\r\n");
+				jspAdd.append("		                       <option value=\"${v.id}\">${v.name}</option>").append("\r\n");
+				jspAdd.append("		                	</c:forEach>").append("\r\n");
+				jspAdd.append("						</select>").append("\r\n");
+				jspAdd.append("					</div>").append("\r\n");
+				jspAdd.append("				</div>").append("\r\n");
 			}else {
 				jspAdd.append("				<div class=\"layui-inline\">").append("\r\n");
 				jspAdd.append("					<label class=\"layui-form-label\">"+title+"</label>").append("\r\n");
@@ -131,14 +143,13 @@ public class CodeJsp extends CodeAssist {
 				jspIndex.append("					<label class=\"layui-form-label\">"+title+"</label>").append("\r\n");
 				jspIndex.append("					<div class=\"layui-input-inline\">").append("\r\n");
 				jspIndex.append("						<select name=\""+field_name+"\">").append("\r\n");
-				String listVar = field_name.substring(0, field_name.length())+"List";
+				String listVar = field_name.substring(0, field_name.length()-2)+"List";
 				jspIndex.append("							<c:forEach items=\"${"+listVar+"}\" var=\"v\">").append("\r\n");
 				jspIndex.append("		                       <option value=\"${v.id}\">${v.name}</option>").append("\r\n");
 				jspIndex.append("		                	</c:forEach>").append("\r\n");
 				jspIndex.append("						</select>").append("\r\n");
 				jspIndex.append("					</div>").append("\r\n");
 				jspIndex.append("				</div>").append("\r\n");
-				
 			}
 		}
 		jspIndex.append("				<div class=\"layui-inline\">").append("\r\n");
@@ -316,6 +327,18 @@ public class CodeJsp extends CodeAssist {
 				jspUpdate.append("					<label class=\"layui-form-label\">"+title+"</label>").append("\r\n");
 				jspUpdate.append("					<div class=\"layui-input-inline\">").append("\r\n");
 				jspUpdate.append("						<select name=\""+field_name+"\" value=\"${entity."+field_name+"}\">").append("\r\n");
+				jspUpdate.append("						</select>").append("\r\n");
+				jspUpdate.append("					</div>").append("\r\n");
+				jspUpdate.append("				</div>").append("\r\n");
+			}else if(field_name.toLowerCase().endsWith("id")) {
+				jspUpdate.append("				<div class=\"layui-inline\">").append("\r\n");
+				jspUpdate.append("					<label class=\"layui-form-label\">"+title+"</label>").append("\r\n");
+				jspUpdate.append("					<div class=\"layui-input-inline\">").append("\r\n");
+				jspUpdate.append("						<select name=\""+field_name+"\">").append("\r\n");
+				String listVar = field_name.substring(0, field_name.length()-2)+"List";
+				jspUpdate.append("							<c:forEach items=\"${"+listVar+"}\" var=\"v\">").append("\r\n");
+				jspUpdate.append("		                       <option value=\"${v.id}\">${v.name}</option>").append("\r\n");
+				jspUpdate.append("		                	</c:forEach>").append("\r\n");
 				jspUpdate.append("						</select>").append("\r\n");
 				jspUpdate.append("					</div>").append("\r\n");
 				jspUpdate.append("				</div>").append("\r\n");
