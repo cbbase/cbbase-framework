@@ -73,6 +73,8 @@ public class CodeXml extends CodeAssist {
 				}
 				if(isSelectField(column_name)){
 					xml.append("			and obj."+db_column+" = #{param."+column_name+"}").append("\r\n");
+				}else if(column_name.toLowerCase().endsWith("id")){
+					xml.append("			and obj."+db_column+" = #{param."+column_name+"}").append("\r\n");
 				}else if(db_column.endsWith("code") || db_column.endsWith("name")){
 					if(JdbcConnection.isMysql(jdbcName)){
 						xml.append("			and obj."+db_column+" like CONCAT('%', #{param."+column_name+"}, '%')").append("\r\n");
