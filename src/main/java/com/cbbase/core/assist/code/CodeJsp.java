@@ -134,6 +134,7 @@ public class CodeJsp extends CodeAssist {
 				jspIndex.append("					<label class=\"layui-form-label\">"+title+"</label>").append("\r\n");
 				jspIndex.append("					<div class=\"layui-input-inline\">").append("\r\n");
 				jspIndex.append("						<select name=\""+field_name+"\">").append("\r\n");
+				jspIndex.append("							<option value=\"\">全部</option>").append("\r\n");
 				jspIndex.append("						</select>").append("\r\n");
 				jspIndex.append("					</div>").append("\r\n");
 				jspIndex.append("				</div>").append("\r\n");
@@ -143,6 +144,7 @@ public class CodeJsp extends CodeAssist {
 				jspIndex.append("					<label class=\"layui-form-label\">"+title+"</label>").append("\r\n");
 				jspIndex.append("					<div class=\"layui-input-inline\">").append("\r\n");
 				jspIndex.append("						<select name=\""+field_name+"\">").append("\r\n");
+				jspIndex.append("							<option value=\"\">全部</option>").append("\r\n");
 				String listVar = field_name.substring(0, field_name.length()-2)+"List";
 				jspIndex.append("							<c:forEach items=\"${"+listVar+"}\" var=\"v\">").append("\r\n");
 				jspIndex.append("		                       <option value=\"${v.id}\">${v.name}</option>").append("\r\n");
