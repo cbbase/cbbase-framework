@@ -53,7 +53,7 @@ public class CodeJsp extends CodeAssist {
 				jspAdd.append("						<select name=\""+field_name+"\">").append("\r\n");
 				String listVar = field_name.substring(0, field_name.length()-2)+"List";
 				jspAdd.append("							<c:forEach items=\"${"+listVar+"}\" var=\"v\">").append("\r\n");
-				jspAdd.append("		                       <option value=\"${v.id}\">${v.name}</option>").append("\r\n");
+				jspAdd.append("		                       <option value=\"${v.id}\">${v.id}</option>").append("\r\n");
 				jspAdd.append("		                	</c:forEach>").append("\r\n");
 				jspAdd.append("						</select>").append("\r\n");
 				jspAdd.append("					</div>").append("\r\n");
@@ -147,7 +147,7 @@ public class CodeJsp extends CodeAssist {
 				jspIndex.append("							<option value=\"\">全部</option>").append("\r\n");
 				String listVar = field_name.substring(0, field_name.length()-2)+"List";
 				jspIndex.append("							<c:forEach items=\"${"+listVar+"}\" var=\"v\">").append("\r\n");
-				jspIndex.append("		                       <option value=\"${v.id}\">${v.name}</option>").append("\r\n");
+				jspIndex.append("		                       <option value=\"${v.id}\">${v.id}</option>").append("\r\n");
 				jspIndex.append("		                	</c:forEach>").append("\r\n");
 				jspIndex.append("						</select>").append("\r\n");
 				jspIndex.append("					</div>").append("\r\n");
@@ -339,7 +339,7 @@ public class CodeJsp extends CodeAssist {
 				jspUpdate.append("						<select name=\""+field_name+"\">").append("\r\n");
 				String listVar = field_name.substring(0, field_name.length()-2)+"List";
 				jspUpdate.append("							<c:forEach items=\"${"+listVar+"}\" var=\"v\">").append("\r\n");
-				jspUpdate.append("		                       <option value=\"${v.id}\">${v.name}</option>").append("\r\n");
+				jspUpdate.append("		                       <option value=\"${v.id}\">${v.id}</option>").append("\r\n");
 				jspUpdate.append("		                	</c:forEach>").append("\r\n");
 				jspUpdate.append("						</select>").append("\r\n");
 				jspUpdate.append("					</div>").append("\r\n");
