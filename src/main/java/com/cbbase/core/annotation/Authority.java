@@ -23,7 +23,7 @@ public @interface Authority {
 	boolean login() default false;
 	
 	/**
-	 * 检查权限(检查多个权限时,用逗号分隔)
+	 * 检查权限
 	 * @return
 	 */
 	String value() default "";
