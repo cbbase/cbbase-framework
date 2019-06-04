@@ -7,19 +7,12 @@ import javax.servlet.http.HttpSession;
 import org.springframework.web.context.request.RequestContextHolder;
 import org.springframework.web.context.request.ServletRequestAttributes;
 
-import com.cbbase.core.common.BeanFactory;
-import com.cbbase.core.handler.DataSourceHandler;
-
 /**
  * 
  * @author changbo
  *
  */
 public class GlobalManager {
-	
-	public static DataSourceHandler getDataSourceHandler() {
-		return BeanFactory.getBean(DataSourceHandler.class);
-	}
 	
 	public static HttpServletRequest getRequest() {
 		return ((ServletRequestAttributes)RequestContextHolder.getRequestAttributes()).getRequest();
@@ -44,12 +37,5 @@ public class GlobalManager {
 	@SuppressWarnings("unchecked")
 	public static <T> T getSession(String key) {
 		return (T) getSession().getAttribute(key);
-	}
-	
-	public static String getDataSource() {
-		if(getDataSourceHandler() != null) {
-			getDataSourceHandler().getDataSource(getRequest());
-		}
-		return null;
 	}
 }
