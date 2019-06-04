@@ -20,7 +20,7 @@ public @interface Authority {
 	 * 检查登录
 	 * @return
 	 */
-	boolean checkLogin() default false;
+	boolean login() default false;
 	
 	/**
 	 * 检查权限(检查多个权限时,用逗号分隔)
@@ -28,15 +28,4 @@ public @interface Authority {
 	 */
 	String value() default "";
 	
-	/**
-	 * 检查token
-	 * @return
-	 */
-	boolean formToken() default false;
-	
-	/**
-	 * 权限控制类型
-	 * @return
-	 */
-	String authType() default "";
 }
