@@ -13,7 +13,7 @@ import com.cbbase.core.container.SelectVO;
  */
 public class ConstantManager {
 	
-    public static List<SelectVO> getList(Class<?> clazz) {
+    public static List<SelectVO> getSelectList(Class<?> clazz) {
         List<SelectVO> list = new ArrayList<>();
         try {
             Field[] fields = clazz.getDeclaredFields();
@@ -27,6 +27,24 @@ public class ConstantManager {
         	e.printStackTrace();
         }
         return list;
+    }
+    
+    public static String getText(Class<?> clazz, Object key) {
+        try {
+            Field[] fields = clazz.getDeclaredFields();
+            for (Field field : fields) {
+                if (field.isAnnotationPresent(Text.class)) {
+                    Text annotation = field.getAnnotation(Text.class);
+                    if(String.valueOf(field.get(null)).equals(key.toString())) {
+                    	return annotation.value();
+                    }
+                }
+            }
+        } catch (Exception e) {
+        	e.printStackTrace();
+        }
+        return null;
+    	
     }
 
 }
