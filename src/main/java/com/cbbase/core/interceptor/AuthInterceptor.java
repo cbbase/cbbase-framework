@@ -13,8 +13,6 @@ import org.springframework.web.servlet.handler.HandlerInterceptorAdapter;
 import com.cbbase.core.annotation.Authority;
 import com.cbbase.core.container.RestResponse;
 import com.cbbase.core.common.AuthManager;
-import com.cbbase.core.common.GlobalManager;
-import com.cbbase.core.constants.SessionConstants;
 import com.cbbase.core.tools.JsonUtil;
 import com.cbbase.core.tools.ServletUtil;
 import com.cbbase.core.tools.StringUtil;
