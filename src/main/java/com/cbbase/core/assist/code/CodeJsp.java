@@ -239,7 +239,7 @@ public class CodeJsp extends CodeAssist {
 		jspIndex.append("	}").append("\r\n");
 		jspIndex.append("	").append("\r\n");
 		jspIndex.append("	function saveAdd(){").append("\r\n");
-		jspIndex.append("		doFormRequest(\"addForm\", basePath+\"/web/"+entityVar+"/saveAdd\", function(){").append("\r\n");
+		jspIndex.append("		doParamRequest(basePath+\"/web/"+entityVar+"/saveAdd\", $(\"#addForm\").serializeJson(), function(){").append("\r\n");
 		jspIndex.append("			layer.close(layer.index);").append("\r\n");
 		jspIndex.append("			reloadTable();").append("\r\n");
 		jspIndex.append("		});").append("\r\n");
@@ -263,7 +263,7 @@ public class CodeJsp extends CodeAssist {
 		jspIndex.append("	}").append("\r\n");
 		jspIndex.append("	").append("\r\n");
 		jspIndex.append("	function saveUpdate(){").append("\r\n");
-		jspIndex.append("		doFormRequest(\"updateForm\", basePath+\"/web/"+entityVar+"/saveUpdate\", function(){").append("\r\n");
+		jspIndex.append("		doParamRequest(basePath+\"/web/"+entityVar+"/saveUpdate\", $(\"#updateForm\").serializeJson(), function(){").append("\r\n");
 		jspIndex.append("			layer.close(layer.index);").append("\r\n");
 		jspIndex.append("			reloadTable();").append("\r\n");
 		jspIndex.append("		});").append("\r\n");
@@ -272,7 +272,7 @@ public class CodeJsp extends CodeAssist {
 		jspIndex.append("	function doDelete(id){").append("\r\n");
 		jspIndex.append("		openConfirm(\"你确认删除这条数据吗?\", function(){").append("\r\n");
 		jspIndex.append("			var ids = [id];").append("\r\n");
-		jspIndex.append("			doParamRequest({\"ids\": ids}, basePath+'/web/"+entityVar+"/delete', reloadTable);").append("\r\n");
+		jspIndex.append("			doParamRequest(basePath+'/web/"+entityVar+"/delete', {\"ids\": ids}, reloadTable);").append("\r\n");
 		jspIndex.append("		});").append("\r\n");
 		jspIndex.append("	}").append("\r\n");
 		jspIndex.append("	").append("\r\n");
@@ -283,7 +283,7 @@ public class CodeJsp extends CodeAssist {
 		jspIndex.append("  			return;").append("\r\n");
 		jspIndex.append("  		}").append("\r\n");
 		jspIndex.append("		openConfirm(\"你确认删除所选中的数据吗?\", function(){").append("\r\n");
-		jspIndex.append("			doParamRequest({\"ids\": ids}, basePath+'/web/"+entityVar+"/delete', reloadTable);").append("\r\n");
+		jspIndex.append("			doParamRequest(basePath+'/web/"+entityVar+"/delete', {\"ids\": ids}, reloadTable);").append("\r\n");
 		jspIndex.append("		});").append("\r\n");
 		jspIndex.append("	}").append("\r\n");
 		jspIndex.append("	").append("\r\n");
