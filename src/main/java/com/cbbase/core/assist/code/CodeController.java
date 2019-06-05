@@ -125,7 +125,7 @@ public class CodeController extends CodeAssist {
 		
 		if(writeFile) {
 			String filePath = rootPath + javaPath + packageFolder + "\\controller\\";
-			FileUtil.createFileByString(filePath + entityName +"Controller.java", text);
+			FileUtil.createFile(filePath + entityName +"Controller.java", text);
 		}
 	}
 

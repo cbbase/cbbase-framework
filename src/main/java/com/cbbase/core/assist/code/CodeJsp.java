@@ -398,9 +398,9 @@ public class CodeJsp extends CodeAssist {
 		
 		if(writeFile) {
 			String filePath = rootPath + jspPath + modelName + "\\" + entityVar;
-			FileUtil.createFileByString(filePath+"\\add.jsp", jspAdd.toString());
-			FileUtil.createFileByString(filePath+"\\index.jsp", jspIndex.toString());
-			FileUtil.createFileByString(filePath+"\\update.jsp", jspUpdate.toString());
+			FileUtil.createFile(filePath+"\\add.jsp", jspAdd.toString());
+			FileUtil.createFile(filePath+"\\index.jsp", jspIndex.toString());
+			FileUtil.createFile(filePath+"\\update.jsp", jspUpdate.toString());
 		}
 
 		

@@ -32,7 +32,7 @@ public class CodeService extends CodeAssist {
 		
 		if(writeFile) {
 			String filePath = rootPath + javaPath + packageFolder + "\\service\\";
-			FileUtil.createFileByString(filePath + entityName +"Service.java", text);
+			FileUtil.createFile(filePath + entityName +"Service.java", text);
 		}
 		
 	}

@@ -32,7 +32,7 @@ public class CodeDao extends CodeAssist {
 		
 		if(writeFile) {
 			String filePath = rootPath + javaPath + packageFolder + "\\dao\\";
-			FileUtil.createFileByString(filePath + entityName +"Dao.java", text);
+			FileUtil.createFile(filePath + entityName +"Dao.java", text);
 		}
 		
 	}

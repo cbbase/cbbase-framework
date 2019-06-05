@@ -86,7 +86,7 @@ public class CodeEntity extends CodeAssist {
 		
 		if(writeFile) {
 			String filePath = rootPath + javaPath + packageFolder + "\\entity\\";
-			FileUtil.createFileByString(filePath + entityName +".java", text);
+			FileUtil.createFile(filePath + entityName +".java", text);
 		}
 	}
 }

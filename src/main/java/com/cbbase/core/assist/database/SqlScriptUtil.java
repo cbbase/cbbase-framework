@@ -70,7 +70,7 @@ public class SqlScriptUtil {
 		if("ORACLE".equalsIgnoreCase(datbaseType)){
 			sql = createSqlByEntityForOracle(list, clazz, tableName);
 		}
-		FileUtil.createFileByString(sqlPath+"/"+tableName+".sql", sql);
+		FileUtil.createFile(sqlPath+"/"+tableName+".sql", sql);
 	}
 	
 	private static String createSqlByEntityForMysql(List<String> list, Class<?> clazz, String tableName){

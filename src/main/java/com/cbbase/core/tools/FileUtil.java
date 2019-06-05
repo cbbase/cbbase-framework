@@ -174,11 +174,11 @@ public class FileUtil {
 	}
 
 	
-	public static void createFileByString(String fileName, String text){
-		createFileByBytes(fileName, text.getBytes());
+	public static void createFile(String fileName, String text){
+		createFile(fileName, text.getBytes());
 	}
 	
-	public static void createFileByBytes(String fileName, byte[] bytes){
+	public static void createFile(String fileName, byte[] bytes){
         try {
     		createFile(fileName);
         	OutputStream os = Files.newOutputStream(Paths.get(fileName), StandardOpenOption.TRUNCATE_EXISTING);
