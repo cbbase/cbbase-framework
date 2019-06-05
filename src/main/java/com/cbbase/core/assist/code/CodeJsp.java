@@ -239,7 +239,8 @@ public class CodeJsp extends CodeAssist {
 		jspIndex.append("	}").append("\r\n");
 		jspIndex.append("	").append("\r\n");
 		jspIndex.append("	function saveAdd(){").append("\r\n");
-		jspIndex.append("		doParamRequest(basePath+\"/web/"+entityVar+"/saveAdd\", $(\"#addForm\").serializeJson(), function(){").append("\r\n");
+		jspIndex.append("		var param = $(\"#addForm\").serializeJson();").append("\r\n");
+		jspIndex.append("		doParamRequest(basePath+\"/web/"+entityVar+"/saveAdd\", param, function(){").append("\r\n");
 		jspIndex.append("			layer.close(layer.index);").append("\r\n");
 		jspIndex.append("			reloadTable();").append("\r\n");
 		jspIndex.append("		});").append("\r\n");
@@ -263,7 +264,8 @@ public class CodeJsp extends CodeAssist {
 		jspIndex.append("	}").append("\r\n");
 		jspIndex.append("	").append("\r\n");
 		jspIndex.append("	function saveUpdate(){").append("\r\n");
-		jspIndex.append("		doParamRequest(basePath+\"/web/"+entityVar+"/saveUpdate\", $(\"#updateForm\").serializeJson(), function(){").append("\r\n");
+		jspIndex.append("		var param = $(\"#updateForm\").serializeJson();").append("\r\n");
+		jspIndex.append("		doParamRequest(basePath+\"/web/"+entityVar+"/saveUpdate\", param, function(){").append("\r\n");
 		jspIndex.append("			layer.close(layer.index);").append("\r\n");
 		jspIndex.append("			reloadTable();").append("\r\n");
 		jspIndex.append("		});").append("\r\n");
