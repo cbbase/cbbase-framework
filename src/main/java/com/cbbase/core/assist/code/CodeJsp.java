@@ -369,6 +369,15 @@ public class CodeJsp extends CodeAssist {
 		jspUpdate.append("<script type=\"text/javascript\">").append("\r\n");
 		jspUpdate.append("").append("\r\n");
 		jspUpdate.append("	$(function() {").append("\r\n");
+		for(int i=0; i<columns.size(); i++){
+			String field_name = StringUtil.formatCamel(columns.get(i).get("column_name").toString());
+			if("id".equals(field_name) || isBaseEntityField(field_name)){
+				continue;
+			}
+			if(isSelectField(field_name) || field_name.toLowerCase().endsWith("id")) {
+				jspUpdate.append("		$(\"#updateForm [name="+field_name+"]\").val('${entity."+field_name+"}');").append("\r\n");
+			}
+		}
 		jspUpdate.append("		form.render();").append("\r\n");
 		jspUpdate.append("	})").append("\r\n");
 		jspUpdate.append("	").append("\r\n");
