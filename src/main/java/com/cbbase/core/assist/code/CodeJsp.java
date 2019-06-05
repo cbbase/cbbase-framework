@@ -27,7 +27,7 @@ public class CodeJsp extends CodeAssist {
 		jspAdd.append("<body>").append("\r\n");
 		jspAdd.append("	<!-- 添加界面 -->").append("\r\n");
 		jspAdd.append("	<div class=\"layerDiv mainDiv\">").append("\r\n");
-		jspAdd.append("		<form id=\"addForm\" class=\"layui-form\" action=\"\">").append("\r\n");
+		jspAdd.append("		<form id=\"addForm\" class=\"layui-form\">").append("\r\n");
 		int fieldCount = 0;
 		for(int i=0; i<columns.size(); i++){
 			String field_name = StringUtil.formatCamel(columns.get(i).get("column_name").toString());
@@ -112,7 +112,7 @@ public class CodeJsp extends CodeAssist {
 		jspIndex.append("</head>").append("\r\n");
 		jspIndex.append("<body>").append("\r\n");
 		jspIndex.append("	<div class=\"mainDiv\">").append("\r\n");
-		jspIndex.append("		<form id=\"queryForm\" class=\"layui-form\" action=\"\">").append("\r\n");
+		jspIndex.append("		<form id=\"queryForm\" class=\"layui-form\">").append("\r\n");
 		jspIndex.append("			<div class=\"layui-form-item\">").append("\r\n");
 		for(int i=0; i<columns.size(); i++){
 			String column_name = columns.get(i).get("column_name").toString().toLowerCase();
@@ -315,7 +315,7 @@ public class CodeJsp extends CodeAssist {
 		jspUpdate.append("<body>").append("\r\n");
 		jspUpdate.append("	<!-- 修改界面 -->").append("\r\n");
 		jspUpdate.append("	<div class=\"layerDiv mainDiv\">").append("\r\n");
-		jspUpdate.append("		<form id=\"updateForm\" class=\"layui-form\" action=\"\">").append("\r\n");
+		jspUpdate.append("		<form id=\"updateForm\" class=\"layui-form\">").append("\r\n");
 		jspUpdate.append("			<input type=\"hidden\" name=\"id\" value=\"${entity.id}\">").append("\r\n");
 		fieldCount = 0;
 		for(int i=0; i<columns.size(); i++){
