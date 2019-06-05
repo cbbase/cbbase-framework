@@ -43,8 +43,13 @@ public class AuthInterceptor extends HandlerInterceptorAdapter {
 		if(authority.login()){
 			if(AuthManager.getUserId() == null){
 				logger.debug("authority.isLogin():"+authority.login());
-				RestResponse resp = new RestResponse(1000, "用户未登录");
-				ServletUtil.returnString(response, JsonUtil.toJson(resp));
+				if(ServletUtil.isAjax(request)) {
+					RestResponse resp = new RestResponse(1000, "用户未登录");
+					ServletUtil.returnString(response, JsonUtil.toJson(resp));
+				}else {
+					request.setAttribute("errorMsg", "用户未登录");
+		            request.getRequestDispatcher("/error.jsp").forward(request, response);
+				}
 				return false;
 			}
 		}
@@ -53,8 +58,13 @@ public class AuthInterceptor extends HandlerInterceptorAdapter {
 		if(StringUtil.hasValue(authority.value())){
 			if(!AuthManager.checkAuth(authority.value())){
 				logger.debug("authority.value():"+authority.value());
-				RestResponse resp = new RestResponse(1001, "用户无权限");
-				ServletUtil.returnString(response, JsonUtil.toJson(resp));
+				if(ServletUtil.isAjax(request)) {
+					RestResponse resp = new RestResponse(1001, "用户无权限");
+					ServletUtil.returnString(response, JsonUtil.toJson(resp));
+				}else {
+					request.setAttribute("errorMsg", "用户未登录");
+		            request.getRequestDispatcher("/error.jsp").forward(request, response);
+				}
 				return false;
 			}
 		}
