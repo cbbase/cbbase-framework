@@ -62,7 +62,7 @@ public class AuthInterceptor extends HandlerInterceptorAdapter {
 					RestResponse resp = new RestResponse(1001, "用户无权限");
 					ServletUtil.returnString(response, JsonUtil.toJson(resp));
 				}else {
-					request.setAttribute("errorMsg", "用户未登录");
+					request.setAttribute("errorMsg", "用户无权限");
 		            request.getRequestDispatcher("/error.jsp").forward(request, response);
 				}
 				return false;
