@@ -1,5 +1,7 @@
 package com.cbbase.core.handler;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -14,6 +16,8 @@ import com.cbbase.core.container.RestResponse;
 @ControllerAdvice
 public class GlobalExceptionHandler {
 	
+	protected Logger logger = LoggerFactory.getLogger(this.getClass());
+	
     /**
      * 未知异常
      * 
@@ -23,6 +27,7 @@ public class GlobalExceptionHandler {
     @ExceptionHandler(Exception.class)
     @ResponseBody
     public RestResponse handleException(Exception ex) {
+    	logger.error("handleException:", ex);
         return new RestResponse(1, null, "请求失败");
     }
 
@@ -35,6 +40,7 @@ public class GlobalExceptionHandler {
     @ExceptionHandler(BusinessException.class)
     @ResponseBody
     public RestResponse handleBusinessException(BusinessException e) {
+    	logger.error("handleBusinessException:", e);
         return new RestResponse(e.getErrorCode(), null, e.getMessage());
     }
 
