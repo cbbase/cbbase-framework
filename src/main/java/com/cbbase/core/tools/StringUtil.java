@@ -1,10 +1,15 @@
 package com.cbbase.core.tools;
 
+import java.io.ByteArrayInputStream;
+import java.io.ByteArrayOutputStream;
+import java.io.IOException;
 import java.text.DecimalFormat;
 import java.util.Arrays;
 import java.util.Base64;
 import java.util.List;
 import java.util.regex.Pattern;
+import java.util.zip.GZIPInputStream;
+import java.util.zip.GZIPOutputStream;
 
 
 /**
@@ -437,17 +442,17 @@ public class StringUtil {
 		if(isEmpty(unicode)){
 			return unicode;
 		}
-		StringBuilder sb = new StringBuilder();  
-		int i = -1;  
-		int pos = 0;  
+		StringBuilder sb = new StringBuilder();
+		int i = -1;
+		int pos = 0;
 		while((i=unicode.indexOf("\\u", pos)) != -1){  
-			sb.append(unicode.substring(pos, i));  
+			sb.append(unicode.substring(pos, i));
 			if(i+5 < unicode.length()){  
-				pos = i+6;  
-				sb.append((char)Integer.parseInt(unicode.substring(i+2, i+6), 16));  
+				pos = i+6;
+				sb.append((char)Integer.parseInt(unicode.substring(i+2, i+6), 16));
 			}  
 		}  
-		return sb.toString();  
+		return sb.toString();
 	}
 	
 	public static String unicodeEncode(String string) {
@@ -461,4 +466,40 @@ public class StringUtil {
 		}
 		return unicode.toString();
 	}
+	
+    public static String gzip(String text) throws IOException {
+        if (isEmpty(text)) {
+            return text;
+        }
+        try {
+            ByteArrayOutputStream out = new ByteArrayOutputStream();
+            GZIPOutputStream gzip = new GZIPOutputStream(out);
+            gzip.write(text.getBytes());
+            gzip.close();
+            return encodeBase64(out.toByteArray());
+        }catch (Exception e) {
+			e.printStackTrace();
+		}
+        return null;
+    }
+	
+    public static String ungzip(String text) throws IOException {
+        if (isEmpty(text)) {
+            return text;
+        }
+        try {
+            ByteArrayOutputStream out = new ByteArrayOutputStream();
+            ByteArrayInputStream in = new ByteArrayInputStream(decodeBase64(text));
+            GZIPInputStream gzip = new GZIPInputStream(in);
+            byte[] buffer = new byte[256];
+            int n = 0;
+            while ((n = gzip.read(buffer)) >= 0) {
+                out.write(buffer, 0, n);
+            }
+            return out.toString("UTF-8");
+        }catch (Exception e) {
+			e.printStackTrace();
+		}
+        return null;
+    } 
 }
