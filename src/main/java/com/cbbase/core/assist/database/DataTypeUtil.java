@@ -58,9 +58,9 @@ public class DataTypeUtil {
 		mybatisTypeMap.put("VARCHAR2", "VARCHAR");
 		mybatisTypeMap.put("TEXT", "VARCHAR");
 		mybatisTypeMap.put("MEDIUMTEXT", "VARCHAR");
-		mybatisTypeMap.put("INT", "DECIMAL");
+		mybatisTypeMap.put("INT", "INTEGER");
 		mybatisTypeMap.put("TINYINT", "DECIMAL");
-		mybatisTypeMap.put("BIGINT", "DECIMAL");
+		mybatisTypeMap.put("BIGINT", "BIGINT");
 		mybatisTypeMap.put("NUMBER", "DECIMAL");
 		mybatisTypeMap.put("DECIMAL", "DECIMAL");
 		mybatisTypeMap.put("DATETIME", "TIMESTAMP");
@@ -102,11 +102,17 @@ public class DataTypeUtil {
 		return toClass(columnType, scale).getSimpleName();
 	}
 	
-	public static String toMybatisType(String columnType){
+	public static String toMybatisType(String columnType, Object scale){
 		if(columnType.indexOf("(") >= 0) {
 			columnType = columnType.substring(0, columnType.indexOf("("));
 		}
-		return mybatisTypeMap.get(columnType.toUpperCase());
+		System.out.println(scale);
+		if(StringUtil.toInt(StringUtil.getValue(scale)) > 0
+				&& columnType.toUpperCase().indexOf("TIME") < 0) {
+			return "DECIMAL";
+		}
+		String type = mybatisTypeMap.get(columnType.toUpperCase());
+		return type;
 	}
 	
 	public static String toJavaFullType(String columnType, Object scale){

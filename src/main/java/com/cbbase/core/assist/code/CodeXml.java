@@ -114,10 +114,16 @@ public class CodeXml extends CodeAssist {
 		xml.append("	    update "+table+" set ").append("\r\n");
 		for(int i=0; i<columns.size(); i++){
 			String db_column = columns.get(i).get("column_name").toString().toLowerCase();
+			Object data_scale = columns.get(i).get("data_scale");
 			String column_name = StringUtil.formatCamel(db_column);
-			String str = "	    "+db_column+" = #{"+column_name+"},";
+			String jdbcType = "";
+			if(xmlJdbcType) {
+				String type = DataTypeUtil.toMybatisType(columns.get(i).get("data_type").toString(), data_scale);
+				jdbcType = ", jdbcType="+type;
+			}
+			String str = "	    "+db_column+" = #{"+column_name+jdbcType+"},";
 			if(i == columns.size()-1){
-				str = "	    "+db_column+" = #{"+column_name+"}";
+				str = "	    "+db_column+" = #{"+column_name+jdbcType+"}";
 			}
 			if("id".equals(column_name)){
 				continue;
@@ -150,13 +156,21 @@ public class CodeXml extends CodeAssist {
 		xml.append("	  	values(");
 		for(int i=0; i<columns.size(); i++){
 			String db_column = columns.get(i).get("column_name").toString().toLowerCase();
+			Object data_scale = columns.get(i).get("data_scale");
 			String column_name = StringUtil.formatCamel(db_column);
-			String str = "#{"+column_name+"}, ";
+			String jdbcType = "";
+			if(xmlJdbcType) {
+				String type = DataTypeUtil.toMybatisType(columns.get(i).get("data_type").toString(), data_scale);
+				jdbcType = ", jdbcType="+type;
+			}
+			String str = "#{"+column_name+jdbcType+"}, ";
 			if(i == columns.size()-1){
-				str = "#{"+column_name+"} ";
+				str = "#{"+column_name+jdbcType+"} ";
 			}
 			xml.append(str);
-			if(i>0 && i%9 == 0 && i != columns.size()-1) {
+			if(xmlJdbcType) {
+				xml.append("\r\n	        ");
+			}else if(i>0 && i%9 == 0 && i != columns.size()-1) {
 				xml.append("\r\n	        ");
 			}
 		}
@@ -187,13 +201,21 @@ public class CodeXml extends CodeAssist {
 		xml.append("	        (");
 		for(int i=0; i<columns.size(); i++){
 			String db_column = columns.get(i).get("column_name").toString().toLowerCase();
+			Object data_scale = columns.get(i).get("data_scale");
 			String column_name = StringUtil.formatCamel(db_column);
-			String str = "#{item."+column_name+"}, ";
+			String jdbcType = "";
+			if(xmlJdbcType) {
+				String type = DataTypeUtil.toMybatisType(columns.get(i).get("data_type").toString(), data_scale);
+				jdbcType = ", jdbcType="+type;
+			}
+			String str = "#{item."+column_name+jdbcType+"}, ";
 			if(i == columns.size()-1){
-				str = "#{item."+column_name+"} ";
+				str = "#{item."+column_name+jdbcType+"} ";
 			}
 			xml.append(str);
-			if(i>0 && i%9 == 0 && i != columns.size()-1) {
+			if(xmlJdbcType) {
+				xml.append("\r\n	        ");
+			}else if(i>0 && i%9 == 0 && i != columns.size()-1) {
 				xml.append("\r\n	        ");
 			}
 		}

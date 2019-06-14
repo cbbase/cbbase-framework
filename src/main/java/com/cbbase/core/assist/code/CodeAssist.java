@@ -41,6 +41,8 @@ public class CodeAssist {
 	public static boolean commentAsTitle = true;//表里面的注释作为字段标题
 	public static boolean addAuth = true;//是否将生成的代码.直接写成文件
 	public static boolean coverCore = false;
+	public static boolean xmlJdbcType = false;//xml文件中是否包含jdbcType
+	
 	
 	public static boolean showContent = false;//是否在控制台输出生成的内容
 	public static boolean writeFile = true;//是否将生成的代码.直接写成文件
