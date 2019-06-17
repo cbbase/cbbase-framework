@@ -106,7 +106,6 @@ public class DataTypeUtil {
 		if(columnType.indexOf("(") >= 0) {
 			columnType = columnType.substring(0, columnType.indexOf("("));
 		}
-		System.out.println(scale);
 		if(StringUtil.toInt(StringUtil.getValue(scale)) > 0
 				&& columnType.toUpperCase().indexOf("TIME") < 0) {
 			return "DECIMAL";

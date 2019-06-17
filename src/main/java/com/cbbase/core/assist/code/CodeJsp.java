@@ -226,7 +226,7 @@ public class CodeJsp extends CodeAssist {
 		jspIndex.append("			    type: 1,").append("\r\n");
 		jspIndex.append("			    title: \"新增\",").append("\r\n");
 		jspIndex.append("			    content: html,").append("\r\n");
-		jspIndex.append("			    area: [\"60%\", \"80%\"],").append("\r\n");
+		jspIndex.append("			    area: [\"60%\", \"auto\"],").append("\r\n");
 		jspIndex.append("			    btn: ['确定', '取消'],").append("\r\n");
 		jspIndex.append("				yes: function(index, layero){").append("\r\n");
 		jspIndex.append("					saveAdd();").append("\r\n");
@@ -252,7 +252,7 @@ public class CodeJsp extends CodeAssist {
 		jspIndex.append("			    type: 1,").append("\r\n");
 		jspIndex.append("			    title: \"新增\",").append("\r\n");
 		jspIndex.append("			    content: html,").append("\r\n");
-		jspIndex.append("			    area: [\"60%\", \"80%\"],").append("\r\n");
+		jspIndex.append("			    area: [\"60%\", \"auto\"],").append("\r\n");
 		jspIndex.append("			    btn: ['确定', '取消'],").append("\r\n");
 		jspIndex.append("				yes: function(index, layero){").append("\r\n");
 		jspIndex.append("					saveUpdate();").append("\r\n");
