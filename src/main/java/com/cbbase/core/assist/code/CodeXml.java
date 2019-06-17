@@ -227,7 +227,7 @@ public class CodeXml extends CodeAssist {
 			xml.append("	<insert id=\"batchInsert\" parameterType=\"java.util.List\" useGeneratedKeys=\"false\"> ").append("\r\n");
 			xml.append("	  	insert all").append("\r\n");
 			xml.append("	    <foreach collection=\"list\" item=\"item\" index=\"index\" separator=\"\" >").append("\r\n");
-			xml.append("	        into SERVICE_CHAIN_DETAIL(").append("\r\n");
+			xml.append("	        into SERVICE_CHAIN_DETAIL(");
 			for(int i=0; i<columns.size(); i++){
 				String db_column = columns.get(i).get("column_name").toString().toLowerCase();
 				String str = db_column+", ";
@@ -240,7 +240,7 @@ public class CodeXml extends CodeAssist {
 				}
 			}
 			xml.append(")").append("\r\n");
-			xml.append("values(").append("\r\n");
+			xml.append("	        values(");
 			for(int i=0; i<columns.size(); i++){
 				String db_column = columns.get(i).get("column_name").toString().toLowerCase();
 				Object data_scale = columns.get(i).get("data_scale");
