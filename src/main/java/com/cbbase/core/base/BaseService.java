@@ -57,7 +57,7 @@ public class BaseService<T extends BaseDao> {
     	return baseDao.update(param);
     }
     
-    public int updateNonNull(Object param) {
+    public int updateNonNullField(Object param) {
     	Long id = (Long) ObjectUtil.getFieldValue(param, "id");
     	if(id == null) {
     		return 0;
