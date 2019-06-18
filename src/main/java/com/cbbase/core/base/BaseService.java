@@ -56,6 +56,19 @@ public class BaseService<T extends BaseDao> {
     public int update(Object param) {
     	return baseDao.update(param);
     }
+    
+    public int updateNonNull(Object param) {
+    	Long id = (Long) ObjectUtil.getFieldValue(param, "id");
+    	if(id == null) {
+    		return 0;
+    	}
+    	Object obj = selectById(id);
+    	if(obj == null) {
+    		return 0;
+    	}
+    	ObjectUtil.copyNonNullField(param, obj);
+    	return baseDao.update(obj);
+    }
 	
     public PageContainer selectPage(PageContainer pageContainer) {
 		Integer total = baseDao.selectPageTotal(pageContainer);
