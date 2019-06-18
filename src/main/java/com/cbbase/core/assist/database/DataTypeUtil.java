@@ -95,6 +95,14 @@ public class DataTypeUtil {
 		return false;
 	}
 	
+	public static boolean isStringType(String columnType, Object scale){
+		String className = toJavaType(columnType, scale);
+		if("String".equals(className)){
+			return true;
+		}
+		return false;
+	}
+	
 	public static String toJavaType(String columnType, Object scale){
 		if(columnType.indexOf("(") >= 0) {
 			columnType = columnType.substring(0, columnType.indexOf("("));
