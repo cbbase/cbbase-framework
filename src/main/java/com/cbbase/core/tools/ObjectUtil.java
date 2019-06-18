@@ -200,4 +200,22 @@ public class ObjectUtil {
 		}
         return _field.getType();
 	}
+	
+	/**
+	 * 复制非空属性
+	 * @param source
+	 * @param target
+	 */
+	public static void copyNonNullField(Object source, Object target) {
+		if(source == null || target == null) {
+			return;
+		}
+        Field[] fields = source.getClass().getDeclaredFields();
+        for (Field temp : fields) {
+        	Object value = getFieldValue(source, temp.getName());
+        	if(value != null) {
+        		setFieldValue(target, temp.getName(), value);
+        	}
+        }
+	}
 }
