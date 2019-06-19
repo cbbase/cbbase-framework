@@ -57,11 +57,11 @@ public class CodeXml extends CodeAssist {
 			xml.append("	<select id=\"selectPageTotal\" resultType=\"int\" parameterType=\"com.cbbase.core.container.PageContainer\">").append("\r\n");
 			xml.append("		select count(0) from "+table+" obj").append("\r\n");
 			xml.append("		<where>").append("\r\n");
-			xml.append("			<include refid=\"whereSql\"/>").append("\r\n");
+			xml.append("			<include refid=\"pageWhereSql\"/>").append("\r\n");
 			xml.append("		</where>").append("\r\n");
 			xml.append("	</select>").append("\r\n");
 			xml.append("\r\n");
-			xml.append("	<sql id=\"whereSql\">").append("\r\n");
+			xml.append("	<sql id=\"pageWhereSql\">").append("\r\n");
 			for(int i=0; i<columns.size(); i++){
 				String db_column = columns.get(i).get("column_name").toString().toLowerCase();
 				String column_name = StringUtil.formatCamel(db_column);
@@ -83,7 +83,6 @@ public class CodeXml extends CodeAssist {
 					xml.append("			and obj."+db_column+" = #{param."+column_name+"}").append("\r\n");
 					xml.append("		</if>").append("\r\n");
 				}
-				xml.append("		</if>").append("\r\n");
 			}
 			xml.append("	</sql>").append("\r\n");
 			xml.append("\r\n");
