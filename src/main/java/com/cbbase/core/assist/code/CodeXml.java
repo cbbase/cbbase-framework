@@ -41,7 +41,7 @@ public class CodeXml extends CodeAssist {
 				xml.append("		SELECT * FROM (SELECT A.*, ROWNUM RN FROM (").append("\r\n");
 				xml.append("			SELECT * FROM "+table+" obj").append("\r\n");
 				xml.append("			<where>").append("\r\n");
-				xml.append("				<include refid=\"whereSql\"/>").append("\r\n");
+				xml.append("				<include refid=\"pageWhereSql\"/>").append("\r\n");
 				xml.append("			</where>").append("\r\n");
 				xml.append("			<if test=\"sortField != null and sortField != '' and sortType != null\">").append("\r\n");
 				xml.append("				order by obj.${sortField} ${sortType}").append("\r\n");
