@@ -138,7 +138,8 @@ public class CodeXml extends CodeAssist {
 		xml.append("	</select>").append("\r\n");
 		xml.append("\r\n");
 		xml.append("	<insert id=\"insert\" parameterType=\""+packageName+".entity."+entityName+"\">").append("\r\n");
-		xml.append("	  	insert into "+table+"(");
+		xml.append("	  	insert into "+table).append("\r\n");
+		xml.append("	  		(");
 		for(int i=0; i<columns.size(); i++){
 			String db_column = columns.get(i).get("column_name").toString().toLowerCase();
 			String str = db_column+", ";
@@ -147,11 +148,11 @@ public class CodeXml extends CodeAssist {
 			}
 			xml.append(str);
 			if(i>0 && i%9 == 0 && i != columns.size()-1) {
-				xml.append("\r\n	        ");
+				xml.append("\r\n	  		");
 			}
 		}
 		xml.append(")").append("\r\n");
-		xml.append("	  	values(");
+		xml.append("	  	values(").append("\r\n");
 		for(int i=0; i<columns.size(); i++){
 			String db_column = columns.get(i).get("column_name").toString().toLowerCase();
 			Object data_scale = columns.get(i).get("data_scale");
@@ -161,18 +162,13 @@ public class CodeXml extends CodeAssist {
 				String type = DataTypeUtil.toMybatisType(columns.get(i).get("data_type").toString(), data_scale);
 				jdbcType = ", jdbcType="+type;
 			}
-			String str = "#{"+column_name+jdbcType+"}, ";
-			if(i == columns.size()-1){
-				str = "#{"+column_name+jdbcType+"} ";
+			xml.append("	        #{"+column_name+jdbcType+"}");
+			if(i != columns.size()-1){
+				xml.append(",");
 			}
-			xml.append(str);
-			if(xmlJdbcType) {
-				xml.append("\r\n	        ");
-			}else if(i>0 && i%9 == 0 && i != columns.size()-1) {
-				xml.append("\r\n	        ");
-			}
+			xml.append("\r\n");
 		}
-		xml.append(")").append("\r\n");
+		xml.append("	        )").append("\r\n");
 		xml.append("	</insert>").append("\r\n");
 		xml.append("\r\n");
 		xml.append("	<delete id=\"delete\" parameterType=\"java.lang.Long\">").append("\r\n");
@@ -207,25 +203,19 @@ public class CodeXml extends CodeAssist {
 					String type = DataTypeUtil.toMybatisType(columns.get(i).get("data_type").toString(), data_scale);
 					jdbcType = ", jdbcType="+type;
 				}
-				String str = "#{item."+column_name+jdbcType+"}, ";
-				if(i == columns.size()-1){
-					str = "#{item."+column_name+jdbcType+"} ";
+				xml.append("	        #{"+column_name+jdbcType+"}");
+				if(i != columns.size()-1){
+					xml.append(",");
 				}
-				xml.append(str);
-				if(xmlJdbcType) {
-					xml.append("\r\n	        ");
-				}else if(i>0 && i%9 == 0 && i != columns.size()-1) {
-					xml.append("\r\n	        ");
-				}
+				xml.append("\r\n");
 			}
-			xml.append(")").append("\r\n");
+			xml.append("	        )").append("\r\n");
 			xml.append("	    </foreach>").append("\r\n");
 			xml.append("	</insert>").append("\r\n");
 		}else if(JdbcConnection.isOracle(jdbcName)){
 			xml.append("	<insert id=\"batchInsert\" parameterType=\"java.util.List\" useGeneratedKeys=\"false\"> ").append("\r\n");
-			xml.append("	  	insert all").append("\r\n");
-			xml.append("	    <foreach collection=\"list\" item=\"item\" index=\"index\" separator=\"\" >").append("\r\n");
-			xml.append("	        into SERVICE_CHAIN_DETAIL(");
+			xml.append("	  	insert into "+table).append("\r\n");
+			xml.append("	  		(");
 			for(int i=0; i<columns.size(); i++){
 				String db_column = columns.get(i).get("column_name").toString().toLowerCase();
 				String str = db_column+", ";
@@ -234,11 +224,12 @@ public class CodeXml extends CodeAssist {
 				}
 				xml.append(str);
 				if(i>0 && i%9 == 0 && i != columns.size()-1) {
-					xml.append("\r\n	        	");
+					xml.append("\r\n	  		");
 				}
 			}
 			xml.append(")").append("\r\n");
-			xml.append("			values(");
+			xml.append("	    <foreach collection=\"list\" item=\"item\" index=\"index\" separator=\" union all \" >").append("\r\n");
+			xml.append("			(select ").append("\r\n");
 			for(int i=0; i<columns.size(); i++){
 				String db_column = columns.get(i).get("column_name").toString().toLowerCase();
 				Object data_scale = columns.get(i).get("data_scale");
@@ -248,18 +239,13 @@ public class CodeXml extends CodeAssist {
 					String type = DataTypeUtil.toMybatisType(columns.get(i).get("data_type").toString(), data_scale);
 					jdbcType = ", jdbcType="+type;
 				}
-				String str = "#{item."+column_name+jdbcType+"}, ";
-				if(i == columns.size()-1){
-					str = "#{item."+column_name+jdbcType+"} ";
+				xml.append("		        #{"+column_name+jdbcType+"}");
+				if(i != columns.size()-1){
+					xml.append(",");
 				}
-				xml.append(str);
-				if(xmlJdbcType) {
-					xml.append("\r\n	  			");
-				}else if(i>0 && i%9 == 0 && i != columns.size()-1) {
-					xml.append("\r\n	  			");
-				}
+				xml.append("\r\n");
 			}
-			xml.append(")").append("\r\n");
+			xml.append("	  		from dual)").append("\r\n");
 			xml.append("	    </foreach>").append("\r\n");
 			xml.append("	    select 1 from dual").append("\r\n");
 			xml.append("	</insert>").append("\r\n");
