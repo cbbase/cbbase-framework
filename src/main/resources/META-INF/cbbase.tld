@@ -21,12 +21,6 @@ version="2.0">
  	</tag>
  	
  	<tag>
-	  	<name>Token</name>
-	  	<tag-class>com.cbbase.core.taglib.impl.TokenTag</tag-class>
-	  	<body-content>empty</body-content>
- 	</tag>
- 	
- 	<tag>
 	  	<name>Message</name>
 	  	<tag-class>com.cbbase.core.taglib.impl.MessageTag</tag-class>
 	  	<body-content>empty</body-content>
