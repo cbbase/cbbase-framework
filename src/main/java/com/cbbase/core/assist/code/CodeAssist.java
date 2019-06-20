@@ -127,7 +127,7 @@ public class CodeAssist {
 		if(commentAsTitle && StringUtil.hasValue(comments)) {
 			String split = null;
 			int index = 10;
-			String[] splitArray = {":", "：", ",", "，", ".", "。"};
+			String[] splitArray = {":", "：", ",", "，", ".", "。", "(", "（"};
 			for(String s : splitArray) {
 				int p = comments.indexOf(s);
 				if(p > 0 && p < index) {
