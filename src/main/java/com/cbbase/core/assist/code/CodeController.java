@@ -77,7 +77,8 @@ public class CodeController extends CodeAssist {
 			controller.append("	@Authority(\""+authName+".modify\")").append("\r\n");
 		}
 		controller.append("	public RestResponse saveAdd("+entityName+" param){").append("\r\n");
-		controller.append("		return getSuccess("+entityVar+"Service.insert(param));").append("\r\n");
+		controller.append("		int result = "+entityVar+"Service.insert(param);").append("\r\n");
+		controller.append("		return getSuccess(result);").append("\r\n");
 		controller.append("	}").append("\r\n");
 		controller.append("\r\n");
 		//update
@@ -99,7 +100,8 @@ public class CodeController extends CodeAssist {
 			controller.append("	@Authority(\""+authName+".modify\")").append("\r\n");
 		}
 		controller.append("	public RestResponse saveUpdate("+entityName+" param){").append("\r\n");
-		controller.append("		return getSuccess("+entityVar+"Service.update(param));").append("\r\n");
+		controller.append("		int result = "+entityVar+"Service.update(param);").append("\r\n");
+		controller.append("		return getSuccess(result);").append("\r\n");
 		controller.append("	}").append("\r\n");
 		controller.append("\r\n");
 		//delete
@@ -109,7 +111,8 @@ public class CodeController extends CodeAssist {
 			controller.append("	@Authority(\""+authName+".modify\")").append("\r\n");
 		}
 		controller.append("	public RestResponse delete(@RequestParam(\"ids\") List<Long> ids){").append("\r\n");
-		controller.append("		return getSuccess("+entityVar+"Service.batchDelete(ids));").append("\r\n");
+		controller.append("		int result = "+entityVar+"Service.batchDelete(ids);").append("\r\n");
+		controller.append("		return getSuccess(result);").append("\r\n");
 		controller.append("	}").append("\r\n");
 		controller.append("}").append("\r\n");
 		
