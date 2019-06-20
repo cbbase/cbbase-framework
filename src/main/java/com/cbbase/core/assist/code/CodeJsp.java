@@ -221,7 +221,7 @@ public class CodeJsp extends CodeAssist {
 		jspIndex.append("	}").append("\r\n");
 		jspIndex.append("	").append("\r\n");
 		jspIndex.append("	function openAdd(){").append("\r\n");
-		jspIndex.append("		$.post(basePath+'/web/"+entityVar+"/add', {}, function(html){").append("\r\n");
+		jspIndex.append("		$.post(basePath+'/web/"+entityVar+"/add.html', {}, function(html){").append("\r\n");
 		jspIndex.append("			layer.open({").append("\r\n");
 		jspIndex.append("			    type: 1,").append("\r\n");
 		jspIndex.append("			    title: \"新增\",").append("\r\n");
@@ -247,7 +247,7 @@ public class CodeJsp extends CodeAssist {
 		jspIndex.append("	}").append("\r\n");
 		jspIndex.append("").append("\r\n");
 		jspIndex.append("	function openUpdate(id){").append("\r\n");
-		jspIndex.append("		$.post(basePath+'/web/"+entityVar+"/update?id='+id, {}, function(html){").append("\r\n");
+		jspIndex.append("		$.post(basePath+'/web/"+entityVar+"/update.html?id='+id, {}, function(html){").append("\r\n");
 		jspIndex.append("			layer.open({").append("\r\n");
 		jspIndex.append("			    type: 1,").append("\r\n");
 		jspIndex.append("			    title: \"新增\",").append("\r\n");
