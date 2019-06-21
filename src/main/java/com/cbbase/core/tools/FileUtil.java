@@ -1,5 +1,6 @@
 package com.cbbase.core.tools;
 
+import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileInputStream;
@@ -208,12 +209,46 @@ public class FileUtil {
         try {
     		ByteBuffer buffer = ByteBuffer.allocate(length);
     		FileChannel channel = FileChannel.open(Paths.get(fileName), StandardOpenOption.READ);
-    		System.out.println("channel.size()"+channel.size());
     		channel.read(buffer, channel.size() - length);
     		return new String(buffer.array());
         } catch (Exception e) {
 			e.printStackTrace();
         }
         return null;
+	}
+	
+	public static void splitFile(String fileName, int size) {
+		try {
+			BufferedReader br = Files.newBufferedReader(Paths.get(fileName));
+			BufferedWriter bw = null;
+			int index = 0;
+			String line = null;
+			while((line = br.readLine()) != null) {
+				int num = (index/size)+1;
+				if(index%size == 0) {
+					if(bw != null) {
+						bw.flush();
+						bw.close();
+					}
+					String newFileName = fileName+"."+StringUtil.leftPad(""+num, '0', 3);
+					createFile(newFileName);
+					bw = Files.newBufferedWriter(Paths.get(newFileName), StandardOpenOption.TRUNCATE_EXISTING);
+				}
+				bw.write(line+"\n");
+			}
+			if(index%size != 0) {
+				if(bw != null) {
+					bw.flush();
+					bw.close();
+				}
+			}
+			index++;
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+	}
+	
+	public static void mergeFile(String fileName, List<String> sourceList) {
+		
 	}
 }
