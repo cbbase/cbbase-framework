@@ -19,7 +19,7 @@ import com.fasterxml.jackson.databind.ser.std.ToStringSerializer;
  * web配置类，与原web.xml功能相同
  */
 @Configuration
-public class CustomWebMvcConfigurer implements WebMvcConfigurer {
+public class WebMvcConfig implements WebMvcConfigurer {
     
 	/**
 	 * 	设置默认访问页
