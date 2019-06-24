@@ -224,31 +224,55 @@ public class FileUtil {
 			int index = 0;
 			String line = null;
 			while((line = br.readLine()) != null) {
+				System.out.println("line:"+line);
 				int num = (index/size)+1;
+				System.out.println("line:"+line);
 				if(index%size == 0) {
 					if(bw != null) {
 						bw.flush();
 						bw.close();
 					}
 					String newFileName = fileName+"."+StringUtil.leftPad(""+num, '0', 3);
+					System.out.println("newFileName:"+newFileName);
 					createFile(newFileName);
 					bw = Files.newBufferedWriter(Paths.get(newFileName), StandardOpenOption.TRUNCATE_EXISTING);
 				}
-				bw.write(line+"\n");
+				bw.write(line);
+				bw.write("\n");
+				index++;
 			}
-			if(index%size != 0) {
+			if((index-1)%size != 0) {
 				if(bw != null) {
 					bw.flush();
 					bw.close();
 				}
 			}
-			index++;
+			br.close();
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
 	}
 	
 	public static void mergeFile(String fileName, List<String> sourceList) {
+		try {
+			createFile(fileName);
+			BufferedWriter bw = Files.newBufferedWriter(Paths.get(fileName), StandardOpenOption.TRUNCATE_EXISTING);
+			for(String source : sourceList) {
+				BufferedReader br = Files.newBufferedReader(Paths.get(source));
+				String line = null;
+				while((line = br.readLine()) != null) {
+					bw.write(line);
+					bw.write("\n");
+				}
+				br.close();
+			}
+			if(bw != null) {
+				bw.flush();
+				bw.close();
+			}
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
 		
 	}
 }
