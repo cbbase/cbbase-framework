@@ -11,6 +11,7 @@ import java.io.OutputStream;
 import java.io.UnsupportedEncodingException;
 import java.nio.ByteBuffer;
 import java.nio.channels.FileChannel;
+import java.nio.charset.Charset;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
@@ -35,10 +36,14 @@ public class FileUtil {
 		}
 		return null;
 	}
-	
+
 	public static String readAsString(String fileName) {
+		return readAsString(fileName, "UTF-8");
+	}
+	
+	public static String readAsString(String fileName, String charset) {
 		try {
-			return new String(readAsBytes(fileName), "UTF-8");
+			return new String(readAsBytes(fileName), charset);
 		} catch (UnsupportedEncodingException e) {
 			e.printStackTrace();
 		}
@@ -96,8 +101,12 @@ public class FileUtil {
 	}
 	
 	public static List<String> readAllLines(String fileName) {
+		return readAllLines(fileName, "UTF-8");
+	}
+
+	public static List<String> readAllLines(String fileName, String charset) {
 		try {
-			return Files.readAllLines(Paths.get(fileName));
+			return Files.readAllLines(Paths.get(fileName), Charset.forName(charset));
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
@@ -216,26 +225,27 @@ public class FileUtil {
         }
         return null;
 	}
-	
+
 	public static void splitFile(String fileName, int size) {
+		splitFile(fileName, size, "UTF-8");
+	}
+	
+	public static void splitFile(String fileName, int size, String charset) {
 		try {
-			BufferedReader br = Files.newBufferedReader(Paths.get(fileName));
+			BufferedReader br = Files.newBufferedReader(Paths.get(fileName), Charset.forName(charset));
 			BufferedWriter bw = null;
 			int index = 0;
 			String line = null;
 			while((line = br.readLine()) != null) {
-				System.out.println("line:"+line);
 				int num = (index/size)+1;
-				System.out.println("line:"+line);
 				if(index%size == 0) {
 					if(bw != null) {
 						bw.flush();
 						bw.close();
 					}
 					String newFileName = fileName+"."+StringUtil.leftPad(""+num, '0', 3);
-					System.out.println("newFileName:"+newFileName);
 					createFile(newFileName);
-					bw = Files.newBufferedWriter(Paths.get(newFileName), StandardOpenOption.TRUNCATE_EXISTING);
+					bw = Files.newBufferedWriter(Paths.get(newFileName), Charset.forName(charset), StandardOpenOption.TRUNCATE_EXISTING);
 				}
 				bw.write(line);
 				bw.write("\n");
@@ -254,11 +264,15 @@ public class FileUtil {
 	}
 	
 	public static void mergeFile(String fileName, List<String> sourceList) {
+		mergeFile(fileName, sourceList, "UTF-8");
+	}
+	
+	public static void mergeFile(String fileName, List<String> sourceList, String charset) {
 		try {
 			createFile(fileName);
-			BufferedWriter bw = Files.newBufferedWriter(Paths.get(fileName), StandardOpenOption.TRUNCATE_EXISTING);
+			BufferedWriter bw = Files.newBufferedWriter(Paths.get(fileName), Charset.forName(charset), StandardOpenOption.TRUNCATE_EXISTING);
 			for(String source : sourceList) {
-				BufferedReader br = Files.newBufferedReader(Paths.get(source));
+				BufferedReader br = Files.newBufferedReader(Paths.get(source), Charset.forName(charset));
 				String line = null;
 				while((line = br.readLine()) != null) {
 					bw.write(line);
