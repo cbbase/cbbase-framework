@@ -202,7 +202,7 @@ public class CodeXml extends CodeAssist {
 					String type = DataTypeUtil.toMybatisType(columns.get(i).get("data_type").toString(), data_scale);
 					jdbcType = ", jdbcType="+type;
 				}
-				xml.append("	        #{"+column_name+jdbcType+"}");
+				xml.append("	        #{item."+column_name+jdbcType+"}");
 				if(i != columns.size()-1){
 					xml.append(",");
 				}
@@ -238,7 +238,7 @@ public class CodeXml extends CodeAssist {
 					String type = DataTypeUtil.toMybatisType(columns.get(i).get("data_type").toString(), data_scale);
 					jdbcType = ", jdbcType="+type;
 				}
-				xml.append("		        #{"+column_name+jdbcType+"}");
+				xml.append("		        #{item."+column_name+jdbcType+"}");
 				if(i != columns.size()-1){
 					xml.append(",");
 				}
