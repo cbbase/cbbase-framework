@@ -26,7 +26,7 @@ public class CodeJsp extends CodeAssist {
 		jspAdd.append("</head>").append("\r\n");
 		jspAdd.append("<body>").append("\r\n");
 		jspAdd.append("	<!-- 添加界面 -->").append("\r\n");
-		jspAdd.append("	<div class=\"layerDiv mainDiv\">").append("\r\n");
+		jspAdd.append("	<div class=\"layout-box\">").append("\r\n");
 		jspAdd.append("		<form id=\"addForm\" class=\"layui-form\">").append("\r\n");
 		int fieldCount = 0;
 		for(int i=0; i<columns.size(); i++){
@@ -111,7 +111,7 @@ public class CodeJsp extends CodeAssist {
 		jspIndex.append("  	<title></title>").append("\r\n");
 		jspIndex.append("</head>").append("\r\n");
 		jspIndex.append("<body>").append("\r\n");
-		jspIndex.append("	<div class=\"mainDiv\">").append("\r\n");
+		jspIndex.append("	<div class=\"content-box\">").append("\r\n");
 		jspIndex.append("		<form id=\"queryForm\" class=\"layui-form\">").append("\r\n");
 		jspIndex.append("			<div class=\"layui-form-item\">").append("\r\n");
 		for(int i=0; i<columns.size(); i++){
@@ -155,7 +155,7 @@ public class CodeJsp extends CodeAssist {
 			}
 		}
 		jspIndex.append("				<div class=\"layui-inline\">").append("\r\n");
-		jspIndex.append("					<button class=\"layui-btn\" onclick=\"reloadTable();\" type=\"button\">查询</button>").append("\r\n");
+		jspIndex.append("					<button class=\"layui-btn search-btn\" onclick=\"reloadTable();\" type=\"button\">查询</button>").append("\r\n");
 		jspIndex.append("				</div>").append("\r\n");
 		jspIndex.append("			</div>").append("\r\n");
 		jspIndex.append("			<div class=\"layui-form-item\">").append("\r\n");
@@ -316,7 +316,7 @@ public class CodeJsp extends CodeAssist {
 		jspUpdate.append("</head>").append("\r\n");
 		jspUpdate.append("<body>").append("\r\n");
 		jspUpdate.append("	<!-- 修改界面 -->").append("\r\n");
-		jspUpdate.append("	<div class=\"layerDiv mainDiv\">").append("\r\n");
+		jspUpdate.append("	<div class=\"layout-box\">").append("\r\n");
 		jspUpdate.append("		<form id=\"updateForm\" class=\"layui-form\">").append("\r\n");
 		jspUpdate.append("			<input type=\"hidden\" name=\"id\" value=\"${entity.id}\">").append("\r\n");
 		fieldCount = 0;
