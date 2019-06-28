@@ -60,6 +60,11 @@ public abstract class BaseController {
     }
     
     protected RestResponse getSuccess(Object object){
+    	if(object instanceof PageContainer) {
+    		PageContainer page = (PageContainer) object;
+    		page.setSortSql(null);
+        	return page;
+    	}
     	if(object instanceof RestResponse) {
         	return (RestResponse) object;
     	}
