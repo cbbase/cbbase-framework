@@ -5,7 +5,7 @@
 <configuration>
 	<settings>
 		<setting name="cacheEnabled" value="true" />
-		<setting name="useGeneratedKeys" value="true" />
+		<setting name="useGeneratedKeys" value="false" />
 		<setting name="defaultExecutorType" value="REUSE" />
 		<setting name="lazyLoadingEnabled" value="true" />
 		<setting name="defaultStatementTimeout" value="10000" />
