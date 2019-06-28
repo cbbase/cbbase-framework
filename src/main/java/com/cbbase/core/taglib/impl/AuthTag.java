@@ -1,9 +1,9 @@
-package com.cbbase.core.taglab.impl;
+package com.cbbase.core.taglib.impl;
 
 import javax.servlet.jsp.JspException;
 
 import com.cbbase.core.common.AuthManager;
-import com.cbbase.core.taglab.base.BaseBodyTaglib;
+import com.cbbase.core.taglib.base.BaseBodyTaglib;
 
 /**
  * 权限标签,在拥有权限时,显示内部标签
