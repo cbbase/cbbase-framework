@@ -32,8 +32,8 @@ public class CodeXml extends CodeAssist {
 				xml.append("		<where>").append("\r\n");
 				xml.append("			<include refid=\"whereSql\"/>").append("\r\n");
 				xml.append("		</where>").append("\r\n");
-				xml.append("		<if test=\"sortField != null and sortField != '' and sortType != null\">").append("\r\n");
-				xml.append("			order by obj.${sortField} ${sortType}").append("\r\n");
+				xml.append("		<if test=\"sortSql != null and sortSql != '' \">").append("\r\n");
+				xml.append("			order by ${sortSql}").append("\r\n");
 				xml.append("		</if>").append("\r\n");
 				xml.append("		LIMIT ${startRow}, ${pageSize}").append("\r\n");
 				
@@ -43,10 +43,10 @@ public class CodeXml extends CodeAssist {
 				xml.append("			<where>").append("\r\n");
 				xml.append("				<include refid=\"pageWhereSql\"/>").append("\r\n");
 				xml.append("			</where>").append("\r\n");
-				xml.append("			<if test=\"sortField != null and sortField != '' and sortType != null\">").append("\r\n");
-				xml.append("				order by obj.${sortField} ${sortType}").append("\r\n");
+				xml.append("			<if test=\"sortSql != null and sortSql != '' \">").append("\r\n");
+				xml.append("				order by ${sortSql}").append("\r\n");
 				xml.append("			</if>").append("\r\n");
-				xml.append("			<if test=\"sortField == null\">").append("\r\n");
+				xml.append("			<if test=\"sortSql == null\">").append("\r\n");
 				xml.append("				order by obj.id").append("\r\n");
 				xml.append("			</if>").append("\r\n");
 				xml.append("			)A WHERE ROWNUM &lt;= ${endRow})").append("\r\n");
