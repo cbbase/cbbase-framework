@@ -18,8 +18,7 @@ public class PageContainer extends RestResponse {
 	
 	private int startRow;//开始行数
 	private int endRow;//结束行数
-	private String sortType;//排序方式：ASC升序，DESC降序
-	private String sortField;//排序字段(数据库列)
+	private String sortSql;//排序SQL
 	
 	private Object param;//查询参数(查询结果为父类中的data字段)
 	
@@ -76,20 +75,12 @@ public class PageContainer extends RestResponse {
 		this.param = param;
 	}
 
-	public String getSortType() {
-		return sortType;
+	public String getSortSql() {
+		return sortSql;
 	}
 
-	public void setSortType(String sortType) {
-		this.sortType = sortType;
-	}
-
-	public String getSortField() {
-		return sortField;
-	}
-
-	public void setSortField(String sortField) {
-		this.sortField = sortField;
+	public void setSortSql(String sortSql) {
+		this.sortSql = sortSql;
 	}
 
 	public int getStartRow() {
