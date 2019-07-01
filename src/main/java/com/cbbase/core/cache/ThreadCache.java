@@ -16,6 +16,10 @@ public class ThreadCache {
 		return map;
 	}
 	
+	public static void clear() {
+		getCacheMap().clear();
+	}
+	
 	public static void put(String key, Object value) {
 		getCacheMap().put(key, value);
 	}

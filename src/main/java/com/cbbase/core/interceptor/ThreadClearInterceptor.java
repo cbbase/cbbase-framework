@@ -14,7 +14,7 @@ import com.cbbase.core.cache.ThreadCache;
  * @author changbo
  *
  */
-public class CacheClearInterceptor extends HandlerInterceptorAdapter {
+public class ThreadClearInterceptor extends HandlerInterceptorAdapter {
 
 	protected Logger logger = LoggerFactory.getLogger(this.getClass());
 
@@ -22,7 +22,7 @@ public class CacheClearInterceptor extends HandlerInterceptorAdapter {
 	public void afterCompletion(HttpServletRequest request, HttpServletResponse response, Object handler, Exception ex)
 			throws Exception {
 		super.afterCompletion(request, response, handler, ex);
-		ThreadCache.getCacheMap().clear();
+		ThreadCache.clear();
 	}
 	
 }
