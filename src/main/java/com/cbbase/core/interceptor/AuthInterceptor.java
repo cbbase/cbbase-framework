@@ -45,6 +45,7 @@ public class AuthInterceptor extends HandlerInterceptorAdapter {
 			if(AuthManager.getUserId() == null){
 				logger.debug("authority.isLogin():"+authority.login());
 				if(uri.endsWith(".html")) {
+					request.setAttribute("errorCode", 1000);
 					request.setAttribute("errorMsg", "用户未登录");
 		            request.getRequestDispatcher("/error.jsp").forward(request, response);
 				}else {
@@ -60,6 +61,7 @@ public class AuthInterceptor extends HandlerInterceptorAdapter {
 			if(!AuthManager.checkAuth(authority.value())){
 				logger.debug("authority.value():"+authority.value());
 				if(uri.endsWith(".html")) {
+					request.setAttribute("errorCode", 1001);
 					request.setAttribute("errorMsg", "用户无权限");
 		            request.getRequestDispatcher("/error.jsp").forward(request, response);
 				}else {
