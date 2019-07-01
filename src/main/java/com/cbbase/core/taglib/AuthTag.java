@@ -1,16 +1,16 @@
-package com.cbbase.core.taglib.impl;
+package com.cbbase.core.taglib;
 
 import javax.servlet.jsp.JspException;
+import javax.servlet.jsp.tagext.BodyTagSupport;
 
 import com.cbbase.core.common.AuthManager;
-import com.cbbase.core.taglib.base.BaseBodyTaglib;
 
 /**
  * 权限标签,在拥有权限时,显示内部标签
  * @author changbo
  *
  */
-public class AuthTag extends BaseBodyTaglib {
+public class AuthTag extends BodyTagSupport {
 	
 	/**
 	 * 

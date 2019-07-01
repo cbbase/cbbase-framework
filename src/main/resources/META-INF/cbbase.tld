@@ -11,7 +11,7 @@ version="2.0">
  	
  	<tag>
 	  	<name>Auth</name>
-	  	<tag-class>com.cbbase.core.taglib.impl.AuthTag</tag-class>
+	  	<tag-class>com.cbbase.core.taglib.AuthTag</tag-class>
 	  	<body-content>JSP</body-content>
 	  	<attribute>
 	   		<name>auth</name>
@@ -22,7 +22,7 @@ version="2.0">
  	
  	<tag>
 	  	<name>Message</name>
-	  	<tag-class>com.cbbase.core.taglib.impl.MessageTag</tag-class>
+	  	<tag-class>com.cbbase.core.taglib.MessageTag</tag-class>
 	  	<body-content>empty</body-content>
 	  	<attribute>
 	   		<name>key</name>
