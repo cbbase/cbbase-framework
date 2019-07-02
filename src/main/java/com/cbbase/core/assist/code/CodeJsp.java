@@ -230,7 +230,7 @@ public class CodeJsp extends CodeAssist {
 		jspIndex.append("			    offset: '10%',").append("\r\n");
 		jspIndex.append("			    btn: ['确定', '取消'],").append("\r\n");
 		jspIndex.append("				yes: function(index, layero){").append("\r\n");
-		jspIndex.append("					saveAdd();").append("\r\n");
+		jspIndex.append("					saveAdd(index);").append("\r\n");
 		jspIndex.append("				},").append("\r\n");
 		jspIndex.append("				btn2: function(index, layero){").append("\r\n");
 		jspIndex.append("				    layer.close(index);").append("\r\n");
@@ -239,10 +239,10 @@ public class CodeJsp extends CodeAssist {
 		jspIndex.append("		});").append("\r\n");
 		jspIndex.append("	}").append("\r\n");
 		jspIndex.append("	").append("\r\n");
-		jspIndex.append("	function saveAdd(){").append("\r\n");
+		jspIndex.append("	function saveAdd(index){").append("\r\n");
 		jspIndex.append("		var param = $(\"#addForm\").serializeJson();").append("\r\n");
 		jspIndex.append("		doParamRequest(basePath+\"/web/"+entityVar+"/saveAdd\", param, function(){").append("\r\n");
-		jspIndex.append("			layer.close(layer.index);").append("\r\n");
+		jspIndex.append("			layer.close(index);").append("\r\n");
 		jspIndex.append("			reloadTable();").append("\r\n");
 		jspIndex.append("		});").append("\r\n");
 		jspIndex.append("	}").append("\r\n");
@@ -257,7 +257,7 @@ public class CodeJsp extends CodeAssist {
 		jspIndex.append("			    offset: '10%',").append("\r\n");
 		jspIndex.append("			    btn: ['确定', '取消'],").append("\r\n");
 		jspIndex.append("				yes: function(index, layero){").append("\r\n");
-		jspIndex.append("					saveUpdate();").append("\r\n");
+		jspIndex.append("					saveUpdate(index);").append("\r\n");
 		jspIndex.append("				},").append("\r\n");
 		jspIndex.append("				btn2: function(index, layero){").append("\r\n");
 		jspIndex.append("				    layer.close(index);").append("\r\n");
@@ -266,10 +266,10 @@ public class CodeJsp extends CodeAssist {
 		jspIndex.append("		});").append("\r\n");
 		jspIndex.append("	}").append("\r\n");
 		jspIndex.append("	").append("\r\n");
-		jspIndex.append("	function saveUpdate(){").append("\r\n");
+		jspIndex.append("	function saveUpdate(index){").append("\r\n");
 		jspIndex.append("		var param = $(\"#updateForm\").serializeJson();").append("\r\n");
 		jspIndex.append("		doParamRequest(basePath+\"/web/"+entityVar+"/saveUpdate\", param, function(){").append("\r\n");
-		jspIndex.append("			layer.close(layer.index);").append("\r\n");
+		jspIndex.append("			layer.close(index);").append("\r\n");
 		jspIndex.append("			reloadTable();").append("\r\n");
 		jspIndex.append("		});").append("\r\n");
 		jspIndex.append("	}").append("\r\n");
