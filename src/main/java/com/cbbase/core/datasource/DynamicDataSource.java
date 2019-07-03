@@ -1,16 +1,19 @@
 package com.cbbase.core.datasource;
 
+import java.util.Map;
+
 import org.springframework.jdbc.datasource.lookup.AbstractRoutingDataSource;
 
 /**
  * 动态设置数据源
+ * 
  * @author changbo
  *
  */
 public class DynamicDataSource extends AbstractRoutingDataSource {
-	
-	private static final ThreadLocal<String> dataDource = new ThreadLocal<String>();
 
+	private static final ThreadLocal<String> dataDource = new ThreadLocal<String>();
+	
 	public static String getDataSource() {
 		return (String) dataDource.get();
 	}
@@ -22,8 +25,9 @@ public class DynamicDataSource extends AbstractRoutingDataSource {
 	public static void clearDataSource() {
 		dataDource.remove();
 	}
-
+	
 	protected Object determineCurrentLookupKey() {
 		return getDataSource();
 	}
+
 }
