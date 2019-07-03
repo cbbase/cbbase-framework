@@ -25,14 +25,14 @@ public class JdbcConnection {
     
     public static DruidDataSource getDataSource(String database){
     	if(database == null || database.length() == 0){
-    		database = "jdbc";
+    		database = "spring.datasource";
     	}
     	DruidDataSource dataSource = dataSourceMap.get(database);
     	if(dataSource != null){
         	return dataSource;
     	}
 		PropertiesHelper helper = PropertiesHelper.getPropertiesHelper(configFile);
-		String driverClassName = helper.getValue(database+".driverClassName");
+		String driverClassName = helper.getValue(database+".driver-class-name");
 		String url = helper.getValue(database+".url");
 		String username = helper.getValue(database+".username");
 		String password = helper.getValue(database+".password");
