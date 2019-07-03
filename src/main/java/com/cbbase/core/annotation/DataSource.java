@@ -9,7 +9,7 @@ import java.lang.annotation.Target;
 @Target({ElementType.METHOD, ElementType.TYPE})
 @Retention(RetentionPolicy.RUNTIME)
 @Documented
-public @interface DataSourceName {
+public @interface DataSource {
     
     /**
      * 数据源key值
