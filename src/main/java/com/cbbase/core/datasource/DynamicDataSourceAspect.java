@@ -7,7 +7,7 @@ import org.aspectj.lang.annotation.Before;
 import org.springframework.core.annotation.Order;
 import org.springframework.stereotype.Component;
 
-import com.cbbase.core.annotation.DataSourceKey;
+import com.cbbase.core.annotation.DataSourceName;
 
 
 /**
@@ -23,10 +23,10 @@ public class DynamicDataSourceAspect {
      * @param point
      * @param dataSourceKey
      */
-    @Before("@annotation(dataSourceKey))")
-    public void switchDataSource(JoinPoint point, DataSourceKey dataSourceKey) {
+    @Before("@annotation(dataSourceName))")
+    public void switchDataSource(JoinPoint point, DataSourceName dataSourceName) {
         //切换数据源
-    	DynamicDataSource.setDataSource(dataSourceKey.value());
+    	DynamicDataSource.setDataSource(dataSourceName.value());
     }
     
     /**
@@ -34,8 +34,8 @@ public class DynamicDataSourceAspect {
      * @param point
      * @param dataSourceKey
      */
-    @After("@annotation(dataSourceKey))")
-    public void restoreDataSource(JoinPoint point, DataSourceKey dataSourceKey) {
+    @After("@annotation(dataSourceName))")
+    public void restoreDataSource(JoinPoint point, DataSourceName dataSourceName) {
     	//重置数据源
     	DynamicDataSource.clearDataSource();
     }
