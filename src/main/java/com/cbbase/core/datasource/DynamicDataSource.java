@@ -1,7 +1,5 @@
 package com.cbbase.core.datasource;
 
-import java.util.Map;
-
 import org.springframework.jdbc.datasource.lookup.AbstractRoutingDataSource;
 
 /**
