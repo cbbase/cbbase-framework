@@ -23,7 +23,7 @@ public class DynamicDataSourceAspect {
      * @param point
      * @param dataSourceKey
      */
-    @Before("@annotation(DataSource))")
+    @Before("@annotation(dataSource))")
     public void switchDataSource(JoinPoint point, DataSource dataSource) {
         //切换数据源
     	DynamicDataSource.setDataSource(dataSource.value());
@@ -34,7 +34,7 @@ public class DynamicDataSourceAspect {
      * @param point
      * @param dataSourceKey
      */
-    @After("@annotation(dataSourceName))")
+    @After("@annotation(dataSource))")
     public void restoreDataSource(JoinPoint point, DataSource dataSource) {
     	//重置数据源
     	DynamicDataSource.clearDataSource();
