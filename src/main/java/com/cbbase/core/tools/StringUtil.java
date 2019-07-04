@@ -25,7 +25,7 @@ public class StringUtil {
 	public static final Pattern PATTERN_DOUBLE = Pattern.compile("[\\d]+([\\.][\\d]+)?");
 	public static final Pattern PATTERN_WORD = Pattern.compile("[\\w]*");
 	public static final Pattern PATTERN_HEX = Pattern.compile("[a-fA-F0-9]*");
-	public static final Pattern PATTERN_MOBILE = Pattern.compile("^[1][3-9]\\d{9}$");
+	public static final Pattern PATTERN_PHONE = Pattern.compile("^[1][3-9]\\d{9}$");
 	public static final Pattern PATTERN_EMAIL = Pattern.compile("^([\\w-])+@([\\w-])+(.[\\w-]+)+$");
 	public static final Pattern PATTERN_CHINESE = Pattern.compile("^[\u4e00-\u9fa5]*$");
 	public static final DecimalFormat df = new DecimalFormat("###0.##");
@@ -370,8 +370,8 @@ public class StringUtil {
 		return false;
 	}
 
-	public static boolean isMobile(String mobile){
-		return matches(mobile, PATTERN_MOBILE);
+	public static boolean isPhone(String mobile){
+		return matches(mobile, PATTERN_PHONE);
 	}
 	
 	public static boolean isEmail(String email){
