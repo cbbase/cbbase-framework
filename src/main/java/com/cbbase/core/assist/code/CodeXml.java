@@ -271,7 +271,7 @@ public class CodeXml extends CodeAssist {
 		}
 		
 		if(writeFile) {
-			String filePath = rootPath + javaPath + packageFolder + "\\dao\\";
+			String filePath = rootPath + javaPath + packageFolder + "\\mapper\\";
 			FileUtil.createFile(filePath + entityName +"Dao.xml", text);
 		}
 		
